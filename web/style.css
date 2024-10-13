@@ -3,11 +3,80 @@
 }
 
 :root {
-    --color-bg: #f1f2f6;
-    --color-fg: #555555;
+    --color-bg: #555555;
+    --color-fg: #f1f2f6;
     --color-theme: #0e3768;
     --color-light: #b0d8e3;
     --color-hl: #efe897;
+
+    --color-green: #80EF80;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
+button {
+    border: none;
+    outline: none;
+    background-color: var(--color-theme);
+    color: var(--color-bg);
+}
+hr { margin-top: 0; }
+
+/* Game display ------------------------------------------------------------- */
+#question {
+    text-align: center;
+    font-size: x-large;
+    padding: 1rem;
+    background-color: var(--color-theme);
+}
+#question img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+
+#answers {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 3rem;
+    row-gap: 1rem;
+    padding: 0 2rem 5rem 2rem;
+}
+#answers li {
+    flex: 1 0 40%;
+    min-width: 20rem;
+    border: 0.5rem solid var(--color-light);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+#answers li:hover {
+    border-color: var(--color-hl);
+}
+#answers .correct {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+    color: #555555;
+}
+
+#controls {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    height: 5rem;
+}
+#controls button {
+
 }
 
 @media print {

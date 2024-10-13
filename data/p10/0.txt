@@ -1,10 +1,10 @@
 # THIS IS A TEST
 
-Đây là một câu hỏi trắc nghiệm
-    Đây là một câu trả lời, được thụt vào trong bằng tab. Câu trả lời đầu tiên sẽ mặc định là câu trả lời đúng.
-    Xuống dòng để tạo ra những đáp án khác.
-    Không có giới hạn số lượng đáp án.
-    Bạn nên cách một dòng trống giữa các câu hỏi, nhưng không bắt buộc.
+Hoạt động nào sau đây là hoạt động nghiên cứu khoa học?
+    Trồng hoa trong nhà kính.
+    Tìm vaccine phòng chống virus trong phòng thí nghiệm.
+    Sản xuất muối ăn từ nước biển.
+    Vận hành nhà máy thủy điện để sản xuất điện.
 
 Lùi sát lề để tạo ra một câu hỏi mới. Đây là ví dụ cho câu hỏi đúng sai.
     + Mỗi dòng sẽ bắt đầu bằng việc thụt lề, sau đó để dấu cộng để đánh câu trả lời này là đúng.

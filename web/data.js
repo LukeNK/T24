@@ -97,5 +97,7 @@ const INIT = async () => {
             if (list.childElementCount > 1) menu.append(list);
         }
     }
+
+    startGame(); // init after data loaded
 };
 INIT();

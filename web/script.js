@@ -15,8 +15,14 @@ const floor = Math.floor,
 function startGame(s, g, i) {
     if (!s) {
         // exit game
-
+        menu.style.display = '';
+        game.style.display = 'none';
+        DONE = [];
+        return
     }
+
+    menu.style.display = 'none';
+    game.style.display = '';
 
     QUEST = SUBJECTS[s][g][i];
 
@@ -25,37 +31,53 @@ function startGame(s, g, i) {
     for (let l0 = 0; l0 < QUEST.questions.length; l0++)
         document.getElementById('progress').innerHTML +=
             `<p id="pro${l0}">○</p>`;
+
+    ask();
 }
 
 /**
  * Start a question.
  */
 function ask() {
-    if (DONE.length >= QUEST.length) return false;
+    if (DONE.length >= QUEST.questions.length) {
+        startGame();
+        return false;
+    };
 
-    let n = 0;
+    let id = 0;
     do {
-        n = floor(random() * QUEST.questions.length);
-    } while (DONE.includes(n));
+        id = floor(random() * QUEST.questions.length);
+    } while (DONE.includes(id));
 
     // set progress bar
-    document.getElementById('pro' + n).innerHTML = '◉';
+    document.getElementById('pro' + id).innerHTML = '◍';
 
-    n = QUEST.questions[n]; // the question class
+    let curQuest = QUEST.questions[id]; // the question class
 
-    if (n.type == 0) {
+    if (curQuest.type == 0) {
         // multiple choices
-        e_quest.innerHTML = n.text;
+        e_quest.innerHTML = curQuest.text;
         e_ans.innerHTML = ''; // clear answers
-        for (const ans in n.ans) {
+        for (const ans in curQuest.ans) {
             let li = document.createElement('li');
             li.innerHTML = ans;
             li.style.order = floor(random() * 100); // random question order
+            li.setAttribute(
+                'onclick',
+                `check(${id}, "${ans}")`
+            )
             e_ans.append(li);
         }
     }
 }
 
-function check() {
+function check(id, result) {
+    if (QUEST.questions[id].ans[result]) {
+        DONE.push(id);
+        document.getElementById('pro' + id).innerHTML = '●';
+    } else {
+        document.getElementById('pro' + id).innerHTML = '◉';
+    }
 
+    ask();
 }

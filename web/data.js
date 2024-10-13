@@ -64,24 +64,30 @@ function parse(data) {
 // iterate through data folder to download files
 const INIT = async () => {
     for (const subject in SUBJECTS) {
-        const trans = SUBJECTS[subject];
+        const trans = SUBJECTS[subject],
+            menu = document.getElementById('menu');
         SUBJECTS[subject] = {}; // clear for array in array
 
         for (let grade = 10; grade <= 10; grade++) {
             SUBJECTS[subject][grade] = [];
+            let list = document.createElement('details');
+            list.innerHTML = `<summary>${trans} ${grade}</summary>`;
+
             for (let id = 0; id < 100; id++) {
+                let test = document.createElement('button');
+
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.txt`);
-
-                if (!response.ok) break;
-
+                if (!response.ok) break; // no more test
                 response = await response.text();
                 response = parse(response);
-                response.meta.name =
-                    `[${trans} ${grade}] ` + response.meta.name;
+                test.innerText = response.meta.name;
 
                 SUBJECTS[subject][grade].push(response);
+                list.append(test);
             }
+
+            if (list.childElementCount > 1) menu.append(list);
         }
     }
 };

@@ -24,9 +24,27 @@ button {
     border: none;
     outline: none;
     background-color: var(--color-theme);
-    color: var(--color-bg);
+    color: var(--color-fg);
+    font-size: large;
 }
 hr { margin-top: 0; }
+p { margin: 1rem; }
+
+/* Menu display ------------------------------------------------------------- */
+details {
+    border-left: 0.25rem solid var(--color-light);
+}
+summary {
+    font-size: larger;
+    background-color: var(--color-light);
+    padding: 1rem;
+    cursor: pointer;;
+}
+details button {
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+}
 
 /* Game display ------------------------------------------------------------- */
 #question {

@@ -83,11 +83,6 @@ details button {
 #answers li:hover {
     border-color: var(--color-hl);
 }
-#answers .correct {
-    background-color: var(--color-green);
-    border-color: var(--color-green);
-    color: #555555;
-}
 
 #controls {
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -97,15 +92,23 @@ details button {
     align-items: center;
     height: 5rem;
 }
+#controls.r {
+    background-color: var(--color-green);
+    color: var(--color-bg);
+}
+#controls.w { background-color: var(--color-red); }
 
 #progress {
     flex: 1 1 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 #progress p {
     margin: 0;
 }
+#controls.r { background-color: var(--color-green); }
+#controls.w { background-color: var(--color-red); }
 
 #controls button {
     align-self: stretch;

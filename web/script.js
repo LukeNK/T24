@@ -33,13 +33,14 @@ function ask() {
 
     n = QUEST.questions[n]; // the question class
 
-    if (n.type = 0) {
+    if (n.type == 0) {
         // multiple choices
         e_quest.innerHTML = n.text;
         e_ans.innerHTML = ''; // clear answers
         for (const ans in n.ans) {
             let li = document.createElement('li');
             li.innerHTML = ans;
+            li.style.order = floor(random() * 100); // random question order
             e_ans.append(li);
         }
     }

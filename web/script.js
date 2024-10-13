@@ -32,12 +32,16 @@ function ask() {
     } while (DONE.includes(n));
 
     n = QUEST.questions[n]; // the question class
-    e_quest.innerHTML = n.text;
-    e_ans.innerHTML = ''; // clear answers
-    for (const ans in n.ans) {
-        let li = document.createElement('li');
-        li.innerHTML = ans;
-        e_ans.append(li);
+
+    if (n.type = 0) {
+        // multiple choices
+        e_quest.innerHTML = n.text;
+        e_ans.innerHTML = ''; // clear answers
+        for (const ans in n.ans) {
+            let li = document.createElement('li');
+            li.innerHTML = ans;
+            e_ans.append(li);
+        }
     }
 }
 

@@ -3,6 +3,9 @@ let SUBJECTS = {
     'p': 'Vật Lý'
 }
 
+const menu = document.getElementById('menu'),
+    game = document.getElementById('game');
+
 class Question {
     constructor(text) {
         this.text = text;
@@ -64,8 +67,7 @@ function parse(data) {
 // iterate through data folder to download files
 const INIT = async () => {
     for (const subject in SUBJECTS) {
-        const trans = SUBJECTS[subject],
-            menu = document.getElementById('menu');
+        const trans = SUBJECTS[subject];
         SUBJECTS[subject] = {}; // clear for array in array
 
         for (let grade = 10; grade <= 10; grade++) {
@@ -75,6 +77,10 @@ const INIT = async () => {
 
             for (let id = 0; id < 100; id++) {
                 let test = document.createElement('button');
+                test.setAttribute(
+                    'onclick',
+                    `startGame("${subject}", ${grade}, ${id})`
+                );
 
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.txt`);
@@ -87,6 +93,7 @@ const INIT = async () => {
                 list.append(test);
             }
 
+            // only append if there is a test
             if (list.childElementCount > 1) menu.append(list);
         }
     }

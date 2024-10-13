@@ -23,9 +23,11 @@ body {
 button {
     border: none;
     outline: none;
-    background-color: var(--color-theme);
+    padding: 1rem;
     color: var(--color-fg);
     font-size: large;
+    background-color: var(--color-theme);
+    cursor: pointer;
 }
 hr { margin-top: 0; }
 p { margin: 1rem; }
@@ -42,7 +44,6 @@ summary {
 }
 details button {
     width: 100%;
-    padding: 1rem;
     text-align: left;
 }
 
@@ -92,9 +93,6 @@ details button {
     display: flex;
     justify-content: space-between;
     height: 5rem;
-}
-#controls button {
-
 }
 
 @media print {

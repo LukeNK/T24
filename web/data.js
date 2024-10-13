@@ -1,3 +1,8 @@
+let SUBJECTS = {
+    'h': 'Lịch Sử',
+    'p': 'Vật Lý'
+}
+
 class Question {
     constructor(text) {
         this.text = text;
@@ -55,3 +60,29 @@ function parse(data) {
 
     return { meta, questions }
 }
+
+// iterate through data folder to download files
+const INIT = async () => {
+    for (const subject in SUBJECTS) {
+        const trans = SUBJECTS[subject];
+        SUBJECTS[subject] = {}; // clear for array in array
+
+        for (let grade = 10; grade <= 12; grade++) {
+            SUBJECTS[subject][grade] = [];
+            for (let id = 0; id < 100; id++) {
+                let response =
+                    await fetch(`data/${subject}${grade}/${id}.txt`);
+
+                if (!response.ok) break;
+
+                response = await response.text();
+                response = parse(response);
+                response.meta.name =
+                    `[${trans} ${grade}] ` + response.meta.name;
+
+                SUBJECTS[subject][grade].push(response);
+            }
+        }
+    }
+};
+INIT();

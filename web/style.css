@@ -68,7 +68,8 @@ details button {
     justify-content: space-around;
     column-gap: 3rem;
     row-gap: 1rem;
-    padding: 0 2rem 5rem 2rem;
+    margin-bottom: 5rem; /* Controls height */
+    padding: 0 2rem 2rem;
 }
 #answers li {
     flex: 1 0 40%;
@@ -92,8 +93,23 @@ details button {
     z-index: 10;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 5rem;
 }
+
+#progress {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+}
+#progress p {
+    margin: 0;
+}
+
+#controls button {
+    align-self: stretch;
+}
+
 
 @media print {
 

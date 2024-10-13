@@ -80,13 +80,15 @@ function ask() {
  * @param {String} result The key of the answer
  */
 function check(id, result) {
-    if (QUEST.questions[id].ans[result]) {
-        DONE.push(id);
-        document.getElementById('pro' + id).innerHTML = '';
-        e_con.className = 'r';
-    } else {
-        document.getElementById('pro' + id).innerHTML = '✕';
-        e_con.className = 'w';
+    if (QUEST.questions[id].type == 0) {
+        if (QUEST.questions[id].ans[result]) {
+            DONE.push(id);
+            document.getElementById('pro' + id).innerHTML = '';
+            e_con.className = 'r';
+        } else {
+            document.getElementById('pro' + id).innerHTML = '✕';
+            e_con.className = 'w';
+        }
     }
 
     document.getElementById('done').innerHTML = DONE.length;

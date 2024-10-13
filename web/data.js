@@ -67,7 +67,7 @@ const INIT = async () => {
         const trans = SUBJECTS[subject];
         SUBJECTS[subject] = {}; // clear for array in array
 
-        for (let grade = 10; grade <= 12; grade++) {
+        for (let grade = 10; grade <= 10; grade++) {
             SUBJECTS[subject][grade] = [];
             for (let id = 0; id < 100; id++) {
                 let response =

@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg: #f1f2f6;
+    --color-fg: #555555;
+    --color-theme: #0e3768;
+    --color-light: #b0d8e3;
+    --color-hl: #efe897;
+}
+
+@media print {
+
+}

@@ -36,7 +36,7 @@ function parse(data) {
     let questions = [], meta = {},
         curQuestion;
 
-    data = data + 'END-OF-INPUT, OVERFLOW FOR SAVING LAST QUESTION';
+    data = data + '\nEND-OF-INPUT, OVERFLOW FOR SAVING LAST QUESTION';
     data = data.split('\n');
 
     data.forEach((line, lineNumber) => {
@@ -73,6 +73,7 @@ const INIT = async () => {
         for (let grade = 10; grade <= 10; grade++) {
             SUBJECTS[subject][grade] = [];
             let list = document.createElement('details');
+            list.setAttribute('open', 'true');
             list.innerHTML = `<summary>${trans} ${grade}</summary>`;
 
             for (let id = 0; id < 100; id++) {

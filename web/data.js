@@ -91,6 +91,7 @@ const INIT = async () => {
                 response = parse(response);
                 test.innerText = response.meta.name;
 
+                document.getElementById('progress').innerHTML += '●';
                 SUBJECTS[subject][grade].push(response);
                 list.append(test);
             }

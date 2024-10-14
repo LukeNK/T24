@@ -49,6 +49,9 @@ details button {
 }
 
 /* Game display ------------------------------------------------------------- */
+#game blockquote { display: none; }
+#game.hint blockquote { display: block; }
+
 #question {
     text-align: center;
     font-size: x-large;

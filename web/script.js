@@ -47,13 +47,11 @@ function ask() {
         return false;
     };
 
+    // select random question
     let id = 0;
     do {
         id = floor(random() * QUEST.questions.length);
     } while (DONE.includes(id));
-
-    // set progress bar
-    document.getElementById('pro' + id).innerHTML = '';
 
     let curQuest = QUEST.questions[id]; // the question class
 
@@ -72,6 +70,10 @@ function ask() {
             e_ans.append(li);
         }
     }
+
+    // set progress bar and hide hints
+    document.getElementById('pro' + id).innerHTML = '';
+    game.classList.remove('hint');
 }
 
 /**
@@ -80,17 +82,19 @@ function ask() {
  * @param {String} result The key of the answer
  */
 function check(id, result) {
-    if (QUEST.questions[id].type == 0) {
+    if (game.classList.contains('hint')) ask(); // skip to next question
+    else if (QUEST.questions[id].type == 0) {
         if (QUEST.questions[id].ans[result]) {
             DONE.push(id);
             document.getElementById('pro' + id).innerHTML = '';
             e_con.className = 'r';
+            ask();
         } else {
             document.getElementById('pro' + id).innerHTML = '✕';
             e_con.className = 'w';
+            game.classList.add('hint');
         }
     }
 
     document.getElementById('done').innerHTML = DONE.length;
-    ask();
 }

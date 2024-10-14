@@ -1,4 +1,4 @@
-let QUEST,
+let QUEST, QUESTID
     DONE = [];
 
 const floor = Math.floor,
@@ -53,6 +53,7 @@ function ask() {
         id = floor(random() * QUEST.questions.length);
     } while (DONE.includes(id));
 
+    QUESTID = id;
     let curQuest = QUEST.questions[id]; // the question class
 
     if (curQuest.type == 0) {

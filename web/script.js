@@ -65,7 +65,7 @@ function ask() {
             li.style.order = floor(random() * 100); // random question order
             li.setAttribute(
                 'onclick',
-                `check(${id}, "${ans}")`
+                `check(${id}, '${ans.replaceAll("'", "\\'")}')`
             )
             e_ans.append(li);
         }

@@ -92,7 +92,7 @@ function check(id, result, elm) {
             e_con.className = 'r';
             ask();
         } else {
-            document.getElementById('pro' + id).innerHTML = '✕';
+            document.getElementById('pro' + id).innerHTML = '●';
             e_con.className = 'w';
             game.classList.add('hint');
 

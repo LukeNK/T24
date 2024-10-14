@@ -47,12 +47,22 @@ function parse(data) {
             meta.name = line.substring(1).trim();
         else if (line.startsWith('    ') || line.startsWith('\t')) {
             line = line.trim();
-            if (line.startsWith('+') || line.startsWith('-'))
+            if (line.startsWith('+') || line.startsWith('-')) {
+                curQuestion.type = 1;
                 curQuestion.add(
                     line.substring(1).trim(),
                     line[0] == "+" ? true : false
                 );
-            else
+            } else if (line.startsWith('>')) {
+                // flashcard
+                curQuestion.text =
+                    `<details>
+                        <summary>${curQuestion.text}</summary>
+                        <p>${line.substring(1).trim()}</p>
+                    </details`;
+                curQuestion.add('☑', true);
+                curQuestion.add('☒', false);
+            } else
                 curQuestion.add(line);
         } else if (line.trim().length > 3) { // new question, check length just to be sure
             if (curQuestion)

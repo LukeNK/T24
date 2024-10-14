@@ -77,6 +77,8 @@ details button {
     padding: 1rem;
     background-color: var(--color-theme);
 }
+#question details { text-align: left; }
+#question summary { background-color: transparent; }
 #question img {
     display: block;
     margin-left: auto;

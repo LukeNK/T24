@@ -1,5 +1,6 @@
 let SUBJECTS = {
     'h': 'Lịch Sử',
+    'l': 'Ngữ văn',
     'p': 'Vật Lý'
 }
 
@@ -84,7 +85,7 @@ const INIT = async () => {
                 );
 
                 let response =
-                    await fetch(`data/${subject}${grade}/${id}.txt`);
+                    await fetch(`data/${subject}${grade}/${id}.html`);
                 if (!response.ok) break; // no more test
                 response = await response.text();
                 response = parse(response);

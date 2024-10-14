@@ -1,5 +1,5 @@
 # Định dạng file dữ liệu câu hỏi
-```md
+```html
 # Tên bộ câu hỏi bắt đầu bằng dấu thăng
 
 Đây là một câu hỏi trắc nghiệm

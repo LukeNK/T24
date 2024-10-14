@@ -65,6 +65,11 @@ details button {
 /* Game display ------------------------------------------------------------- */
 #game blockquote { display: none; }
 #game.hint blockquote { display: block; }
+#game .r {
+    background-color: var(--color-green);
+    color: var(--color-bg);
+}
+#game .w { background-color: var(--color-red); }
 
 #question {
     text-align: center;
@@ -109,11 +114,6 @@ details button {
     align-items: center;
     height: 5rem;
 }
-#controls.r {
-    background-color: var(--color-green);
-    color: var(--color-bg);
-}
-#controls.w { background-color: var(--color-red); }
 
 #progress {
     flex: 1 1 0;

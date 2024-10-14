@@ -66,7 +66,7 @@ function ask() {
             li.style.order = floor(random() * 100); // random question order
             li.setAttribute(
                 'onclick',
-                `check(${id}, '${ans.replaceAll("'", "\\'")}')`
+                `check(${id}, '${ans.replaceAll("'", "\\'")}', this)`
             )
             e_ans.append(li);
         }
@@ -81,8 +81,9 @@ function ask() {
  * Check the answer of the user
  * @param {Number} id Question ID
  * @param {String} result The key of the answer
+ * @param {HTMLElement} elm The answer that was clocked on
  */
-function check(id, result) {
+function check(id, result, elm) {
     if (game.classList.contains('hint')) ask(); // skip to next question
     else if (QUEST.questions[id].type == 0) {
         if (QUEST.questions[id].ans[result]) {
@@ -94,6 +95,8 @@ function check(id, result) {
             document.getElementById('pro' + id).innerHTML = '✕';
             e_con.className = 'w';
             game.classList.add('hint');
+
+            if (elm) elm.classList.add('w');
         }
     }
 

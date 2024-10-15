@@ -65,6 +65,7 @@ details button {
 /* Game display ------------------------------------------------------------- */
 #game blockquote { display: none; }
 #game.hint blockquote { display: block; }
+#game > button { width: 100%; }
 #game .r {
     background-color: var(--color-green);
     color: var(--color-bg);
@@ -96,7 +97,7 @@ details button {
     margin-bottom: 5rem; /* Controls height */
     padding: 0 2rem 2rem;
 }
-#answers li {
+#answers[type="0"] li {
     flex: 1 0 40%;
     min-width: 20rem;
     border: 0.5rem solid var(--color-light);
@@ -104,8 +105,17 @@ details button {
     padding: 1rem;
     cursor: pointer;
 }
-#answers li:hover {
+#answers[type="0"] li:hover {
     border-color: var(--color-hl);
+}
+#answers[type="1"] li {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#answers .t {
+    content: "Yes";
 }
 
 #controls {

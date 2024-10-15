@@ -81,7 +81,6 @@ let TESTLOAD = 0, TESTFIRST = true;
 function loadTracker(loaded) {
     TESTFIRST = false;
     TESTLOAD += (loaded)? -1 : 1;
-    console.log(!(TESTLOAD || TESTFIRST))
     return !(TESTLOAD || TESTFIRST);
 }
 
@@ -123,5 +122,4 @@ for (const subject in SUBJECTS) {
             if (list.childElementCount > 1) menu.append(list);
         })();
     }
-
 }

@@ -55,7 +55,7 @@ function parse(data) {
                 curQuestion.text =
                     `<details>
                         <summary>${curQuestion.text}</summary>
-                        <p>${line.substring(1).trim()}</p>
+                        ${line.substring(1).trim()}
                     </details`;
                 curQuestion.add('✔', true);
                 curQuestion.add('✘', false);

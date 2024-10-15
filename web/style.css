@@ -78,8 +78,14 @@ details button {
     padding: 1rem;
     background-color: var(--color-theme);
 }
-#question details { text-align: left; }
-#question summary { background-color: transparent; }
+#question details {
+    border: none;
+    text-align: left;
+}
+#question summary {
+    border-bottom: 1px solid var(--color-light);
+    background-color: transparent;
+}
 #question img {
     display: block;
     margin-left: auto;
@@ -114,9 +120,7 @@ details button {
     justify-content: space-between;
     align-items: center;
 }
-#answers .t {
-    content: "Yes";
-}
+#answers[type="1"] button { border-radius: 0.5rem; }
 
 #controls {
     position: fixed; bottom: 0; left: 0; right: 0;

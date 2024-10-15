@@ -90,6 +90,8 @@ function ask() {
             `<button onclick="check(${id})">Kiểm tra kết quả</button>`;
     }
 
+    e_quest.scrollIntoView();
+
     // set progress bar and hide hints
     document.getElementById('pro' + id).innerHTML = '';
     game.classList.remove('hint');

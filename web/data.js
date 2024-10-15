@@ -95,6 +95,8 @@ for (const subject in SUBJECTS) {
         list.setAttribute('open', 'true');
         list.innerHTML = `<summary>${trans} ${grade}</summary>`;
 
+        loadTracker(); // track loading progress
+
         (async () => {
             for (let id = 0; id < 100; id++) {
                 let test = document.createElement('button');
@@ -103,12 +105,13 @@ for (const subject in SUBJECTS) {
                     `startGame("${subject}", ${grade}, ${id})`
                 );
 
-                loadTracker(); // track loading progress
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.html`);
-                if (loadTracker(true)) startGame();
 
-                if (!response.ok) break; // no more test
+                if (!response.ok) {
+                    if (loadTracker(true)) startGame();
+                    break; // no more test
+                };
                 response = await response.text();
                 response = parse(response);
                 test.innerText = response.meta.name;

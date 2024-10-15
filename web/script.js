@@ -1,3 +1,5 @@
+// ◉○◍●✕▶✔✘□ symbol hot bar
+
 let QUEST, QUESTID
     DONE = [];
 
@@ -43,7 +45,6 @@ function startGame(s, g, i) {
 
 /**
  * Start a question.
- * ◉○◍●✕▶✔✘□
  */
 function ask() {
     if (DONE.length >= QUEST.questions.length) {

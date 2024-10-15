@@ -4,9 +4,6 @@ let SUBJECTS = {
     'p': 'Vật Lý'
 }
 
-const menu = document.getElementById('menu'),
-    game = document.getElementById('game');
-
 class Question {
     constructor(text) {
         this.text = text;
@@ -60,8 +57,8 @@ function parse(data) {
                         <summary>${curQuestion.text}</summary>
                         <p>${line.substring(1).trim()}</p>
                     </details`;
-                curQuestion.add('☑', true);
-                curQuestion.add('☒', false);
+                curQuestion.add('✔', true);
+                curQuestion.add('✘', false);
             } else
                 curQuestion.add(line);
         } else if (line.trim().length > 3) { // new question, check length just to be sure
@@ -75,18 +72,31 @@ function parse(data) {
     return { meta, questions }
 }
 
+let TESTLOAD = 0, TESTFIRST = true;
+/**
+ * Track if all tests are loaded
+ * @param {Boolean} loaded If the test is loaded
+ * @returns {Boolean} Returns true if all tests are loaded
+ */
+function loadTracker(loaded) {
+    TESTFIRST = false;
+    TESTLOAD += (loaded)? -1 : 1;
+    console.log(!(TESTLOAD || TESTFIRST))
+    return !(TESTLOAD || TESTFIRST);
+}
+
 // iterate through data folder to download files
-const INIT = async () => {
-    for (const subject in SUBJECTS) {
-        const trans = SUBJECTS[subject];
-        SUBJECTS[subject] = {}; // clear for array in array
+for (const subject in SUBJECTS) {
+    const trans = SUBJECTS[subject];
+    SUBJECTS[subject] = {}; // clear for array in array
 
-        for (let grade = 10; grade <= 10; grade++) {
-            SUBJECTS[subject][grade] = [];
-            let list = document.createElement('details');
-            list.setAttribute('open', 'true');
-            list.innerHTML = `<summary>${trans} ${grade}</summary>`;
+    for (let grade = 10; grade <= 10; grade++) {
+        SUBJECTS[subject][grade] = [];
+        let list = document.createElement('details');
+        list.setAttribute('open', 'true');
+        list.innerHTML = `<summary>${trans} ${grade}</summary>`;
 
+        (async () => {
             for (let id = 0; id < 100; id++) {
                 let test = document.createElement('button');
                 test.setAttribute(
@@ -94,8 +104,11 @@ const INIT = async () => {
                     `startGame("${subject}", ${grade}, ${id})`
                 );
 
+                loadTracker(); // track loading progress
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.html`);
+                if (loadTracker(true)) startGame();
+
                 if (!response.ok) break; // no more test
                 response = await response.text();
                 response = parse(response);
@@ -108,9 +121,7 @@ const INIT = async () => {
 
             // only append if there is a test
             if (list.childElementCount > 1) menu.append(list);
-        }
+        })();
     }
 
-    startGame(); // init after data loaded
-};
-INIT();
+}

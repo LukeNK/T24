@@ -87,10 +87,7 @@ details button {
     border: none;
     text-align: left;
 }
-#question summary {
-    border-bottom: 1px solid var(--color-light);
-    background-color: transparent;
-}
+#question summary { background-color: transparent; }
 #question p {
     font-size: large;
     text-align: left;

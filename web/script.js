@@ -1,18 +1,3 @@
-// ◉○◍●✕▶✔✘□ symbol hot bar
-
-let QUEST, QUESTID
-    DONE = [];
-
-const floor = Math.floor,
-    random = Math.random,
-    CHECKMARK = '✔',
-    XMARK = '✘',
-    menu = document.getElementById('menu'),
-    game = document.getElementById('game'),
-    e_quest = document.getElementById('question'),
-    e_ans = document.getElementById('answers'),
-    e_con = document.getElementById('controls');
-
 /**
  * Start a game process. Omit parameters to exit game
  * @param {String} s Subject

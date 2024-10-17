@@ -4,6 +4,14 @@ let SUBJECTS = {
     'p': 'Vật Lý'
 }
 
+/**
+ * A point on a two dimensional plane.
+ * @typedef {Object} Quiz
+ * @property {Object} meta Key pair value of the meta of the quiz
+ * @property {Question[]} questions An array of questions in the list
+ */
+
+
 class Question {
     constructor(text) {
         this.text = text;
@@ -29,6 +37,7 @@ class Question {
 /**
  * Parse result according to format
  * @param {String} data
+ * @returns {Quiz} The result quiz after parsing
  */
 function parse(data) {
     let questions = [], meta = {},

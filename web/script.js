@@ -1,3 +1,18 @@
+// ◉○◍●✕▶✔✘□ symbol hot bar
+
+let QUEST, QUESTID
+    DONE = [];
+
+const floor = Math.floor,
+    random = Math.random,
+    CHECKMARK = '✔',
+    XMARK = '✘',
+    menu = document.getElementById('menu'),
+    game = document.getElementById('game'),
+    e_quest = document.getElementById('question'),
+    e_ans = document.getElementById('answers'),
+    e_con = document.getElementById('controls');
+
 /**
  * Start a game process. Omit parameters to exit game
  * @param {String} s Subject
@@ -139,4 +154,59 @@ function report(id, correct) {
 function swap(btn) {
     if (btn.innerHTML == CHECKMARK) btn.innerHTML = XMARK;
     else btn.innerHTML = CHECKMARK;
+}
+
+let TESTLOAD = 0, TESTFIRST = true;
+/**
+ * Track if all tests are loaded
+ * @param {Boolean} loaded If the test is loaded
+ * @returns {Boolean} Returns true if all tests are loaded
+ */
+function loadTracker(loaded) {
+    TESTFIRST = false;
+    TESTLOAD += (loaded)? -1 : 1;
+    return !(TESTLOAD || TESTFIRST);
+}
+
+// iterate through data folder to download files
+for (const subject in SUBJECTS) {
+    const trans = SUBJECTS[subject];
+    SUBJECTS[subject] = {}; // clear for array in array
+
+    for (let grade = 10; grade <= 10; grade++) {
+        SUBJECTS[subject][grade] = [];
+        let list = document.createElement('details');
+        list.setAttribute('open', 'true');
+        list.innerHTML = `<summary>${trans} ${grade}</summary>`;
+
+        loadTracker(); // track loading progress
+
+        (async () => {
+            for (let id = 0; id < 100; id++) {
+                let test = document.createElement('button');
+                test.setAttribute(
+                    'onclick',
+                    `startGame("${subject}", ${grade}, ${id})`
+                );
+
+                let response =
+                    await fetch(`data/${subject}${grade}/${id}.html`);
+
+                if (!response.ok) {
+                    if (loadTracker(true)) startGame();
+                    break; // no more test
+                };
+                response = await response.text();
+                response = parse(response);
+                test.innerText = response.meta.name;
+
+                document.getElementById('progress').innerHTML += '●';
+                SUBJECTS[subject][grade].push(response);
+                list.append(test);
+            }
+
+            // only append if there is a test
+            if (list.childElementCount > 1) menu.append(list);
+        })();
+    }
 }

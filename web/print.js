@@ -3,6 +3,7 @@ const list = document.querySelector('dl');
 (async () => {
 
 let quizID = window.location.hash.substring(1);
+if (!window.location.hash.substring(1)) window.location.href = 'https://lukenk.github.io/T24';
 quizID = quizID.replaceAll('-', '/') + '.html';
 
 let data = await fetch('data/' + quizID);

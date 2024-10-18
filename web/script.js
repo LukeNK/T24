@@ -215,11 +215,11 @@ for (const subject in SUBJECTS) {
 
                 document.getElementById('progress').innerHTML += '●';
                 SUBJECTS[subject][grade].push(response);
-                list.append(test);
+                list.prepend(test); // reverse sort
             }
 
             // only append if there is a test
-            if (list.childElementCount > 1) menu.append(list);
+            if (list.childElementCount > 1) menu.prepend(list);
         })();
     }
 }

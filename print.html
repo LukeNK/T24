@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print document</title>
+
+    <style>
+        dl {
+            counter-reset: question;
+        }
+
+        dt {
+            font-weight: bolder;
+        }
+        dt::before {
+            counter-increment: question;
+            content: counter(question) ". ";
+        }
+
+        img {
+            display: block;
+            height: auto;
+            width: auto;
+            max-width: 10rem;
+            max-height: 10rem;
+        }
+
+        details {
+            font-weight: normal;
+        }
+        summary { font-weight: bolder; }
+        summary::marker { content: ""; }
+
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 0.25rem;
+        }
+
+        blockquote {
+            border-left: 0.25rem solid black;
+            padding: 0.5rem 4rem;
+            margin: 0 0;
+        }
+    </style>
+</head>
+<body><dl></dl></body>
+<script src="web/parser.js"></script>
+<script src="web/print.js"></script>
+</html>

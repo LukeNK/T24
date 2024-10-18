@@ -79,7 +79,8 @@ function ask() {
         e_quest.innerHTML = curQuest.text;
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
-            li.innerHTML = ans + '<button onclick="swap(this)">✘</button>';
+            li.innerHTML =
+                ans + '<button onclick="swap(this)">-</button>'; // empty
             li.style.order = floor(random() * -100); // negative to show after check button
             e_ans.append(li);
         }

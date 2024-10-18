@@ -16,6 +16,10 @@
     font-size: large;
 }
 
+a {
+    color: var(--color-light);
+}
+
 button {
     border: none;
     outline: none;
@@ -62,13 +66,22 @@ details button {
     text-align: left;
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+}
+span {
+    margin: 0 0.5rem;
+}
+
 /* Game display ------------------------------------------------------------- */
 #game blockquote { display: none; }
 #game.hint blockquote {
     display: block;
     margin: 0 0.5rem;
     padding-left: 0.5rem;
-    border-left: 0.25rem solid #b0d8e3;
+    border-left: 0.25rem solid var(--color-light);
 }
 #game > button { width: 100%; }
 #game .r {

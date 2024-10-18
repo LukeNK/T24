@@ -192,7 +192,21 @@ for (const subject in SUBJECTS) {
                     await fetch(`data/${subject}${grade}/${id}.html`);
 
                 if (!response.ok) {
-                    if (loadTracker(true)) startGame();
+                    if (loadTracker(true)) {
+                        let hash = window.location.hash;
+                        try {
+                            console.info('Starting ' + hash)
+                            startGame(
+                                hash[1],
+                                hash.substring(2).split('-')[0],
+                                hash.substring(2).split('-')[1],
+                            )
+                        } catch (err) {
+                            // just clear the display screen
+                            console.info('Just clear the screen')
+                            startGame();
+                        }
+                    };
                     break; // no more test
                 };
                 response = await response.text();

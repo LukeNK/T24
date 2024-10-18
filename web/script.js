@@ -5,8 +5,6 @@ let QUEST, QUESTID
 
 const floor = Math.floor,
     random = Math.random,
-    CHECKMARK = '✔',
-    XMARK = '✘',
     menu = document.getElementById('menu'),
     game = document.getElementById('game'),
     e_quest = document.getElementById('question'),

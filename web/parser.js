@@ -1,3 +1,6 @@
+const CHECKMARK = '✔',
+    XMARK = '✘';
+
 let SUBJECTS = {
     'h': 'Lịch Sử',
     'l': 'Ngữ văn',
@@ -66,8 +69,8 @@ function parse(data) {
                         <summary>${curQuestion.text}</summary>
                         ${line.substring(1).trim()}
                     </details`;
-                curQuestion.add('✔', true);
-                curQuestion.add('✘', false);
+                curQuestion.add(CHECKMARK, true);
+                curQuestion.add(XMARK, false);
             } else
                 curQuestion.add(line);
         } else if (line.trim().length > 3) { // new question, check length just to be sure

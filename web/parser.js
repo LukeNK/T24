@@ -2,9 +2,10 @@ const CHECKMARK = '✔',
     XMARK = '✘';
 
 let SUBJECTS = {
+    'l': 'Ngữ Văn',
+    'p': 'Vật Lý',
     'h': 'Lịch Sử',
-    'l': 'Ngữ văn',
-    'p': 'Vật Lý'
+    'g': 'Địa Lý',
 }
 
 /**

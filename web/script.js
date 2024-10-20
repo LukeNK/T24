@@ -2,6 +2,7 @@
 
 let QUIZ,
     QUIZTIME, // quiz start time
+    QUIZLIM,
     QUESTID,
     DONE = [], // completed question to never show again
     AGAIN = []; // wrong questions to try again
@@ -34,12 +35,13 @@ function startGame(s, g, i) {
 
     QUIZ = SUBJECTS[s][g][i];
     QUIZTIME = Date.now();
-
-    // display
-    document.getElementById('total').innerHTML = Math.min(
+    QUIZLIM = Math.min(
         QUIZ.questions.length,
         document.getElementById('quizLimit').value
     );
+
+    // display
+    document.getElementById('total').innerHTML = QUIZLIM;
     document.getElementById('progress').innerHTML = ''; //clear
     for (let l0 = 0; l0 < QUIZ.questions.length; l0++)
         document.getElementById('progress').innerHTML +=
@@ -52,10 +54,7 @@ function startGame(s, g, i) {
  * Start a question.
  */
 function ask() {
-    if (
-        DONE.length >= document.getElementById('quizLimit').value
-        && AGAIN.length <= 0
-    ) {
+    if (DONE.length >= QUIZLIM && AGAIN.length <= 0) {
         let temp = (Date.now() - QUIZTIME) / 1000;
         menu.innerHTML =
             `<p>🎉Hoàn thành ${DONE.length} câu trong ${floor(temp / 60)}m ${floor(temp % 60)}s</p>`
@@ -71,7 +70,7 @@ function ask() {
         // bias wrong question
         if (
             (DONE.includes(id) && AGAIN.length > 0)
-            || DONE.length >= document.getElementById('quizLimit').value
+            || DONE.length >= QUIZLIM
         )
             id = AGAIN[id % AGAIN.length];
     } while (DONE.includes(id));
@@ -143,7 +142,7 @@ function check(id, result, elm) {
             ) wrongAns--;
         });
 
-        report(id, wrongAns <= 0 );
+        report(id, wrongAns <= 0);
     }
 
     document.getElementById('done').innerHTML = DONE.length;

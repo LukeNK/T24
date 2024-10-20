@@ -12,6 +12,7 @@
         }
 
         dt {
+            margin-top: 0.5rem;
             font-weight: bolder;
         }
         dd { margin-inline-start: 2rem; }
@@ -51,6 +52,13 @@
             content: "→";
             margin: 0 0.5rem;
         }
+
+        @media print {
+            button { display: none; }
+        }
+
+        body .wAns { display: none; }
+        body.wAns .wAns { display: block; }
     </style>
 
     <script
@@ -61,6 +69,7 @@
     </script>
 </head>
 <body>
+    <button onclick="document.body.classList.add('wAns')">Show wrong answers</button>
     <div id="qrcode"></div>
     <h2 id="quiz"></h2>
     <dl></dl>

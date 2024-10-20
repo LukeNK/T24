@@ -16,8 +16,11 @@ document.getElementById('quiz').innerHTML =
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
     Object.keys(quest.ans).forEach(ans => {
-        if (quest.ans[ans] && ans != CHECKMARK)
+        if (ans != CHECKMARK && ans != XMARK) {
             list.innerHTML += `<dd>${ans}</dd>`;
+            if (!quest.ans[ans])
+                list.lastElementChild.classList.add('wAns');
+        }
     })
 });
 

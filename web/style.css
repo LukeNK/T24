@@ -194,8 +194,3 @@ span { margin: 0 0.5rem; }
 #controls button {
     align-self: stretch;
 }
-
-
-@media print {
-
-}

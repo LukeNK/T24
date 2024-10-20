@@ -105,7 +105,8 @@ function ask() {
     e_quest.scrollIntoView();
 
     // set progress bar and hide hints
-    document.getElementById('pro' + id).innerHTML = '';
+    if (AGAIN.includes(id))
+        document.getElementById('pro' + id).innerHTML = '◉';
     game.classList.remove('hint');
 }
 

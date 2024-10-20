@@ -153,7 +153,7 @@ span { margin: 0 0.5rem; }
 }
 #answers[type="0"] li {
     flex: 1 0 40%;
-    min-width: 20rem;
+    min-width: min(100%, 20rem);
     border: 0.5rem solid var(--color-light);
     border-radius: 0.5rem;
     padding: 1rem;

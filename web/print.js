@@ -31,3 +31,9 @@ document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true')
 new QRCode(
     document.getElementById("qrcode"),
     'http://lukenk.github.io/T24' + window.location.hash);
+
+let quoteID = Math.floor(Math.random() * Quotes.length);
+document.querySelector('footer').innerHTML =
+    `<hr>
+    « ${Quotes[quoteID][1]} »<br>
+    — ${Quotes[quoteID][0]}`;

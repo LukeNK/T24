@@ -137,6 +137,7 @@ span { margin: 0 0.5rem; }
     margin-right: auto;
     margin-top: 1rem;
     max-height: 50vh;
+    max-width: 100%;
 }
 
 #answers {

@@ -1,7 +1,8 @@
 // ◉○◍●✕▶✔✘□ symbol hot bar
 
-let QUEST, QUESTID
-    DONE = [];
+let QUEST, QUESTID,
+    DONE = [], // completed question to never show again
+    AGAIN = []; // wrong questions to try again
 
 const floor = Math.floor,
     random = Math.random,
@@ -50,7 +51,7 @@ function startGame(s, g, i) {
 function ask() {
     if (
         DONE.length >= document.getElementById('quizLimit').value
-        && !document.getElementById('progress').innerHTML.includes(WMARK)
+        && AGAIN.length <= 0
     ) {
         startGame();
         return false;
@@ -60,6 +61,12 @@ function ask() {
     let id = 0;
     do {
         id = floor(random() * QUEST.questions.length);
+        // bias wrong question
+        if (
+            (DONE.includes(id) && AGAIN.length > 0)
+            || DONE.length >= document.getElementById('quizLimit').value
+        )
+            id = AGAIN[id % AGAIN.length];
     } while (DONE.includes(id));
 
     QUESTID = id;
@@ -142,10 +149,12 @@ function check(id, result, elm) {
 function report(id, correct) {
     if (correct) {
         DONE.push(id);
+        AGAIN = AGAIN.filter(v => v != id); // remove from again
         document.getElementById('pro' + id).innerHTML = '';
         e_con.className = 'r';
         ask();
     } else {
+        AGAIN.push(id);
         document.getElementById('pro' + id).innerHTML = WMARK;
         e_con.className = 'w';
         game.classList.add('hint');

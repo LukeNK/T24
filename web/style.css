@@ -30,6 +30,15 @@ button {
     cursor: pointer;
 }
 
+details { border-left: 0.25rem solid var(--color-light); }
+summary {
+    font-size: larger;
+    padding: 1rem;
+    background-color: var(--color-light);
+    font-weight: bold;
+    cursor: pointer;;
+}
+
 hr { margin-top: 0; }
 
 p { margin: 1rem; }
@@ -52,28 +61,45 @@ body {
 }
 
 /* Menu display ------------------------------------------------------------- */
-details {
-    border-left: 0.25rem solid var(--color-light);
-}
-summary {
-    font-size: larger;
-    background-color: var(--color-light);
-    padding: 1rem;
-    cursor: pointer;;
-}
+#menu summary { color: var(--color-bg); }
 details button {
     width: 100%;
     text-align: left;
 }
+
+#setting {
+    border-color: var(--color-red);
+    background-color: var(--color-fg);
+    color: var(--color-bg);
+}
+#setting summary { background-color: var(--color-red); }
+#setting > *:not(summary) { padding: 0.5rem; }
+
+label {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+}
+label > * { flex: 2 1 0; }
+label input {
+    flex: 3 1 0;
+    appearance: none;
+    width: 100%;
+    height: 0.25rem;
+    cursor: pointer;
+    background: var(--color-bg);
+    outline: none;
+}
+label span { max-width: 3rem; }
 
 footer {
     display: flex;
     justify-content: center;
     padding: 0.5rem;
 }
-span {
-    margin: 0 0.5rem;
-}
+span { margin: 0 0.5rem; }
 
 /* Game display ------------------------------------------------------------- */
 #game blockquote { display: none; }

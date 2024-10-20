@@ -32,7 +32,10 @@ function startGame(s, g, i) {
     QUEST = SUBJECTS[s][g][i];
 
     // display
-    document.getElementById('total').innerHTML = QUEST.questions.length;
+    document.getElementById('total').innerHTML = Math.min(
+        QUEST.questions.length,
+        document.getElementById('quizLimit').value
+    );
     document.getElementById('progress').innerHTML = ''; //clear
     for (let l0 = 0; l0 < QUEST.questions.length; l0++)
         document.getElementById('progress').innerHTML +=
@@ -45,7 +48,10 @@ function startGame(s, g, i) {
  * Start a question.
  */
 function ask() {
-    if (DONE.length >= QUEST.questions.length) {
+    if (
+        DONE.length >= document.getElementById('quizLimit').value
+        && !document.getElementById('progress').innerHTML.includes(WMARK)
+    ) {
         startGame();
         return false;
     };
@@ -74,7 +80,7 @@ function ask() {
             )
             e_ans.append(li);
         }
-    } if (curQuest.type == 1) {
+    } else if (curQuest.type == 1) {
         // true false
         e_quest.innerHTML = curQuest.text;
         for (const ans in curQuest.ans) {
@@ -122,7 +128,7 @@ function check(id, result, elm) {
             ) wrongAns--;
         });
 
-        report(id, wrongAns <= 0);
+        report(id, wrongAns <= 0 );
     }
 
     document.getElementById('done').innerHTML = DONE.length;
@@ -140,7 +146,7 @@ function report(id, correct) {
         e_con.className = 'r';
         ask();
     } else {
-        document.getElementById('pro' + id).innerHTML = '●';
+        document.getElementById('pro' + id).innerHTML = WMARK;
         e_con.className = 'w';
         game.classList.add('hint');
     }
@@ -213,6 +219,16 @@ for (const subject in SUBJECTS) {
                 response = parse(response);
                 test.innerText = response.meta.name;
 
+                // set config
+                document.getElementById('quizLimit').max =
+                    Math.max(
+                        document.getElementById('quizLimit').max,
+                        response.questions.length
+                    );
+                document.getElementById('quizLimit').value =
+                    document.getElementById('quizLimit').max;
+
+                // loading bar
                 document.getElementById('progress').innerHTML += '●';
                 SUBJECTS[subject][grade].push(response);
                 list.prepend(test); // reverse sort

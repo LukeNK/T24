@@ -1,5 +1,6 @@
 const CHECKMARK = '✔',
-    XMARK = '✘';
+    XMARK = '✘',
+    WMARK = '●'; // wrong answer mark on the progress bar
 
 let SUBJECTS = {
     'l': 'Ngữ Văn',
@@ -9,7 +10,7 @@ let SUBJECTS = {
 }
 
 /**
- * A point on a two dimensional plane.
+ * A quiz object
  * @typedef {Object} Quiz
  * @property {Object} meta Key pair value of the meta of the quiz
  * @property {Question[]} questions An array of questions in the list

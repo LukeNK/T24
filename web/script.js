@@ -23,7 +23,7 @@ function startGame(s, g, i) {
         // exit game
         menu.style.display = '';
         game.style.display = 'none';
-        DONE = [];
+        DONE = []; AGAIN = [];
         return
     }
 
@@ -53,6 +53,8 @@ function ask() {
         DONE.length >= document.getElementById('quizLimit').value
         && AGAIN.length <= 0
     ) {
+        menu.innerHTML =
+            `<p>Hoàn thành ${DONE.length} câu</p>` + menu.innerHTML
         startGame();
         return false;
     };

@@ -1,6 +1,8 @@
 // ◉○◍●✕▶✔✘□ symbol hot bar
 
-let QUEST, QUESTID,
+let QUIZ,
+    QUIZTIME, // quiz start time
+    QUESTID,
     DONE = [], // completed question to never show again
     AGAIN = []; // wrong questions to try again
 
@@ -30,15 +32,16 @@ function startGame(s, g, i) {
     menu.style.display = 'none';
     game.style.display = '';
 
-    QUEST = SUBJECTS[s][g][i];
+    QUIZ = SUBJECTS[s][g][i];
+    QUIZTIME = Date.now();
 
     // display
     document.getElementById('total').innerHTML = Math.min(
-        QUEST.questions.length,
+        QUIZ.questions.length,
         document.getElementById('quizLimit').value
     );
     document.getElementById('progress').innerHTML = ''; //clear
-    for (let l0 = 0; l0 < QUEST.questions.length; l0++)
+    for (let l0 = 0; l0 < QUIZ.questions.length; l0++)
         document.getElementById('progress').innerHTML +=
             `<p id="pro${l0}"></p>`;
 
@@ -53,8 +56,10 @@ function ask() {
         DONE.length >= document.getElementById('quizLimit').value
         && AGAIN.length <= 0
     ) {
+        let temp = (Date.now() - QUIZTIME) / 1000;
         menu.innerHTML =
-            `<p>Hoàn thành ${DONE.length} câu</p>` + menu.innerHTML
+            `<p>🎉Hoàn thành ${DONE.length} câu trong ${floor(temp / 60)}m ${floor(temp % 60)}s</p>`
+            + menu.innerHTML;
         startGame();
         return false;
     };
@@ -62,7 +67,7 @@ function ask() {
     // select random question
     let id = 0;
     do {
-        id = floor(random() * QUEST.questions.length);
+        id = floor(random() * QUIZ.questions.length);
         // bias wrong question
         if (
             (DONE.includes(id) && AGAIN.length > 0)
@@ -72,7 +77,7 @@ function ask() {
     } while (DONE.includes(id));
 
     QUESTID = id;
-    let curQuest = QUEST.questions[id]; // the question class
+    let curQuest = QUIZ.questions[id]; // the question class
 
     e_ans.setAttribute('type', curQuest.type);
     e_ans.innerHTML = ''; // clear answers
@@ -120,20 +125,20 @@ function ask() {
  */
 function check(id, result, elm) {
     if (game.classList.contains('hint')) ask(); // skip to next question
-    else if (QUEST.questions[id].type == 0) {
-        if (QUEST.questions[id].ans[result]) report(id, true);
+    else if (QUIZ.questions[id].type == 0) {
+        if (QUIZ.questions[id].ans[result]) report(id, true);
         else {
             report(id)
             if (elm) elm.classList.add('w');
         }
-    } else if (QUEST.questions[id].type == 1) {
-        let wrongAns = Object.keys(QUEST.questions[id].ans).length;
+    } else if (QUIZ.questions[id].type == 1) {
+        let wrongAns = Object.keys(QUIZ.questions[id].ans).length;
         [...e_ans.children].forEach(elm => {
             if (elm.tagName == 'BUTTON')
                 return; // check button
             result = elm.innerHTML.split('<button')[0];
             if (
-                QUEST.questions[id].ans[result]
+                QUIZ.questions[id].ans[result]
                 == ((elm.querySelector('button').innerHTML == CHECKMARK)? 1 : 0)
             ) wrongAns--;
         });

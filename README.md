@@ -1,4 +1,6 @@
-# Study app
+![Logo which looks like a light bulb with a question marking going through the center](web/logo.svg)
+
+# T24
 I honestly don't know how to name this app, so I guess I will settle with the year marker of my class then. T24 is a Russian tank but this has nothing to do with that.
 
 I was trying to find an alternative against all of the popular quizzing apps, when I decided to program this app because why not.
@@ -20,6 +22,8 @@ The reason the last one is not preferred is because most of the people in my cla
 
 ## Gameplay
 After starting a quiz, the user will ask to answer 1 question at a time. If they answer the question incorrectly or skip it, the answer hints will show and they will need to answer the question later. The quiz will be finished once all of the questions are answered correctly. For flashcards, it works in a similar manner but in this case, the "correct" answer is marking the question as "memorized".
+
+If user adjusted `quizLimit`, then the quiz will only end once the user has answered correctly the set amount. If there are still wrong questions to be answer, the user must also answer all of them in order to end the quiz.
 
 ## Data structure
 The general format of quiz filename in `data/` is:

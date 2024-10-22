@@ -5,6 +5,7 @@ const CHECKMARK = '✔',
 let SUBJECTS = {
     'l': 'Ngữ Văn',
     'p': 'Vật Lý',
+    'b': 'Sinh Học',
     'h': 'Lịch Sử',
     'g': 'Địa Lý',
 }

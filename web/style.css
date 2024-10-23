@@ -182,6 +182,10 @@ span { margin: 0 0.5rem; }
     cursor: pointer;
     text-align: center;
 }
+#answers[type="2"] li:hover {
+    background-color: var(--color-hl);
+    color: var(--color-bg);
+}
 
 #controls {
     position: fixed; bottom: 0; left: 0; right: 0;

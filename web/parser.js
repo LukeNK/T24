@@ -22,7 +22,7 @@ let SUBJECTS = {
 class Question {
     constructor(text) {
         this.text = text;
-        this.type = 0; // 0 for multiple choice, 1 for true/false
+        this.type = 0; // 0 multiple choice, 1 true/false, 2 flashcard
         this.ans = {};
 
         return this;
@@ -54,13 +54,20 @@ function parse(data) {
     data = data.split('\n');
 
     data.forEach((line, lineNumber) => {
-        if (line.trim() == '')
-            return; // skip empty lines
-        else if (line[0] == '#')
+        if (line.trim() == '' || line.trim().startsWith('//')) {
+            // empty line and comment
+            return;
+        } else if (line[0] == '#') {
+            // quiz name
             meta.name = line.substring(1).trim();
-        else if (line.startsWith('    ') || line.startsWith('\t')) {
+        } else if (line.trim().startsWith('<')) {
+            // html code, ignore white space, only apply to question text
+            curQuestion.text += line;
+        } else if (line.startsWith('    ') || line.startsWith('\t')) {
+            // answer
             line = line.trim();
             if (line.startsWith('+') || line.startsWith('-')) {
+                // true false
                 curQuestion.type = 1;
                 curQuestion.add(
                     line.substring(1).trim(),
@@ -68,21 +75,28 @@ function parse(data) {
                 );
             } else if (line.startsWith('>')) {
                 // flashcard
+                curQuestion.type = 2;
                 curQuestion.text =
                     `<details>
                         <summary>${curQuestion.text}</summary>
-                        ${line.substring(1).trim()}
-                    </details`;
+                        ${line.substring(1).trim()}`; // will close when push
                 curQuestion.add(CHECKMARK, true);
                 curQuestion.add(XMARK, false);
-            } else
+            } else {
+                // multiple choices as default
                 curQuestion.add(line);
-        } else if (line.trim().length > 3) { // new question, check length just to be sure
-            if (curQuestion)
+            }
+        } else if (line.trim().length > 3) {
+            // new question
+            if (curQuestion) {
+                if (curQuestion.type == 2)
+                    curQuestion.text += '</details>';
                 questions.push(curQuestion); // only push if there is an old question
+            }
             curQuestion = new Question(line);
-        } else
+        } else {
             throw SyntaxError('Parser code failure at ' + lineNumber + '\n' + line);
+        }
     });
 
     return { meta, questions }

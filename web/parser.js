@@ -8,6 +8,7 @@ let SUBJECTS = {
     'b': 'Sinh Học',
     'h': 'Lịch Sử',
     'g': 'Địa Lý',
+    'e': 'Kinh Tế - Pháp Luật'
 }
 
 /**

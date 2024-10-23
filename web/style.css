@@ -151,6 +151,7 @@ span { margin: 0 0.5rem; }
     margin-bottom: 5rem; /* Controls height */
     padding: 0 2rem 2rem;
 }
+
 #answers[type="0"] li {
     flex: 1 0 40%;
     min-width: min(100%, 20rem);
@@ -162,6 +163,7 @@ span { margin: 0 0.5rem; }
 #answers[type="0"] li:hover {
     border-color: var(--color-hl);
 }
+
 #answers[type="1"] li {
     flex: 1 1 100%;
     display: flex;
@@ -169,6 +171,17 @@ span { margin: 0 0.5rem; }
     align-items: center;
 }
 #answers[type="1"] button { border-radius: 0.5rem; }
+
+#answers[type="2"] li {
+    flex: 1 0 40%;
+    min-width: min(100%, 15rem);
+    height: 100%;
+    border: 0.5rem solid var(--color-hl);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+}
 
 #controls {
     position: fixed; bottom: 0; left: 0; right: 0;

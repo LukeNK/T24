@@ -80,8 +80,8 @@ function ask() {
 
     e_ans.setAttribute('type', curQuest.type);
     e_ans.innerHTML = ''; // clear answers
-    if (curQuest.type == 0) {
-        // multiple choices
+    if (curQuest.type == 0 || curQuest.type == 2) {
+        // multiple choices or flashcard (2 choices)
         e_quest.innerHTML = curQuest.text;
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
@@ -124,7 +124,7 @@ function ask() {
  */
 function check(id, result, elm) {
     if (game.classList.contains('hint')) ask(); // skip to next question
-    else if (QUIZ.questions[id].type == 0) {
+    else if (QUIZ.questions[id].type == 0 || QUIZ.questions[id].type == 2) {
         if (QUIZ.questions[id].ans[result]) report(id, true);
         else {
             report(id)

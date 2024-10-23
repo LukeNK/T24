@@ -53,7 +53,7 @@ function parse(data) {
     data = data.split('\n');
 
     data.forEach((line, lineNumber) => {
-        if (line == '')
+        if (line.trim() == '')
             return; // skip empty lines
         else if (line[0] == '#')
             meta.name = line.substring(1).trim();

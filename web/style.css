@@ -128,9 +128,11 @@ span { margin: 0 0.5rem; }
     text-align: left;
 }
 #question summary { background-color: transparent; }
-#question p {
+#question p,
+#question ul,
+#question ol {
     font-size: large;
-    text-align: left;
+    text-align: justify;
 }
 #question img {
     display: block;

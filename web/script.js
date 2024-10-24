@@ -78,11 +78,11 @@ function ask() {
     QUESTID = id;
     let curQuest = QUIZ.questions[id]; // the question class
 
+    e_quest.innerHTML = curQuest.text;
     e_ans.setAttribute('type', curQuest.type);
     e_ans.innerHTML = ''; // clear answers
     if (curQuest.type == 0 || curQuest.type == 2) {
         // multiple choices or flashcard (2 choices)
-        e_quest.innerHTML = curQuest.text;
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
             li.innerHTML = ans;
@@ -95,7 +95,6 @@ function ask() {
         }
     } else if (curQuest.type == 1) {
         // true false
-        e_quest.innerHTML = curQuest.text;
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
             li.innerHTML =
@@ -105,7 +104,12 @@ function ask() {
         }
 
         e_ans.innerHTML +=
-            `<button onclick="check(${id})">Kiểm tra kết quả</button>`;
+            `<button onclick="check(${id})">${CHECKMARK}</button>`;
+    } else if (curQuest.type == 3) {
+        // short answer
+        e_ans.innerHTML += `
+            <input id="ansInp" placeholder=" ">
+            <button onclick="check(${id})">${CHECKMARK}</button>`;
     }
 
     e_quest.scrollIntoView();
@@ -143,6 +147,14 @@ function check(id, result, elm) {
         });
 
         report(id, wrongAns <= 0);
+    } else if (QUIZ.questions[id].type == 3) {
+        // check if the answer exist in the allowed answer
+        report(
+            id,
+            QUIZ.questions[id].ans[
+                document.getElementById('ansInp').value
+            ]
+        )
     }
 
     document.getElementById('done').innerHTML = DONE.length;

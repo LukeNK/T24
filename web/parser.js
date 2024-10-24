@@ -23,7 +23,7 @@ let SUBJECTS = {
 class Question {
     constructor(text) {
         this.text = text;
-        this.type = 0; // 0 multiple choice, 1 true/false, 2 flashcard
+        this.type = 0; // 0 multiple choice, 1 true/false, 2 flashcard, 3 short answer
         this.ans = {};
 
         return this;
@@ -83,6 +83,9 @@ function parse(data) {
                         ${line.substring(1).trim()}`; // will close when push
                 curQuestion.add(CHECKMARK, true);
                 curQuestion.add(XMARK, false);
+            } else if (line.startsWith('=')) {
+                curQuestion.type = 3;
+                curQuestion.add(line.substring(1).trim(), true);
             } else {
                 // multiple choices as default
                 curQuestion.add(line);

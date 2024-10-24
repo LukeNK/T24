@@ -189,6 +189,19 @@ span { margin: 0 0.5rem; }
     color: var(--color-bg);
 }
 
+#answers input {
+    /* Type 3: short answer */
+    border: none;
+    outline: none;
+    font-size: large;
+    min-height: 3rem;
+    background-color: var(--color-theme);
+    color: var(--color-fg);
+}
+#answers input:placeholder-shown {
+    background-color: var(--color-red);
+}
+
 #controls {
     position: fixed; bottom: 0; left: 0; right: 0;
     z-index: 10;

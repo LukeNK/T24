@@ -6,10 +6,13 @@ let SUBJECTS = {
     'l': 'Ngữ Văn',
     'p': 'Vật Lý',
     'b': 'Sinh Học',
-    'f': 'Français',
     'h': 'Lịch Sử',
     'g': 'Địa Lý',
-    'e': 'Kinh Tế - Pháp Luật'
+    'e': 'Kinh Tế - Pháp Luật',
+
+    'n': 'Nghề',
+
+    'f': 'Français',
 }
 
 /**

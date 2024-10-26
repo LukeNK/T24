@@ -202,15 +202,16 @@ function loadTracker(loaded) {
 }
 
 // iterate through data folder to download files
-for (const subject in SUBJECTS) {
+for (const subject of Object.keys(SUBJECTS)) {
     const trans = SUBJECTS[subject];
     SUBJECTS[subject] = {}; // clear for array in array
 
     for (let grade = 10; grade <= 10; grade++) {
         SUBJECTS[subject][grade] = [];
         let list = document.createElement('details');
-        list.setAttribute('open', 'true');
+        // list.setAttribute('open', 'true');
         list.innerHTML = `<summary>${trans} ${grade}</summary>`;
+        menu.querySelector('div').append(list);
 
         loadTracker(); // track loading progress
 
@@ -261,9 +262,6 @@ for (const subject in SUBJECTS) {
                 SUBJECTS[subject][grade].push(response);
                 list.prepend(test); // reverse sort
             }
-
-            // only append if there is a test
-            if (list.childElementCount > 1) menu.prepend(list);
         })();
     }
 }

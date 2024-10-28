@@ -129,6 +129,7 @@ span { margin: 0 0.5rem; }
     font-size: x-large;
     padding: 1rem;
     background-color: var(--color-theme);
+    overflow-x: auto;
 }
 #question details {
     border: none;

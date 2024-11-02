@@ -235,3 +235,14 @@ span { margin: 0 0.5rem; }
 #controls button {
     align-self: stretch;
 }
+
+/* Animation */
+@keyframes loading {
+    0% { background-position: 100% 50%}
+    100% { background-position: 0% 50%}
+}
+.loading {
+    background: linear-gradient(270deg, var(--color-fg) 49%, var(--color-theme) 50%, var(--color-fg) 51%);
+    background-size: 400% 400%;
+    animation: loading 0.75s linear infinite;
+}

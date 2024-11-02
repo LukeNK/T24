@@ -210,7 +210,7 @@ for (const subject of Object.keys(SUBJECTS)) {
         SUBJECTS[subject][grade] = [];
         let list = document.createElement('details');
         // list.setAttribute('open', 'true');
-        list.innerHTML = `<summary>${trans} ${grade}</summary>`;
+        list.innerHTML = `<summary class="loading">${trans} ${grade}</summary>`;
         menu.querySelector('div').append(list);
 
         loadTracker(); // track loading progress
@@ -262,6 +262,8 @@ for (const subject of Object.keys(SUBJECTS)) {
                 SUBJECTS[subject][grade].push(response);
                 list.prepend(test); // reverse sort
             }
+
+            list.querySelector('summary').classList.remove('loading');
         })();
     }
 }

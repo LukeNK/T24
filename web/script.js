@@ -86,12 +86,16 @@ function ask() {
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
             li.innerHTML = ans;
-            li.style.order = floor(random() * 100); // random question order
             li.setAttribute(
                 'onclick',
                 `check(${id}, '${ans.replaceAll("'", "\\'")}', this)`
             )
-            e_ans.append(li);
+
+            // shuffle answer order
+            if (random() < 0.5)
+                e_ans.append(li);
+            else
+                e_ans.prepend(li);
         }
     } else if (curQuest.type == 1) {
         // true false

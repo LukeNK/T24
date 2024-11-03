@@ -91,8 +91,8 @@ function ask() {
                 `check(${id}, '${ans.replaceAll("'", "\\'")}', this)`
             )
 
-            // shuffle answer order
-            if (random() < 0.5)
+            // shuffle answer order or set flashcard
+            if (random() < 0.5 || curQuest.type == 2)
                 e_ans.append(li);
             else
                 e_ans.prepend(li);

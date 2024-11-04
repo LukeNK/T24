@@ -104,8 +104,8 @@ function ask() {
             let li = document.createElement('li');
             li.innerHTML =
                 ans + '<button onclick="swap(this)">-</button>'; // empty
-            li.style.order = floor(random() * -100); // negative to show after check button
-            e_ans.append(li);
+            if (random() < 0.5) e_ans.append(li);
+            else e_ans.prepend(li);
         }
 
         e_ans.innerHTML +=

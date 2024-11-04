@@ -26,6 +26,7 @@ function startGame(s, g, i) {
         // exit game
         menu.style.display = '';
         game.style.display = 'none';
+        QUIZ = undefined;
         DONE = []; AGAIN = [];
         return
     }
@@ -108,7 +109,7 @@ function ask() {
         }
 
         e_ans.innerHTML +=
-            `<button onclick="check(${id})">${CHECKMARK}</button>`;
+            `<button onclick="check(QUESTID)">${CHECKMARK}</button>`;
     } else if (curQuest.type == 3) {
         // short answer
         e_ans.innerHTML += `
@@ -143,7 +144,7 @@ function check(id, result, elm) {
         [...e_ans.children].forEach(elm => {
             if (elm.tagName == 'BUTTON')
                 return; // check button
-            result = elm.innerHTML.split('<button')[0];
+            result = elm.innerHTML.split('<button')[0]; // clean true false button
             if (
                 QUIZ.questions[id].ans[result]
                 == ((elm.querySelector('button').innerHTML == CHECKMARK)? 1 : 0)

@@ -3,6 +3,7 @@ const CHECKMARK = '✔',
     WMARK = '●'; // wrong answer mark on the progress bar
 
 let SUBJECTS = {
+    'm': 'Toán Học',
     'l': 'Ngữ Văn',
     'p': 'Vật Lý',
     'b': 'Sinh Học',

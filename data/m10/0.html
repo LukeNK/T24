@@ -1,53 +1,174 @@
-# Các khái niệm hình học từ lớp 9
+# Cuối học kỳ I
 
-Đường trung trực của đoạn thẳng AB
-    > cắt qua trung điểm của AB và vuông góc với AB
-    <img src="data/m10/0/0.png">
+Mệnh đề đề phủ định của P là
+    > ¬P
+    <table>
+        <tr><td>P</td><td>¬P</td></tr>
+        <tr><td>T</td><td>F</td></tr>
+        <tr><td>F</td><td>T</td></tr>
+    </table>
 
-Tia phân giác của góc xOy
-    > chia đôi góc xOy, có xOm = yOm = xOy / 2
-    <img src="data/m10/0/0.png">
-Tên gọi của các góc
+Mệnh đề kéo theo P thì Q
+    > P ⇒ Q
+    <ul>
+        <li>P là giả thiết, Q là kết kết luận</li>
+        <li>Q là điều kiện cần cho P (Q đúng thì P phải đúng)</li>
+        <li>P là điều kiện đủ cho Q (...nhưng P không đúng chưa chắc Q không đúng)</li>
+    </ul>
+    <p>Ví dụ: Nếu trời đẹp thì Luka sẽ đi chơi</p>
     <table>
         <tr>
-            <td>Góc nhọn</td>
-            <td>&lt;90°</td>
+            <th>Trời</th>
+            <th>Đi chơi</th>
+            <th>P ⇒ Q</th>
         </tr>
         <tr>
-            <td>Góc vuông</td>
-            <td>=90°</td>
+            <td>Đẹp</td>
+            <td>Đi chơi</td>
+            <td>Đúng</td>
         </tr>
         <tr>
-            <td>Góc tù</td>
-            <td>&gt;90°</td>
+            <td>Đẹp</td>
+            <td>Không đi chơi</td>
+            <td>Sai, vì P ⇒ Q nhấn mạnh trường hợp trời đẹp (Q sai thì chắc chắn là P sai, điều kiện cần)</td>
         </tr>
         <tr>
-            <td>Góc bẹt</td>
-            <td>=180°</td>
+            <td>Không đẹp</td>
+            <td>Đi chơi</td>
+            <td>Vẫn đúng, vì P ⇒ Q chỉ nói về trường hợp trời đẹp thôi (P sai chưa chắc là Q sai nên P chỉ là điều kiện đủ)</td>
         </tr>
         <tr>
-            <td>Hai góc phụ nhau</td>
-            <td>Tổng hai góc = 90°</td>
+            <td>Không đẹp</td>
+            <td>Không đi chơi</td>
+            <td>Đúng, vì P ⇒ Q chỉ nói về trường hợp trời đẹp thôi</td>
+        </tr>
+    </table>
+    <p>Tóm gọn, điều kiện cần là <b>PHẢI ĐÚNG</b> trong mọi trường hợp, còn điều kiện đủ là nguyên nhân.</p>
+
+Mệnh đề đảo của P ⇒ Q là
+    > Q ⇒ P. Nếu cả hai đều đúng thì P ⇔ Q
+    <ul>
+        <li>P tương đương/khi hoặc chỉ khi Q</li>
+        <li>Cả P là điều kiện cần và đủ để có cái kia Q</li>
+        <li>Nếu P sai thì Q sai, nếu Q sai thì P sai</li>
+    </ul>
+
+Kí hiệu "với mọi" là
+    > ∀ (chữ A úp ngược trong tiếng Anh là "For <b>A</b>ll")
+    <p>Tất cả mọi con số được đề ra đều phải thỏa mãn điều kiện. Cách chứng minh mệnh đề này <b>sai</b>: tìm một kết quả làm mệnh đề này sai.</p>
+    <blockquote>Thường các con số để chứng minh mệnh đề này sẽ nằm ở các giới hạn trên dưới.</blockquote>
+
+Kí hiệu "tồn tại" là
+    > ∃ (chữ E ngược trong tiếng Anh là "<b>E</b>xists")
+    <p>Có ít nhất một con số thỏa mãn điều kiện, nên cách chứng minh mệnh đề này đúng: tìm một con số đúng.</p>
+    <blockquote>Thường các con số để chứng minh mệnh đề này sẽ nằm ở các giới hạn trên dưới.</blockquote>
+
+Phủ định của mệnh đề có ∀ hoặc ∃
+    > bằng cách lật ∀ với ∃, và lấy phủ định của điều kiện.
+    <table>
+        <tr>
+            <td>P</td>
+            <td>¬P</td>
         </tr>
         <tr>
-            <td>Hai góc bù nhau</td>
-            <td>Tổng hai góc = 180°</td>
+            <td>∀n ∈ N : n ≠ -1</td>
+            <td>∃n ∈ N : n = -1</td>
+        </tr>
+        <tr>
+            <td>Mọi số tự nhiên đều khác -1</td>
+            <td>Tồn tại một số tự nhiên là -1</td>
+        </tr>
+    </table>
+    <p>Phủ định ở đây có thể được giải thích bằng cách suy nghĩ làm sao mình có thể chứng minh P là sai: Để chứng minh ∀ thì mình cần phải tìm một con số (∃) trong N bằng -1.</p>
+    <table>
+        <tr>
+            <td>P</td>
+            <td>¬P</td>
+        </tr>
+        <tr>
+            <td>∃x ∈ N : x &lt; 0</td>
+            <td>∀x ∈ N : x &GreaterSlantEqual; 0</td>
+        </tr>
+        <tr>
+            <td>Có một số tự nhiên nhỏ hơn 0</td>
+            <td>Mọi số tự nhiên đều lớn hơn hoặc bằng 0</td>
         </tr>
     </table>
 
-Tổng các góc trong tam giác là bao nhiêu độ?
-    = 180
-Các trường hợp đồng dạng của 2 tam giác
-    > <ul>
-        <li>a'/a = b'/b  = c'/c</li>
-        <li>A' = A <b>VÀ</b> b'/b = c'/c</li>
-        <li>Góc - góc (- góc)</li>
+Nếu mọi phần tử của A là phần tử của B thì được gọi là
+    > A là tập con của B, ký hiệu là A ⊂ B. Đây còn được gọi là quan hệ bao hàm.
+Sự khác nhau giữa ∈ và ⊂
+    > Đứng trước ∈ là một phần tử, nên x ∈ R nghĩa là x là một phần tử của R.<br>Đứng trước ⊂ là một tập hợp, khi đó N ⊂ R nghĩa là bản thân N vẫn chứa một danh sách phần tử.
+
+A ⊂ B và B ⊂ A ⇔
+    > A = B ⇔ ∀x : x ∈ A và x ∈ B
+
+Thứ tự của các tập hợp số
+    > N ⊂ Z ⊂ Q ⊂ R
+    <p>Số tự nhiên ⊂ số nguyên ⊂ số hữu tỉ ⊂ số thực</p>
+    <blockquote>Natural numbers ⊂ Integers ⊂ Rational number ⊂ Real number. Quite a fun journey of how we got Q to represent rational number.</blockquote>
+
+A ∪ B
+    > {x | x ∈ A hoặc x ∈ B}
+    <p>Hợp của A và B là lấy hết mọi phần tử.</p>
+    <blockquote>Union (the upward U to take all the water)</blockquote>
+
+A ∩ B
+    > {x | x ∈ A và x ∈ B}
+    <p>Giao của A và B là lấy chỉ phần giống nhau.</p>
+    <blockquote>Intersection (Facing down so it is much more restrictive)</blockquote>
+
+A \ B
+    > {x | x ∈ A và x ∉ B}
+    <p>Hiệu của A và B, lấy A trừ đi những gì có trong B</p>
+
+Phần bù
+    > Nếu A ⊂ E thì phần bù là E \ A = C<sub>E</sub>A
+    <blockquote>Phần bù sẽ bù cho A để có được E</blockquote>
+
+Trong phương trình y = x
+    > Với mỗi x bỏ vào thì một y đi ra. Tập hợp các số đi vào là D sao cho kết quả đi ra là T ∈ <Ri:a></Ri:a>.
+    <ul>
+        <li>y là hàm số, x là biến số</li>
+        <li>T là tập giá trị, D là tập xác định</li>
     </ul>
-Các trường hợp bằng nhau của 2 tam giác
+
+Tập xác định của hàm số đơn giản
     > <ul>
-        <li>Cạnh - cạnh - cạnh</li>
-        <li>Cạnh - góc - cạnh</li>
-        <li>Góc - cạnh - góc</li>
+        <li>A / B ⇒ B ≠ 0</li>
+        <li>&Sqrt;(A) ⇒ A &GreaterSlantEqual; 0</li>
+        <li>A / &Sqrt;(B) ⇒ A &gt; 0</li>
     </ul>
-    <p>Cần ít nhất một cạnh để xác nhận kích cỡ của tam giác trong cả ba trường hợp. Đây là điểm khác biệt với tam giác đồng dạng.</p>
-Định lý Thales
+
+Đồng biến, nghịch biến
+    > <ul>
+        <li><b>Đồng biến:</b> x tăng thì y cũng tăng (đồ thị đi xuống)</li>
+        <li><b>Nghịch biến:</b> x tăng mà y giảm (đồ thị đi lên)</li>
+    </ul>
+
+Hàm số bậc hai có hình dạng
+    > parabol
+
+Công thức của Δ trong hàm số bậc hai
+    > Δ = b<sup>2</sup> - 4ac
+
+Công thức tìm đỉnh của hàm số bậc hai
+    > <ul>
+        <li>x = -b/2a</li>
+        <li>y = -Δ/4a</li>
+    </ul>
+    <blockquote>Sử dụng máy tính 9 → 2</blockquote>
+
+Trục đối xứng của hàm số bậc hai
+    > đi qua đỉnh, trùng với Oy nếu b = 0
+
+Giao điểm của Ox với hàm số bậc 2
+    > giải ax<sup>2</sup> + bx + c = 0
+    <blockquote>Sử dụng máy tính 9 → 2</blockquote>
+
+Giao điểm của Oy với hàm số bậc 2
+    > (0; c)
+
+Tổng hợp công thức trong hàm số bậc 2
+    > <img src="data/m10/0/0.png">
+    <p>Hướng úp của đường parabol: úp lên trên nếu a > 0</p>

@@ -1,5 +1,16 @@
 const list = document.querySelector('dl');
 
+function shuffle(array) {
+    let currentIndex = array.length;
+    while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
 (async () => {
 
 let quizID = window.location.hash.substring(1);
@@ -15,13 +26,25 @@ document.getElementById('quiz').innerHTML =
 
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
-    Object.keys(quest.ans).forEach(ans => {
+
+    let letters = 'ABCD', order = 0;
+    shuffle(Object.keys(quest.ans)).forEach(ans => {
         if (ans != CHECKMARK && ans != XMARK) {
-            list.innerHTML += `<dd>${ans}</dd>`;
+            let insert = (quest.type == 1)?
+                order + 1 : letters[order]
+
+            list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
             if (!quest.ans[ans])
                 list.lastElementChild.classList.add('wAns');
+
+            order++
         }
     })
+
+    list.innerHTML +=
+        `<dd class="wAns" style="text-align: right;">
+            ${(quest.type == 1)? '◯◯ ◯◯ ◯◯ ◯◯' : '◯ ◯ ◯ ◯'}
+        </dd>`
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))

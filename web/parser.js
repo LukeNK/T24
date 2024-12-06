@@ -55,6 +55,9 @@ function parse(data) {
     let questions = [], meta = {},
         curQuestion;
 
+    // clean absolute path
+    data = data.replaceAll('<img src="/', '<img src="');
+
     data = data + '\nEND-OF-INPUT, OVERFLOW FOR SAVING LAST QUESTION';
     data = data.split('\n');
 

@@ -61,8 +61,8 @@
         }
 
         blockquote {
-            display: inline;
             margin: 0;
+            font-weight: normal;
         }
         blockquote::before {
             content: "→";
@@ -76,9 +76,10 @@
             button { display: none; }
         }
 
+        body td.wAns { display: block; visibility: hidden; }
+        body.wAns td.wAns { display: table-cell; visibility: visible; }
         body .wAns { display: none; }
         body.wAns .wAns { display: block; }
-        body.wans blockquote { display: none; }
         dd.wAns > table {
             margin-right: 0;
             margin-left: auto;
@@ -87,6 +88,16 @@
             width: 1rem;
             height: 1.5rem;
         }
+
+        body td.hints {
+            visibility: hidden;
+        }
+        body.hints td.hints {
+            visibility: visible;
+        }
+        body blockquote { display: none; }
+        body.hints blockquote { display: inline; }
+
     </style>
 
     <script
@@ -97,21 +108,25 @@
     </script>
     <script src="https://lukenk.github.io/quotes.js"></script>
 </head>
-<body>
-    <button onclick="document.body.classList.add('wAns')">Print test</button>
+<body class="wAns">
     <table>
         <tr>
-            <th id="quiz"></th>
+            <th id="quiz" colspan="2"></th>
             <td id="qrcode" rowspan="3"></td>
             <th id="subID"></th>
         </tr>
         <tr>
             <td id="time"></td>
+            <td class="wAns">All options</td>
             <th id="quizID"></th>
         </tr>
         <tr>
-            <td><span id="questCount"></span> questions</td>
-            <td id="totalCount"></td>
+            <td id="questCount"></td>
+            <td class="hints">Hints</td>
+            <td style="text-align: right;">
+                <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('wAns');" checked>
+                <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('hints');">
+            </td>
         </tr>
     </table>
     <dl></dl>

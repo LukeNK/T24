@@ -27,24 +27,36 @@ document.getElementById('quiz').innerHTML =
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
 
-    let letters = 'ABCD', order = 0;
-    shuffle(Object.keys(quest.ans)).forEach(ans => {
-        if (ans != CHECKMARK && ans != XMARK) {
-            let insert = (quest.type == 1)?
-                order + 1 : letters[order]
+    if (quest.type != 3) {
+        // skip showing answer for short answer questions
+        let letters = 'ABCD', order = 0;
+        shuffle(Object.keys(quest.ans)).forEach(ans => {
+            if (ans != CHECKMARK && ans != XMARK) {
+                let insert = (quest.type == 1)?
+                    order + 1 : letters[order]
 
-            list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
-            if (!quest.ans[ans])
-                list.lastElementChild.classList.add('wAns');
+                list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
+                if (!quest.ans[ans])
+                    list.lastElementChild.classList.add('wAns');
 
-            order++
-        }
-    })
+                order++
+            }
+        })
+    }
 
-    list.innerHTML +=
-        `<dd class="wAns" style="text-align: right;">
-            ${(quest.type == 1)? '◯◯ ◯◯ ◯◯ ◯◯' : '◯ ◯ ◯ ◯'}
-        </dd>`
+    let answerKey = '<dd class="wAns" style="text-align: right;">';
+    switch (quest.type) {
+        case 0:
+            answerKey += '◯ ◯ ◯ ◯';
+            break;
+        case 1:
+            answerKey += '◯◯ ◯◯ ◯◯ ◯◯';
+            break;
+        case 3:
+            answerKey += '<table><tr><td></td><td></td><td></td><td></td></tr></table';
+            break;
+    }
+    list.innerHTML += answerKey + '</dd>';
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))

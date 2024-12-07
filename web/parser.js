@@ -16,6 +16,20 @@ let SUBJECTS = {
     'f': 'Français',
 }
 
+var decodeEntities = (function() {
+    // function to decode HTML entities to characters
+    var element = document.createElement('div');
+    function decodeHTMLEntities (str) {
+        if(str && typeof str === 'string') {
+            element.innerHTML = str;
+            str = element.innerHTML;
+            element.innerHTML = '';
+        }
+        return str;
+    }
+    return decodeHTMLEntities;
+})();
+
 /**
  * A quiz object
  * @typedef {Object} Quiz
@@ -57,6 +71,8 @@ function parse(data) {
 
     // clean absolute path
     data = data.replaceAll('<img src="/', '<img src="');
+    // clean HTML entities so the result can check directly from innerHTML
+    data = decodeEntities(data);
 
     data = data + '\nEND-OF-INPUT, OVERFLOW FOR SAVING LAST QUESTION';
     data = data.split('\n');

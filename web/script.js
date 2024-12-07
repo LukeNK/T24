@@ -103,7 +103,7 @@ function ask() {
         for (const ans in curQuest.ans) {
             let li = document.createElement('li');
             li.innerHTML =
-                ans + '<button onclick="swap(this)">-</button>'; // empty
+                `<div>${ans}</div><button onclick="swap(this)">-</button>`; // empty
             if (random() < 0.5) e_ans.append(li);
             else e_ans.prepend(li);
         }
@@ -141,13 +141,11 @@ function check(id, result, elm) {
         }
     } else if (QUIZ.questions[id].type == 1) {
         let wrongAns = Object.keys(QUIZ.questions[id].ans).length;
-        [...e_ans.children].forEach(elm => {
-            if (elm.tagName == 'BUTTON')
-                return; // check button
-            result = elm.innerHTML.split('<button')[0]; // clean true false button
+        [...e_ans.querySelectorAll('div')]
+        .forEach(elm => {
             if (
-                QUIZ.questions[id].ans[result]
-                == ((elm.querySelector('button').innerHTML == CHECKMARK)? 1 : 0)
+                QUIZ.questions[id].ans[elm.innerHTML]
+                == ((elm.nextElementSibling.innerHTML == CHECKMARK)? 1 : 0)
             ) wrongAns--;
         });
 

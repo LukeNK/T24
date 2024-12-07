@@ -7,9 +7,20 @@
     <title>Print document</title>
 
     <style>
-        #qrcode {
-            float: right;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
         }
+        body > table {
+            width: 100%;
+        }
+        body > table th {
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+        body > table td {
+            border: none;
+        }
+        #subID { text-transform: uppercase; }
 
         dt {
             margin-top: 0.5rem;
@@ -88,8 +99,21 @@
 </head>
 <body>
     <button onclick="document.body.classList.add('wAns')">Print test</button>
-    <div id="qrcode"></div>
-    <h2 id="quiz"></h2>
+    <table>
+        <tr>
+            <th id="quiz"></th>
+            <td id="qrcode" rowspan="3"></td>
+            <th id="subID"></th>
+        </tr>
+        <tr>
+            <td id="time"></td>
+            <th id="quizID"></th>
+        </tr>
+        <tr>
+            <td><span id="questCount"></span> questions</td>
+            <td id="totalCount"></td>
+        </tr>
+    </table>
     <dl></dl>
     <footer></footer>
 </body>

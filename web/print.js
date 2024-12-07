@@ -21,8 +21,18 @@ let data = await fetch('data/' + quizID);
 data = await data.text();
 data = parse(data);
 
+// set header
 document.getElementById('quiz').innerHTML =
     `[${SUBJECTS[quizID[0]]}] ` + data.meta.name;
+document.getElementById('subID').innerHTML = quizID[0];
+document.getElementById('quizID').innerHTML = quizID[1];
+document.getElementById('questCount').innerHTML =
+    data.questions.filter(v => v.type == 0).length + ' + '
+    + data.questions.filter(v => v.type == 1).length + ' + '
+    + data.questions.filter(v => v.type == 2).length + ' + '
+    + data.questions.filter(v => v.type == 3).length;
+
+document.getElementById('totalCount').innerHTML = data.questions.length;
 
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
@@ -66,6 +76,14 @@ document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true')
 new QRCode(
     document.getElementById("qrcode"),
     'http://lukenk.github.io/T24' + window.location.hash);
+
+let date = new Date();
+document.getElementById('time').innerText =
+    date.getFullYear() + '-'
+    + date.getMonth().toString().padStart(2, '0') + '-'
+    + date.getDate().toString().padStart(2, '0') + ' '
+    + date.getHours().toString().padStart(2, '0') + ':'
+    + date.getMinutes().toString().padStart(2, '0');
 
 let quoteID = Math.floor(Math.random() * Quotes.length);
 document.querySelector('footer').innerHTML =

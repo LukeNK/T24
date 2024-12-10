@@ -57,7 +57,7 @@ data.questions.forEach(quest => {
             answerKey += '◯ ◯ ◯ ◯';
             break;
         case 1:
-            answerKey += '◯◯ ◯◯ ◯◯ ◯◯';
+            answerKey += '◯◯—◯◯—◯◯—◯◯';
             break;
         case 3:
             answerKey += '<table><tr><td></td><td></td><td></td><td></td></tr></table';

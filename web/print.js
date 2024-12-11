@@ -2,7 +2,7 @@ const list = document.querySelector('dl'),
     params = new URLSearchParams(document.location.search);
 let MainSeed = 
     (~~params.get('seed'))
-    || Date.now();
+    || Date.now() % 10000;
 
 function seedRand() {
     var x = Math.sin(MainSeed++) * 10000;
@@ -34,12 +34,19 @@ data = parse(data);
 document.getElementById('quiz').innerHTML = data.meta.name;
 document.getElementById('subID').innerHTML = quizID[0];
 document.getElementById('quizID').innerHTML = quizID[1];
+let date = new Date();
+document.getElementById('time').innerHTML =
+    date.getFullYear() + '-'
+    + date.getMonth().toString().padStart(2, '0') + '-'
+    + date.getDate().toString().padStart(2, '0') + ' '
+    + date.getHours().toString().padStart(2, '0') + ':'
+    + date.getMinutes().toString().padStart(2, '0')
+    + `<br>Seed: ${MainSeed.toString(16).toUpperCase()}`;
 document.getElementById('questCount').innerHTML =
     data.questions.filter(v => v.type == 0).length + ' + '
     + data.questions.filter(v => v.type == 1).length + ' + '
     + data.questions.filter(v => v.type == 2).length + ' + '
-    + data.questions.filter(v => v.type == 3).length
-    + '<br>Seed: ${MainSeed}';
+    + data.questions.filter(v => v.type == 3).length;
 
 // parse questions
 data.questions.forEach(quest => {
@@ -60,6 +67,8 @@ data.questions.forEach(quest => {
                 list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
                 if (!quest.ans[ans])
                     list.lastElementChild.classList.add('wAns');
+                else
+                    MainSeed += ans.length; // check sum correct answer
 
                 order++
             }
@@ -82,20 +91,13 @@ data.questions.forEach(quest => {
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
+document.getElementById('questCount').innerHTML += `<br>Checksum: ${MainSeed.toString(16).toUpperCase()}`;
 
 })();
 
 new QRCode(
     document.getElementById("qrcode"),
     'http://lukenk.github.io/T24' + window.location.hash);
-
-let date = new Date();
-document.getElementById('time').innerText =
-    date.getFullYear() + '-'
-    + date.getMonth().toString().padStart(2, '0') + '-'
-    + date.getDate().toString().padStart(2, '0') + ' '
-    + date.getHours().toString().padStart(2, '0') + ':'
-    + date.getMinutes().toString().padStart(2, '0');
 
 let quoteID = Math.floor(Math.random() * Quotes.length);
 document.querySelector('footer').innerHTML =

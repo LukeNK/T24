@@ -1,9 +1,18 @@
-const list = document.querySelector('dl');
+const list = document.querySelector('dl'),
+    params = new URLSearchParams(document.location.search);
+let MainSeed = 
+    (~~params.get('seed'))
+    || Date.now();
+
+function seedRand() {
+    var x = Math.sin(MainSeed++) * 10000;
+    return x - Math.floor(x);
+}
 
 function shuffle(array) {
     let currentIndex = array.length;
     while (currentIndex != 0) {
-        let randomIndex = Math.floor(Math.random() * currentIndex);
+        let randomIndex = Math.floor(seedRand() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
@@ -29,15 +38,21 @@ document.getElementById('questCount').innerHTML =
     data.questions.filter(v => v.type == 0).length + ' + '
     + data.questions.filter(v => v.type == 1).length + ' + '
     + data.questions.filter(v => v.type == 2).length + ' + '
-    + data.questions.filter(v => v.type == 3).length;
+    + data.questions.filter(v => v.type == 3).length
+    + '<br>Seed: ${MainSeed}';
 
+// parse questions
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
+
+    // check sum
+    MainSeed += quest.text.length;
 
     if (quest.type != 3) {
         // skip showing answer for short answer questions
         let letters = 'ABCD', order = 0;
-        shuffle(Object.keys(quest.ans)).forEach(ans => {
+        shuffle(Object.keys(quest.ans))
+        .forEach(ans => {
             if (ans != CHECKMARK && ans != XMARK) {
                 let insert = (quest.type == 1)?
                     order + 1 : letters[order]

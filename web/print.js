@@ -68,7 +68,7 @@ data.questions.forEach(quest => {
                 if (!quest.ans[ans])
                     list.lastElementChild.classList.add('wAns');
                 else
-                    MainSeed += ans.length; // check sum correct answer
+                    MainSeed += ans.length * (order + 1); // check sum correct answer
 
                 order++
             }

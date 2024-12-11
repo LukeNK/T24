@@ -1,18 +1,10 @@
-const list = document.querySelector('dl'),
-    params = new URLSearchParams(document.location.search);
-let MainSeed = 
-    (~~params.get('seed'))
-    || Date.now() % 10000;
-
-function seedRand() {
-    var x = Math.sin(MainSeed++) * 10000;
-    return x - Math.floor(x);
-}
+const list = document.querySelector('dl');
+let checksum = 0;
 
 function shuffle(array) {
     let currentIndex = array.length;
     while (currentIndex != 0) {
-        let randomIndex = Math.floor(seedRand() * currentIndex);
+        let randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
@@ -28,6 +20,7 @@ quizID = quizID.replaceAll('-', '/') + '.html';
 
 let data = await fetch('data/' + quizID);
 data = await data.text();
+for (const i in data) checksum ^= data[i].charCodeAt(0);
 data = parse(data);
 
 // set header
@@ -41,34 +34,30 @@ document.getElementById('time').innerHTML =
     + date.getDate().toString().padStart(2, '0') + ' '
     + date.getHours().toString().padStart(2, '0') + ':'
     + date.getMinutes().toString().padStart(2, '0')
-    + `<br>Seed: ${MainSeed.toString(16).toUpperCase()}`;
+    + `<br>Data: ${checksum.toString(16).toUpperCase()}`;
 document.getElementById('questCount').innerHTML =
     data.questions.filter(v => v.type == 0).length + ' + '
     + data.questions.filter(v => v.type == 1).length + ' + '
     + data.questions.filter(v => v.type == 2).length + ' + '
     + data.questions.filter(v => v.type == 3).length;
 
-// parse questions
+checksum = 0; // reset for answer checksum
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
-
-    // check sum
-    MainSeed += quest.text.length;
 
     if (quest.type != 3) {
         // skip showing answer for short answer questions
         let letters = 'ABCD', order = 0;
-        shuffle(Object.keys(quest.ans))
-        .forEach(ans => {
+        shuffle(Object.keys(quest.ans)).forEach(ans => {
             if (ans != CHECKMARK && ans != XMARK) {
                 let insert = (quest.type == 1)?
                     order + 1 : letters[order]
 
                 list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
-                if (!quest.ans[ans])
-                    list.lastElementChild.classList.add('wAns');
+                if (quest.ans[ans])
+                    for (const char of ans) checksum ^= char.charCodeAt(0);
                 else
-                    MainSeed += ans.length * (order + 1); // check sum correct answer
+                    list.lastElementChild.classList.add('wAns');
 
                 order++
             }
@@ -91,7 +80,7 @@ data.questions.forEach(quest => {
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
-document.getElementById('questCount').innerHTML += `<br>Checksum: ${MainSeed.toString(16).toUpperCase()}`;
+document.getElementById('questCount').innerHTML += `<br>Answer: ${checksum.toString(16).toUpperCase()}`;
 
 })();
 

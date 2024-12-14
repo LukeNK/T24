@@ -3,15 +3,15 @@ const CHECKMARK = '✔',
     WMARK = '●'; // wrong answer mark on the progress bar
 
 let SUBJECTS = {
-    'm': 'Toán Học',
-    'l': 'Ngữ Văn',
-    'p': 'Vật Lý',
-    'b': 'Sinh Học',
-    'h': 'Lịch Sử',
-    'g': 'Địa Lý',
-    'e': 'Kinh Tế - Pháp Luật',
+    'm': 'Les maths',
+    'p': 'La physique',
+    'l': 'La littérature',
+    'b': 'La biologie',
+    'g': 'La geographie',
+    'h': "L'histoire",
+    'e': "L'économique",
 
-    'n': 'Nghề',
+    'n': 'Collège',
 
     'f': 'Français',
 }

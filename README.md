@@ -20,6 +20,8 @@ Collaboration is a bit harder, which I attempted to do a server-less approach (f
 
 The reason the last one is not preferred is because most of the people in my class only have cellphones and are very relunctant to install Google.
 
+*Unfortunately, it turned out there aren't that many people who actually want to study in my school. However, I still keep this project alive for my own usage (for example, the print layout). That is why I switched the UI language to French as I am learning it and at the same time, I am notating the questions in English as that is the language I am most comfortable with. Of course, the questions are given to me in Vietnamese by my teachers, so essentially there are three languages in this app.*
+
 ## Gameplay
 After starting a quiz, the user will ask to answer 1 question at a time. If they answer the question incorrectly or skip it, the answer hints will show and they will need to answer the question later. The quiz will be finished once all of the questions are answered correctly. For flashcards, it works in a similar manner but in this case, the "correct" answer is marking the question as "memorized".
 

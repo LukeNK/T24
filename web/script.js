@@ -204,12 +204,15 @@ function loadTracker(loaded) {
     return !(TESTLOAD || TESTFIRST);
 }
 
+// clear display
+startGame()
+
 // iterate through data folder to download files
 for (const subject of Object.keys(SUBJECTS)) {
     const trans = SUBJECTS[subject];
     SUBJECTS[subject] = {}; // clear for array in array
 
-    for (let grade = 10; grade <= 10; grade++) {
+    for (let grade = 10; grade <= 12; grade++) {
         SUBJECTS[subject][grade] = [];
         let list = document.createElement('details');
         // list.setAttribute('open', 'true');
@@ -232,18 +235,11 @@ for (const subject of Object.keys(SUBJECTS)) {
                 if (!response.ok) {
                     if (loadTracker(true)) {
                         let hash = window.location.hash;
-                        try {
-                            console.info('Starting ' + hash)
-                            startGame(
-                                hash[1],
-                                hash.substring(2).split('-')[0],
-                                hash.substring(2).split('-')[1],
-                            )
-                        } catch (err) {
-                            // just clear the display screen
-                            console.info('Just clear the screen')
-                            startGame();
-                        }
+                        startGame(
+                            hash[1],
+                            hash.substring(2).split('-')[0],
+                            hash.substring(2).split('-')[1],
+                        )
                     };
                     break; // no more test
                 };
@@ -261,7 +257,6 @@ for (const subject of Object.keys(SUBJECTS)) {
                     document.getElementById('quizLimit').max;
 
                 // loading bar
-                document.getElementById('progress').innerHTML += '●';
                 SUBJECTS[subject][grade].push(response);
                 list.prepend(test); // reverse sort
             }

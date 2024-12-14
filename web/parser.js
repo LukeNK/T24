@@ -18,7 +18,8 @@ let SUBJECTS = {
 
 var decodeEntities = (function() {
     // function to decode HTML entities to characters
-    var element = document.createElement('div');
+    // wrap in noscript to prevent image from loading
+    var element = document.createElement('noscript');
     function decodeHTMLEntities (str) {
         if(str && typeof str === 'string') {
             element.innerHTML = str;

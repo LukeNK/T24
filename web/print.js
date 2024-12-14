@@ -80,7 +80,7 @@ data.questions.forEach(quest => {
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
-document.getElementById('questCount').innerHTML += `<br>Answer: ${checksum.toString(16).toUpperCase()}`;
+document.getElementById('questCount').innerHTML += `<br>Réponses: ${checksum.toString(16).toUpperCase()}`;
 
 })();
 

@@ -61,6 +61,16 @@ body {
 }
 
 /* Menu display ------------------------------------------------------------- */
+#menu div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#menu details {
+    flex: 1 1 40%;
+    min-width: 15rem;
+}
+
 #menu summary { color: var(--color-bg); }
 #menu iframe {
     display: block;

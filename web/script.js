@@ -212,12 +212,12 @@ for (const subject of Object.keys(SUBJECTS)) {
     const trans = SUBJECTS[subject];
     SUBJECTS[subject] = {}; // clear for array in array
 
+    let list = document.createElement('details');
+    list.innerHTML = `<summary class="loading">${trans}</summary>`;
+    menu.querySelector('div').append(list);
+
     for (let grade = 10; grade <= 12; grade++) {
         SUBJECTS[subject][grade] = [];
-        let list = document.createElement('details');
-        // list.setAttribute('open', 'true');
-        list.innerHTML = `<summary class="loading">${trans} ${grade}</summary>`;
-        menu.querySelector('div').append(list);
 
         loadTracker(); // track loading progress
 
@@ -245,7 +245,7 @@ for (const subject of Object.keys(SUBJECTS)) {
                 };
                 response = await response.text();
                 response = parse(response);
-                test.innerText = response.meta.name;
+                test.innerHTML = grade + '. ' + response.meta.name;
 
                 // set config
                 document.getElementById('quizLimit').max =

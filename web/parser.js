@@ -114,7 +114,7 @@ function parse(data) {
                 // multiple choices as default
                 curQuestion.add(line);
             }
-        } else if (line.trim().length > 3) {
+        } else if (line.trim().length >= 1) {
             // new question
             if (curQuestion) {
                 if (curQuestion.type == 2)

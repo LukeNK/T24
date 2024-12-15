@@ -58,7 +58,7 @@ function ask() {
     if (DONE.length >= QUIZLIM && AGAIN.length <= 0) {
         let temp = (Date.now() - QUIZTIME) / 1000;
         menu.innerHTML =
-            `<p>🎉Hoàn thành ${DONE.length} câu trong ${floor(temp / 60)}m ${floor(temp % 60)}s</p>`
+            `<p>🎉Vous avez répondu à ${DONE.length} questions en ${floor(temp / 60)}m ${floor(temp % 60)}s</p>`
             + menu.innerHTML;
         startGame();
         return false;

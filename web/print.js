@@ -24,9 +24,10 @@ for (const i in data) checksum ^= data[i].charCodeAt(0);
 data = parse(data);
 
 // set header
+quizID = quizID.split('/');
 document.getElementById('quiz').innerHTML = data.meta.name;
-document.getElementById('subID').innerHTML = quizID[0];
-document.getElementById('quizID').innerHTML = quizID[1];
+document.getElementById('subID').innerHTML = quizID[0][0];
+document.getElementById('quizID').innerHTML = quizID[1].split('.')[0];
 let date = new Date();
 document.getElementById('time').innerHTML =
     date.getFullYear() + '-'

@@ -192,20 +192,15 @@ function swap(btn) {
     else btn.innerHTML = CHECKMARK;
 }
 
-let TESTLOAD = 0, TESTFIRST = true;
-/**
- * Track if all tests are loaded
- * @param {Boolean} loaded If the test is loaded
- * @returns {Boolean} Returns true if all tests are loaded
- */
-function loadTracker(loaded) {
-    TESTFIRST = false;
-    TESTLOAD += (loaded)? -1 : 1;
-    return !(TESTLOAD || TESTFIRST);
-}
-
 // clear display
 startGame()
+
+// hash to load the same as soon as a match
+let hash = window.location.hash;
+hash = [
+    hash[1],
+    ...hash.substring(2).split('-')
+]
 
 // iterate through data folder to download files
 for (const subject of Object.keys(SUBJECTS)) {
@@ -216,12 +211,10 @@ for (const subject of Object.keys(SUBJECTS)) {
     list.innerHTML = `<summary class="loading">${trans}</summary>`;
     menu.querySelector('div').append(list);
 
-    for (let grade = 10; grade <= 12; grade++) {
-        SUBJECTS[subject][grade] = [];
+    (async () => {
+        for (let grade = 10; grade <= 12; grade++) {
+            SUBJECTS[subject][grade] = [];
 
-        loadTracker(); // track loading progress
-
-        (async () => {
             for (let id = 0; id < 100; id++) {
                 let test = document.createElement('button');
                 test.setAttribute(
@@ -232,17 +225,7 @@ for (const subject of Object.keys(SUBJECTS)) {
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.html`);
 
-                if (!response.ok) {
-                    if (loadTracker(true)) {
-                        let hash = window.location.hash;
-                        startGame(
-                            hash[1],
-                            hash.substring(2).split('-')[0],
-                            hash.substring(2).split('-')[1],
-                        )
-                    };
-                    break; // no more test
-                };
+                if (!response.ok) break;
                 response = await response.text();
                 response = parse(response);
                 test.innerHTML = grade + '. ' + response.meta.name;
@@ -256,12 +239,20 @@ for (const subject of Object.keys(SUBJECTS)) {
                 document.getElementById('quizLimit').value =
                     document.getElementById('quizLimit').max;
 
-                // loading bar
                 SUBJECTS[subject][grade].push(response);
                 list.prepend(test); // reverse sort
+
+                // start game the moment it is available
+                if (
+                    hash[0] == subject
+                    && hash[1] == grade
+                    && hash[2] == id
+                )
+                    startGame(hash[0], hash[1], hash[2]);
             }
 
-            list.querySelector('summary').classList.remove('loading');
-        })();
-    }
+        }
+
+        list.querySelector('summary').classList.remove('loading');
+    })();
 }

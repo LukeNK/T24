@@ -73,7 +73,16 @@ data.questions.forEach(quest => {
             answerKey += '◯◯—◯◯—◯◯—◯◯';
             break;
         case 3:
-            answerKey += '<table><tr><td></td><td></td><td></td><td></td></tr></table';
+            answerKey += '<table><tr>';
+            // get the longest answer, minimum is 4
+            let ansLen = 4;
+            Object.keys(quest.ans).forEach(e => {
+                if (e.length > ansLen)
+                    ansLen = e.length;
+            });
+            for (; ansLen > 0; ansLen--)
+                answerKey += '<td></td>'
+            answerKey += '</tr></table>';
             break;
     }
     list.innerHTML += answerKey + '</dd>';

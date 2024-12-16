@@ -14,8 +14,7 @@ function shuffle(array) {
 
 (async () => {
 
-let quizID = window.location.hash.substring(1);
-if (!window.location.hash.substring(1)) window.location.href = 'https://lukenk.github.io/T24';
+let quizID = window.location.hash.substring(1) || prompt('Please input test ID');
 quizID = quizID.replaceAll('-', '/') + '.html';
 
 let data = await fetch('data/' + quizID);

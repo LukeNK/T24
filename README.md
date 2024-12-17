@@ -31,18 +31,28 @@ This is a multiple choice question
     Empty line (or lines with less than 4 characters) will be ignored
 
 Remove indentation to add a new question. This is a true-false question. <blockquote>This question has answer hints</blockquote>
+    <!-- If an answer line starts with a less-than sign (symbolize for a HTML tag) then it will be inserted to the question's text instead of being a separate answer. -->
+    <p>You can insert as many extra text as you'd like
+        <br>You can indent too, as long as it starts with the answer indent rule (4 spaces or a tab at the very start of the line)
+        <br>And as long as the text starts with a less-than sign
+    </p>
     + Start with a plus to mark this sub-question's answer as true.
     - The user should mark this as false because this sub-question starts with a minus.
     + You should add a space after the plus/minus for readability.
     + You can add hints, which will be show if the user answer wrong. <blockquote>You can put then anywhere AFTER the main display element</blockquote>
 
 This is a test flashcard, which will be displayed with details tag.
-    > This is the content. User can open/close the flashcard, and there will be buttons to mark as remembered or not.
+    <i>For flashcard specifically, a line starts with a less-than sign will be insert to the summary tag</i>
+    > A line starts with a greater-than sign is the content. User can open/close the flashcard, and there will be buttons to mark as remembered or not.
+    <!-- But if a HTML tag appear after the greater sign (symbolize for flashcard content) then it will be insered into the flashcard body -->
+
+This is a short-answer question.
+    = The result starts with an equal sign
+    = There can be multiple answers
 ```
 
 ## Tools
 - [Table to HTML](https://tableconvert.com/excel-to-html)
-
 
 # Removed introduction
 I was trying to find an alternative against all of the popular quizzing apps, when I decided to program this app because why not.

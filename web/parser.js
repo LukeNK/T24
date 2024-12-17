@@ -110,6 +110,9 @@ function parse(data) {
             } else if (line.startsWith('=')) {
                 curQuestion.type = 3;
                 curQuestion.add(line.substring(1).trim(), true);
+            } else if (line.startsWith('_')) {
+                // space for written response
+                curQuestion.writeLine = Number(line.substring(1).trim());
             } else {
                 // multiple choices as default
                 curQuestion.add(line);

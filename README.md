@@ -20,6 +20,8 @@ Where:
 
 When `web/data.js` scan, it will scan by increasing `<id>` for each `<subject><grade>` until it reaches an error response.
 
+When refering to "quiz ID", simply replace the slash with a hyphen.
+
 ## Quiz file syntax
 ```html
 # The title of the quiz is after a hash
@@ -49,7 +51,17 @@ This is a test flashcard, which will be displayed with details tag.
 This is a short-answer question.
     = The result starts with an equal sign
     = There can be multiple answers
+    = You can also add the number of lines for users to write when printing the quiz
+    _ 100
 ```
+
+## Quiz-printing
+With the correct quiz ID, you can print the quiz at [print.html](https://lukenk.github.io/T24/print.html). Features includes
+- Date + data checksum + answer checksum to make sure you have the most up-to-date quiz.
+- Shuffled answers
+- Space to answer on the right, so you can simply cover it whenever you want to test yourself.
+- Option to show/hide wrong options or hints
+- Inspirational quotes provided by [LukeNK](https://lukenk.github.io/)
 
 ## Tools
 - [Table to HTML](https://tableconvert.com/excel-to-html)

@@ -85,6 +85,10 @@ data.questions.forEach(quest => {
             answerKey += '</tr></table>';
             break;
     }
+    if (quest.writeLine)
+        for (; quest.writeLine > 0; quest.writeLine--)
+            answerKey += '<hr>';
+
     list.innerHTML += answerKey + '</dd>';
 });
 

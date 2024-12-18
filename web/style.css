@@ -84,6 +84,11 @@ details button {
 }
 #setting summary { background-color: var(--color-red); }
 #setting > *:not(summary) { padding: 0.5rem; }
+#setting button {
+    display: inline;
+    text-align: center;
+    width: 20%;
+}
 
 label {
     width: 100%;

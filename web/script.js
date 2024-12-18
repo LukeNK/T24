@@ -221,6 +221,18 @@ for (const subject of Object.keys(SUBJECTS)) {
                     'onclick',
                     `startGame("${subject}", ${grade}, ${id})`
                 );
+                test.addEventListener('contextmenu', (ev) => {
+                    document.getElementById('setting').setAttribute('open', 'true');
+                    document.getElementById('setting').scrollIntoView();
+                    document.querySelector('#setting summary span').innerHTML = 
+                        `${subject}${grade}-${id}`;
+                    document.getElementById('setStart').onclick = () => test.click();
+                    document.getElementById('setPrint').setAttribute(
+                        'onclick',
+                        `window.location.href = '${window.location.href}print.html#${subject}${grade}-${id}'`
+                    );
+                    ev.preventDefault();
+                })
 
                 let response =
                     await fetch(`data/${subject}${grade}/${id}.html`);

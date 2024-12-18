@@ -9,7 +9,14 @@ document.addEventListener('keydown', ev => {
 
     switch(ev.key) {
         case 'ArrowRight': case ' ':
-            if (QUIZ.questions[QUESTID].type == 3) break;
+            // if it is flashcard, toggle flashcard
+            // if it is short answer, don't register shortcut
+            // else, check the answer
+            if (QUIZ.questions[QUESTID].type == 2) {
+                e_quest.querySelector('details').toggleAttribute('open');
+                break;
+            } else if (QUIZ.questions[QUESTID].type == 3)
+                break;
         case 'Enter':
             check(QUESTID);
             break;

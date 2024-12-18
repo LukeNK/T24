@@ -87,7 +87,7 @@ details button {
 #setting button {
     display: inline;
     text-align: center;
-    width: 20%;
+    width: max-content;
 }
 
 label {

@@ -54,6 +54,8 @@ td, th {
     padding: 0.5rem;
 }
 
+span { margin: 0 0.5rem; }
+
 body {
     margin: 0;
     background-color: var(--color-bg);
@@ -115,7 +117,9 @@ footer {
     align-items: center;
     padding: 0.5rem;
 }
-span { margin: 0 0.5rem; }
+footer a {
+    width: 7rem;
+}
 
 /* Game display ------------------------------------------------------------- */
 #game blockquote { display: none; }

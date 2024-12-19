@@ -16,20 +16,12 @@ let SUBJECTS = {
     'f': 'Français',
 }
 
-var decodeEntities = (function() {
-    // function to decode HTML entities to characters
-    // wrap in noscript to prevent image from loading
-    var element = document.createElement('noscript');
-    function decodeHTMLEntities (str) {
-        if(str && typeof str === 'string') {
-            element.innerHTML = str;
-            str = element.innerHTML;
-            element.innerHTML = '';
-        }
-        return str;
-    }
-    return decodeHTMLEntities;
-})();
+function decodeEntities(html) {
+    // function to decude HTML entities
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+};
 
 /**
  * A quiz object

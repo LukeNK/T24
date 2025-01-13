@@ -17,7 +17,7 @@ let SUBJECTS = {
 }
 
 function decodeEntities(html) {
-    // function to decude HTML entities
+    // function to decode HTML entities
     var txt = document.createElement("textarea");
     txt.innerHTML = html;
     return txt.value;

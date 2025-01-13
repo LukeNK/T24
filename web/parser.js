@@ -11,7 +11,7 @@ let SUBJECTS = {
     'h': "L'histoire",
     'e': "L'économique",
 
-    'n': 'Collège',
+    'c': 'Collège',
 
     'f': 'Français',
 }

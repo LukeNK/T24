@@ -104,5 +104,5 @@ new QRCode(
 let quoteID = Math.floor(Math.random() * Quotes.length);
 document.querySelector('footer').innerHTML =
     `<hr>
-    « ${Quotes[quoteID][1]} »<br>
+    « ${Quotes[quoteID][1].replaceAll('\n', '<br>')} »<br>
     — ${Quotes[quoteID][0]}`;

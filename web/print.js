@@ -30,7 +30,7 @@ document.getElementById('quizID').innerHTML = quizID[1].split('.')[0];
 let date = new Date();
 document.getElementById('time').innerHTML =
     date.getFullYear() + '-'
-    + date.getMonth().toString().padStart(2, '0') + '-'
+    + (date.getMonth() + 1).toString().padStart(2, '0') + '-'
     + date.getDate().toString().padStart(2, '0') + ' '
     + date.getHours().toString().padStart(2, '0') + ':'
     + date.getMinutes().toString().padStart(2, '0')

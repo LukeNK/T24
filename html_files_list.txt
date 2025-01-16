@@ -1,7 +1,9 @@
 data\b10\0.html
 data\b10\1.html
 data\b10\2.html
+data\b10\3.html
 data\c10\0.html
+data\c10\1.html
 data\e10\0.html
 data\e10\1.html
 data\e10\2.html

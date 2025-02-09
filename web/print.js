@@ -76,6 +76,10 @@ data.questions.forEach((quest, questID) => {
                 order++
             }
         })
+    } else {
+        let answers = '';
+        Object.keys(quest.ans).forEach(ans => answers += ans + ' ' );
+        list.innerHTML += `<dd class="sAns"> = ${answers}</dd>`;
     }
 
     let answerKey = '<dd class="wAns" style="text-align: right; clear: both;">';

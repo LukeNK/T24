@@ -89,8 +89,14 @@
 
         body td.wAns { display: block; visibility: hidden; }
         body.wAns td.wAns { display: table-cell; visibility: visible; }
-        body .wAns { display: none; }
-        body.wAns .wAns { display: block; }
+
+        /* Display wrong answers, hide short answers.
+            Reverse with show all options */
+        body .wAns,
+        body.wAns .sAns { display: none; }
+        body.wAns .wAns,
+        body .sAns
+        { display: block; }
         dd.wAns > table {
             margin-right: 0;
             margin-left: auto;

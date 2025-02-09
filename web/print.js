@@ -45,6 +45,13 @@ checksum = 0; // reset for answer checksum
 data.questions.forEach(quest => {
     list.innerHTML += `<dt>${quest.text}</dt>`;
 
+    // get the longest answer, minimum is 4
+    let ansLen = 4;
+    Object.keys(quest.ans).forEach(e => {
+        if (e.length > ansLen)
+            ansLen = e.length;
+    });
+
     if (quest.type != 3) {
         // skip showing answer for short answer questions
         let letters = 'ABCD', order = 0;
@@ -53,7 +60,14 @@ data.questions.forEach(quest => {
                 let insert = (quest.type == 1)?
                     order + 1 : letters[order]
 
-                list.innerHTML += `<dd>${insert}. ${ans}</dd>`;
+                let dd = document.createElement('dd');
+                dd.innerHTML = `${insert}. ${ans}`;
+                if (ansLen < 30) {
+                    dd.style.float = 'left';
+                    dd.style.width = (ansLen < 15)? '20%' :  '45%';
+                }
+                list.appendChild(dd);
+
                 if (quest.ans[ans])
                     for (const char of ans) checksum ^= char.charCodeAt(0);
                 else
@@ -64,7 +78,7 @@ data.questions.forEach(quest => {
         })
     }
 
-    let answerKey = '<dd class="wAns" style="text-align: right;">';
+    let answerKey = '<dd class="wAns" style="text-align: right; clear: both;">';
     switch (quest.type) {
         case 0:
             answerKey += '◯ ◯ ◯ ◯';
@@ -74,12 +88,6 @@ data.questions.forEach(quest => {
             break;
         case 3:
             answerKey += '<table><tr>';
-            // get the longest answer, minimum is 4
-            let ansLen = 4;
-            Object.keys(quest.ans).forEach(e => {
-                if (e.length > ansLen)
-                    ansLen = e.length;
-            });
             for (; ansLen > 0; ansLen--)
                 answerKey += '<td></td>'
             answerKey += '</tr></table>';

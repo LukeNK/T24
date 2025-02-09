@@ -200,71 +200,87 @@ let hash = window.location.hash;
 hash = [
     hash[1],
     ...hash.substring(2).split('-')
-]
+];
 
-// iterate through data folder to download files
-for (const subject of Object.keys(SUBJECTS)) {
-    const trans = SUBJECTS[subject];
-    SUBJECTS[subject] = {}; // clear for array in array
+let repo = [];
+(async () => {
+    // if not on Github, use brute-force loading
+    if (window.location.href.includes('lukenk.github.io')) return;
 
-    let list = document.createElement('details');
-    list.innerHTML = `<summary class="loading">${trans}</summary>`;
-    menu.querySelector('div').append(list);
+    // get Github list of quizzes
+    repo = await fetch('https://api.github.com/repos/LukeNK/T24/git/trees/main?recursive=1');
+    repo = await repo.json();
+    repo = repo.tree.filter(v => v.path.search(/data\/.*\.html/) == 0);
+    for (let i in repo)
+        repo[i] = repo[i].path; // save paths
+})().finally(() => {
+    // iterate through data folder to download files
+    for (const subject of Object.keys(SUBJECTS)) {
+        const trans = SUBJECTS[subject];
+        SUBJECTS[subject] = {}; // clear for array in array
 
-    (async () => {
-        for (let grade = 10; grade <= 12; grade++) {
-            SUBJECTS[subject][grade] = [];
+        let list = document.createElement('details');
+        list.innerHTML = `<summary class="loading">${trans}</summary>`;
+        menu.querySelector('div').append(list);
 
-            for (let id = 0; id < 100; id++) {
-                let test = document.createElement('button');
-                test.setAttribute(
-                    'onclick',
-                    `startGame("${subject}", ${grade}, ${id})`
-                );
-                test.addEventListener('contextmenu', (ev) => {
-                    document.getElementById('setting').setAttribute('open', 'true');
-                    document.getElementById('setting').scrollIntoView();
-                    document.querySelector('#setting summary span').innerHTML =
-                        `${subject}${grade}-${id}`;
-                    document.getElementById('setStart').onclick = () => test.click();
-                    document.getElementById('setPrint').setAttribute(
+        (async () => {
+            for (let grade = 10; grade <= 12; grade++) {
+                SUBJECTS[subject][grade] = [];
+
+                for (let id = 0; id < 100; id++) {
+                    let test = document.createElement('button');
+                    test.setAttribute(
                         'onclick',
-                        `window.location.href = '${window.location.href}print.html#${subject}${grade}-${id}'`
+                        `startGame("${subject}", ${grade}, ${id})`
                     );
-                    ev.preventDefault();
-                })
+                    test.addEventListener('contextmenu', (ev) => {
+                        document.getElementById('setting').setAttribute('open', 'true');
+                        document.getElementById('setting').scrollIntoView();
+                        document.querySelector('#setting summary span').innerHTML =
+                            `${subject}${grade}-${id}`;
+                        document.getElementById('setStart').onclick = () => test.click();
+                        document.getElementById('setPrint').setAttribute(
+                            'onclick',
+                            `window.location.href = '${window.location.href}print.html#${subject}${grade}-${id}'`
+                        );
+                        ev.preventDefault();
+                    })
 
-                let response =
-                    await fetch(`data/${subject}${grade}/${id}.html`);
+                    let quizPath = `data/${subject}${grade}/${id}.html`;
+                    // if the repo list is loaded AND no quiz is found
+                    if ( repo.length != 0 && !repo.includes(quizPath) ) break;
 
-                if (!response.ok) break;
-                response = await response.text();
-                response = parse(response);
-                test.innerHTML = grade + '. ' + response.meta.name;
+                    // else, load the quiz
+                    let response =
+                        await fetch(`data/${subject}${grade}/${id}.html`);
+                    if (!response.ok) break;
+                    response = await response.text();
+                    response = parse(response);
+                    test.innerHTML = grade + '. ' + response.meta.name;
 
-                // set config
-                document.getElementById('quizLimit').max =
-                    Math.max(
-                        document.getElementById('quizLimit').max,
-                        response.questions.length
-                    );
-                document.getElementById('quizLimit').value =
-                    document.getElementById('quizLimit').max;
+                    // set config
+                    document.getElementById('quizLimit').max =
+                        Math.max(
+                            document.getElementById('quizLimit').max,
+                            response.questions.length
+                        );
+                    document.getElementById('quizLimit').value =
+                        document.getElementById('quizLimit').max;
 
-                SUBJECTS[subject][grade].push(response);
-                list.prepend(test); // reverse sort
+                    SUBJECTS[subject][grade].push(response);
+                    list.prepend(test); // reverse sort
 
-                // start game the moment it is available
-                if (
-                    hash[0] == subject
-                    && hash[1] == grade
-                    && hash[2] == id
-                )
-                    startGame(hash[0], hash[1], hash[2]);
+                    // start game the moment it is available
+                    if (
+                        hash[0] == subject
+                        && hash[1] == grade
+                        && hash[2] == id
+                    )
+                        startGame(hash[0], hash[1], hash[2]);
+                }
             }
 
-        }
-
-        list.querySelector('summary').classList.remove('loading');
-    })();
-}
+            list.querySelector('summary').classList.remove('loading');
+        })();
+    }
+});

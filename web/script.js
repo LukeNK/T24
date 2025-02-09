@@ -195,7 +195,7 @@ function swap(btn) {
 // clear display
 startGame()
 
-// hash to load the same as soon as a match
+// hash to load the game as soon as there is a match
 let hash = window.location.hash;
 hash = [
     hash[1],
@@ -224,7 +224,7 @@ for (const subject of Object.keys(SUBJECTS)) {
                 test.addEventListener('contextmenu', (ev) => {
                     document.getElementById('setting').setAttribute('open', 'true');
                     document.getElementById('setting').scrollIntoView();
-                    document.querySelector('#setting summary span').innerHTML = 
+                    document.querySelector('#setting summary span').innerHTML =
                         `${subject}${grade}-${id}`;
                     document.getElementById('setStart').onclick = () => test.click();
                     document.getElementById('setPrint').setAttribute(

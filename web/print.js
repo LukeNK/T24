@@ -42,8 +42,8 @@ document.getElementById('questCount').innerHTML =
     + data.questions.filter(v => v.type == 3).length;
 
 checksum = 0; // reset for answer checksum
-data.questions.forEach(quest => {
-    list.innerHTML += `<dt>${quest.text}</dt>`;
+data.questions.forEach((quest, questID) => {
+    list.innerHTML += `<dt>${questID}⟩ ${quest.text}</dt>`;
 
     // get the longest answer, minimum is 4
     let ansLen = 4;

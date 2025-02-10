@@ -43,8 +43,13 @@ document.getElementById('questCount').innerHTML =
 
 checksum = 0; // reset for answer checksum
 data.questions.forEach((quest, questNum) => {
-    questNum = quest.num || questNum; // question number
-    list.innerHTML += `<dt>${questNum}⟩ ${quest.text}</dt>`;
+    // display question, no number for flashcards
+    if (quest.type == 2)
+        list.innerHTML += `<dt>${quest.text}</dt>`;
+    else {
+        questNum = quest.num || questNum; // question number
+        list.innerHTML += `<dt>${questNum}⟩ ${quest.text}</dt>`;
+    }
 
     // get the longest answer, minimum is 4
     let ansLen = 4;

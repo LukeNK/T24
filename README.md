@@ -53,6 +53,11 @@ This is a short-answer question.
     = There can be multiple answers
     = You can also add the number of lines for users to write when printing the quiz
     _ 100
+
+39
+    ? You can also add question number to the questions
+    Simply put the question number without indent
+    Then the indented line starts with a question mark will be the question
 ```
 
 ## Quiz-printing

@@ -63,7 +63,7 @@ function parse(data) {
         curQuestion;
 
     // clean absolute path
-    data = data.replaceAll('<img src="/', '<img src="');
+    data = data.replaceAll('src="/', 'src="');
     // clean HTML entities so the result can check directly from innerHTML
     data = decodeEntities(data);
 
@@ -90,6 +90,10 @@ function parse(data) {
                     line.substring(1).trim(),
                     line[0] == "+" ? true : false
                 );
+            } else if (line.startsWith('?')) {
+                // Parse the question text as question number
+                curQuestion.num = curQuestion.text;
+                curQuestion.text = line.substring(1).trim();
             } else if (line.startsWith('>')) {
                 // flashcard
                 curQuestion.type = 2;

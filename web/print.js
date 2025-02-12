@@ -1,10 +1,13 @@
 const list = document.querySelector('dl');
-let checksum = 0;
+let seed = prompt('Please input a seed'),
+    random = '', // placeholder for global function
+    checksum = 0;
+
 
 function shuffle(array) {
     let currentIndex = array.length;
     while (currentIndex != 0) {
-        let randomIndex = Math.floor(Math.random() * currentIndex);
+        let randomIndex = Math.floor(random() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
@@ -20,6 +23,7 @@ quizID = quizID.replaceAll('-', '/') + '.html';
 let data = await fetch('data/' + quizID);
 data = await data.text();
 for (const i in data) checksum ^= data[i].charCodeAt(0);
+checksum = checksum.toString(16).toUpperCase();
 data = parse(data);
 
 // set header
@@ -34,12 +38,16 @@ document.getElementById('time').innerHTML =
     + date.getDate().toString().padStart(2, '0') + ' '
     + date.getHours().toString().padStart(2, '0') + ':'
     + date.getMinutes().toString().padStart(2, '0')
-    + `<br>Data: ${checksum.toString(16).toUpperCase()}`;
+    + '<br>Data: ' + checksum;
 document.getElementById('questCount').innerHTML =
     data.questions.filter(v => v.type == 0).length + ' + '
     + data.questions.filter(v => v.type == 1).length + ' + '
     + data.questions.filter(v => v.type == 2).length + ' + '
     + data.questions.filter(v => v.type == 3).length;
+
+// set random seed
+seed = seed || checksum;
+random = new Math.seedrandom(seed);
 
 checksum = 0; // reset for answer checksum
 data.questions.forEach((quest, questNum) => {
@@ -111,7 +119,8 @@ data.questions.forEach((quest, questNum) => {
 });
 
 document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
-document.getElementById('questCount').innerHTML += `<br>Réponses: ${checksum.toString(16).toUpperCase()}`;
+document.getElementById('time').innerHTML += ' / ' + checksum.toString(16).toUpperCase()
+document.getElementById('questCount').innerHTML += `<br>Code de réponse: ${seed}`;
 
 })();
 

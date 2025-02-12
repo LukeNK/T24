@@ -99,26 +99,26 @@ let loadQuiz = async () => {
             list.innerHTML += `<dd class="sAns"> = ${answers}</dd>`;
         }
 
-        let answerKey = '<dd class="wAns" style="text-align: right; clear: both;">';
+        let answerSpace = '<dd class="wAns" style="text-align: right; clear: both;">';
         switch (quest.type) {
             case 0:
-                answerKey += '◯ ◯ ◯ ◯';
+                answerSpace += '◯ ◯ ◯ ◯';
                 break;
             case 1:
-                answerKey += '◯◯—◯◯—◯◯—◯◯';
+                answerSpace += '◯◯—◯◯—◯◯—◯◯';
                 break;
             case 3:
-                answerKey += '<table><tr>';
+                answerSpace += '<table><tr>';
                 for (; ansLen > 0; ansLen--)
-                    answerKey += '<td></td>'
-                answerKey += '</tr></table>';
+                    answerSpace += '<td></td>'
+                answerSpace += '</tr></table>';
                 break;
         }
         if (quest.writeLine)
             for (; quest.writeLine > 0; quest.writeLine--)
-                answerKey += '<hr class=""wAns>';
+                answerSpace += '<hr class=""wAns>';
 
-        list.innerHTML += answerKey + '</dd>';
+        list.innerHTML += answerSpace + '</dd>';
     });
 
     document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))

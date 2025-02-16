@@ -78,10 +78,9 @@ let loadQuiz = async () => {
 
                     let dd = document.createElement('dd');
                     dd.innerHTML = `${insert}. ${ans}`;
-                    if (ansLen < 30) {
-                        dd.style.float = 'left';
-                        dd.style.width = (ansLen < 15)? '20%' :  '45%';
-                    }
+                    if (ansLen > 30) dd.classList.add('long');
+                    else if (ansLen > 15) dd.classList.add('mid');
+
                     list.appendChild(dd);
 
                     if (quest.ans[ans])
@@ -98,7 +97,7 @@ let loadQuiz = async () => {
             list.innerHTML += `<dd class="sAns"> = ${answers}</dd>`;
         }
 
-        let answerSpace = '<dd class="wAns" style="text-align: right; clear: both;">';
+        let answerSpace = '<dd class="wAns" style="text-align: right; flex-basis: 100%;">';
         switch (quest.type) {
             case 0:
                 answerSpace += '◯ ◯ ◯ ◯';

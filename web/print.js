@@ -4,8 +4,7 @@ let quizID = window.location.hash.substring(1) || prompt('Please input test ID')
     random = '', // placeholder for global function
     checksum = 0;
 
-quizID = quizID.replaceAll('-', '/') + '.html';
-quizID = quizID.split('/');
+quizID = quizID.split('-');
 
 function shuffle(array) {
     let currentIndex = array.length;
@@ -24,7 +23,7 @@ let loadQuiz = async () => {
     checksum = 0;
 
     // load data
-    let data = await fetch('data/' + quizID.join('/'));
+    let data = await fetch('data/' + quizID.join('/') + '.html');
     data = await data.text();
     for (const i in data) checksum ^= data[i].charCodeAt(0);
     checksum = checksum.toString(16).toUpperCase();
@@ -33,7 +32,7 @@ let loadQuiz = async () => {
     // set header
     document.getElementById('quiz').innerHTML = data.meta.name;
     document.getElementById('subID').innerHTML = quizID[0][0];
-    document.getElementById('quizID').innerHTML = quizID[1].split('.')[0];
+    document.getElementById('quizID').innerHTML = quizID[1];
     let date = new Date();
     document.getElementById('time').innerHTML =
         date.getFullYear() + '-'
@@ -41,7 +40,7 @@ let loadQuiz = async () => {
         + date.getDate().toString().padStart(2, '0') + ' '
         + date.getHours().toString().padStart(2, '0') + ':'
         + date.getMinutes().toString().padStart(2, '0')
-        + '<br>Data: ' + checksum;
+        + '<br>Checksum: ' + checksum;
     document.getElementById('questCount').innerHTML =
         data.questions.filter(v => v.type == 0).length + ' + '
         + data.questions.filter(v => v.type == 1).length + ' + '
@@ -121,6 +120,7 @@ let loadQuiz = async () => {
         list.innerHTML += answerSpace + '</dd>';
     });
 
+    document.title = '[' + quizID.join('-').toUpperCase() + '] ' + data.meta.name;
     document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
     document.getElementById('time').innerHTML += ' / ' + checksum.toString(16).toUpperCase()
     document.getElementById('questCount').innerHTML += `<br>Code de réponse: ${seed}`;

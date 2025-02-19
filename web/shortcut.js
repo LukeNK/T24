@@ -18,7 +18,7 @@ document.addEventListener('keydown', ev => {
             } else if (QUIZ.questions[QUESTID].type == 3)
                 break;
         case 'Enter':
-            check(QUESTID);
+            check();
             break;
         case 'Escape':
             startGame();

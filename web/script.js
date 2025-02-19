@@ -89,7 +89,7 @@ function ask() {
             li.innerHTML = ans;
             li.setAttribute(
                 'onclick',
-                `check(${id}, '${ans.replaceAll("'", "\\'")}', this)`
+                `check('${ans.replaceAll("'", "\\'")}', this)`
             )
 
             // shuffle answer order or set flashcard
@@ -109,12 +109,12 @@ function ask() {
         }
 
         e_ans.innerHTML +=
-            `<button onclick="check(QUESTID)">${CHECKMARK}</button>`;
+            `<button onclick="check()">${CHECKMARK}</button>`;
     } else if (curQuest.type == 3) {
         // short answer
         e_ans.innerHTML += `
             <input id="ansInp" placeholder=" ">
-            <button onclick="check(${id})">${CHECKMARK}</button>`;
+            <button onclick="check()">${CHECKMARK}</button>`;
     }
 
     e_quest.scrollIntoView();
@@ -127,11 +127,12 @@ function ask() {
 
 /**
  * Check the answer of the user
- * @param {Number} id Question ID
  * @param {String} result The key of the answer
  * @param {HTMLElement} elm The answer that was clicked on
  */
-function check(id, result, elm) {
+function check(result, elm) {
+    let id = QUESTID;
+
     if (game.classList.contains('hint')) ask(); // skip to next question
     else switch (QUIZ.questions[id].type) {
         case 0:

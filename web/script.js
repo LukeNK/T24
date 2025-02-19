@@ -133,31 +133,36 @@ function ask() {
  */
 function check(id, result, elm) {
     if (game.classList.contains('hint')) ask(); // skip to next question
-    else if (QUIZ.questions[id].type == 0 || QUIZ.questions[id].type == 2) {
-        if (QUIZ.questions[id].ans[result]) report(id, true);
-        else {
-            report(id)
-            if (elm) elm.classList.add('w');
-        }
-    } else if (QUIZ.questions[id].type == 1) {
-        let wrongAns = Object.keys(QUIZ.questions[id].ans).length;
-        [...e_ans.querySelectorAll('div')]
-        .forEach(elm => {
-            if (
-                QUIZ.questions[id].ans[elm.innerHTML]
-                == ((elm.nextElementSibling.innerHTML == CHECKMARK)? 1 : 0)
-            ) wrongAns--;
-        });
+    else switch (QUIZ.questions[id].type) {
+        case 0:
+        case 2:
+            if (QUIZ.questions[id].ans[result]) report(id, true);
+            else {
+                report(id)
+                if (elm) elm.classList.add('w');
+            }
+            break;
+        case 1:
+            let wrongAns = Object.keys(QUIZ.questions[id].ans).length;
+            [...e_ans.querySelectorAll('div')]
+            .forEach(elm => {
+                if (
+                    QUIZ.questions[id].ans[elm.innerHTML]
+                    == ((elm.nextElementSibling.innerHTML == CHECKMARK)? 1 : 0)
+                ) wrongAns--;
+            });
 
-        report(id, wrongAns <= 0);
-    } else if (QUIZ.questions[id].type == 3) {
-        // check if the answer exist in the allowed answer
-        report(
-            id,
-            QUIZ.questions[id].ans[
-                document.getElementById('ansInp').value
-            ]
-        )
+            report(id, wrongAns <= 0);
+            break;
+        case 3:
+            // check if the answer exist in the allowed answer
+            report(
+                id,
+                QUIZ.questions[id].ans[
+                    document.getElementById('ansInp').value
+                ]
+            );
+            break;
     }
 
     document.getElementById('done').innerHTML = DONE.length;

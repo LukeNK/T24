@@ -98,7 +98,10 @@ let loadQuiz = async () => {
         }
 
         let answerSpace = '<dd class="wAns" style="text-align: right; flex-basis: 100%;">';
-        switch (quest.type) {
+        if (quest.writeLine)
+            for (; quest.writeLine > 0; quest.writeLine--)
+                answerSpace += '<hr class="wAns">';
+        else switch (quest.type) {
             case 0:
                 answerSpace += '◯ ◯ ◯ ◯';
                 break;
@@ -112,9 +115,6 @@ let loadQuiz = async () => {
                 answerSpace += '</tr></table>';
                 break;
         }
-        if (quest.writeLine)
-            for (; quest.writeLine > 0; quest.writeLine--)
-                answerSpace += '<hr class="wAns">';
 
         list.innerHTML += answerSpace + '</dd>';
     });

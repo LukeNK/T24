@@ -54,6 +54,9 @@ This is a short-answer question.
     = You can also add the number of lines for users to write when printing the quiz
     _ 100
 
+A written response that expects no answer, in which case there will be space to answer but no automatic grading.
+    _ 10
+
 39
     ? You can also add question number to the questions
     Simply put the question number without indent

@@ -34,7 +34,7 @@ function decodeEntities(html) {
 class Question {
     constructor(text) {
         this.text = text;
-        this.type = 0; // 0 multiple choice, 1 true/false, 2 flashcard, 3 short answer
+        this.type = 0; // 0 multiple choice, 1 true/false, 2 flashcard, 3 short answer, 4 long answer
         this.ans = {};
 
         return this;
@@ -109,6 +109,12 @@ function parse(data) {
             } else if (line.startsWith('_')) {
                 // space for written response
                 curQuestion.writeLine = Number(line.substring(1).trim());
+                console.log(curQuestion);
+                if (Object.keys(curQuestion.ans).length == 0) {
+                    curQuestion.type = 4;
+                    curQuestion.add(CHECKMARK, true);
+                    curQuestion.add(XMARK, false);
+                }
             } else {
                 // multiple choices as default
                 curQuestion.add(line);

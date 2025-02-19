@@ -18,8 +18,6 @@ Where:
 - `<grade>` is currectly default at 10 right now
 - `<id>` is the unique ID of the question list
 
-When `web/data.js` scan, it will scan by increasing `<id>` for each `<subject><grade>` until it reaches an error response.
-
 When refering to "quiz ID", simply replace the slash with a hyphen.
 
 ## Quiz file syntax
@@ -30,7 +28,7 @@ This is a multiple choice question
     The answer will be indented with tab or 4 spaces, the first answer will be marked as the correct one
     Add a newline for a new answer. There is no answer upper limit but there should be at least one answer.
     The answers will be randomized when showing to the user.
-    Empty line (or lines with less than 4 characters) will be ignored
+    Empty lines will be ignored
 
 Remove indentation to add a new question. This is a true-false question. <blockquote>This question has answer hints</blockquote>
     <!-- If an answer line starts with a less-than sign (symbolize for a HTML tag) then it will be inserted to the question's text instead of being a separate answer. -->
@@ -41,7 +39,7 @@ Remove indentation to add a new question. This is a true-false question. <blockq
     + Start with a plus to mark this sub-question's answer as true.
     - The user should mark this as false because this sub-question starts with a minus.
     + You should add a space after the plus/minus for readability.
-    + You can add hints, which will be show if the user answer wrong. <blockquote>You can put then anywhere AFTER the main display element</blockquote>
+    + You can add hints, which will be show if the user answer wrong. <blockquote>You can put them anywhere AFTER the main display element</blockquote>
 
 This is a test flashcard, which will be displayed with details tag.
     <i>For flashcard specifically, a line starts with a less-than sign will be insert to the summary tag</i>
@@ -66,7 +64,7 @@ A written response that expects no answer, in which case there will be space to 
 ## Quiz-printing
 With the correct quiz ID, you can print the quiz at [print.html](https://lukenk.github.io/T24/print.html). Features includes
 - Date + data checksum + answer checksum to make sure you have the most up-to-date quiz.
-- Shuffled answers
+- Seeded random-shuffled answers (which you can load the seed to have an answer key)
 - Space to answer on the right, so you can simply cover it whenever you want to test yourself.
 - Option to show/hide wrong options or hints
 - Inspirational quotes provided by [LukeNK](https://lukenk.github.io/)

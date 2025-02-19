@@ -109,7 +109,6 @@ function parse(data) {
             } else if (line.startsWith('_')) {
                 // space for written response
                 curQuestion.writeLine = Number(line.substring(1).trim());
-                console.log(curQuestion);
                 if (Object.keys(curQuestion.ans).length == 0) {
                     curQuestion.type = 4;
                     curQuestion.add(CHECKMARK, true);

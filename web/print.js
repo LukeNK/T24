@@ -114,7 +114,7 @@ let loadQuiz = async () => {
         }
         if (quest.writeLine)
             for (; quest.writeLine > 0; quest.writeLine--)
-                answerSpace += '<hr class=""wAns>';
+                answerSpace += '<hr class="wAns">';
 
         list.innerHTML += answerSpace + '</dd>';
     });

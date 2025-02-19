@@ -15,9 +15,13 @@ document.addEventListener('keydown', ev => {
             if (QUIZ.questions[QUESTID].type == 2) {
                 e_quest.querySelector('details').toggleAttribute('open');
                 break;
-            } else if (QUIZ.questions[QUESTID].type == 3)
+            } else if (
+                QUIZ.questions[QUESTID].type == 3
+                || QUIZ.questions[QUESTID].type == 4
+            )
                 break;
         case 'Enter':
+            if (QUIZ.questions[QUESTID].type == 4) break; // allow new line
             check();
             break;
         case 'Escape':

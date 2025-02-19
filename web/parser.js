@@ -109,11 +109,8 @@ function parse(data) {
             } else if (line.startsWith('_')) {
                 // space for written response
                 curQuestion.writeLine = Number(line.substring(1).trim());
-                if (Object.keys(curQuestion.ans).length == 0) {
-                    curQuestion.type = 4;
-                    curQuestion.add(CHECKMARK, true);
-                    curQuestion.add(XMARK, false);
-                }
+                if (Object.keys(curQuestion.ans).length == 0)
+                    curQuestion.type = 4; // no answer response
             } else {
                 // multiple choices as default
                 curQuestion.add(line);

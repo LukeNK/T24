@@ -218,8 +218,11 @@ footer a {
     color: var(--color-bg);
 }
 
-#answers input {
-    /* Type 3: short answer */
+/*
+    Type 3: short answer
+    Type 4: written response
+*/
+#answers input, #answers textarea {
     border: none;
     outline: none;
     font-size: large;
@@ -229,6 +232,11 @@ footer a {
 }
 #answers input:placeholder-shown {
     background-color: var(--color-red);
+}
+
+#answers textarea {
+    width: 100%;
+    resize: vertical;
 }
 
 #controls {

@@ -115,6 +115,11 @@ function ask() {
         e_ans.innerHTML += `
             <input id="ansInp" placeholder=" ">
             <button onclick="check()">${CHECKMARK}</button>`;
+    } else if (curQuest.type == 4) {
+        // written response
+        e_ans.innerHTML += `
+            <textarea rows="${curQuest.writeLine}"></textarea>
+            <button onclick="check()">${CHECKMARK}</button>`;
     }
 
     e_quest.scrollIntoView();
@@ -163,6 +168,10 @@ function check(result, elm) {
                     document.getElementById('ansInp').value
                 ]
             );
+            break;
+        case 4:
+            // written response, always correct
+            report(id, true);
             break;
     }
 

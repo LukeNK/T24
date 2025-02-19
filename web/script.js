@@ -142,9 +142,9 @@ function check(result, elm) {
     else switch (QUIZ.questions[id].type) {
         case 0:
         case 2:
-            if (QUIZ.questions[id].ans[result]) report(id, true);
+            if (QUIZ.questions[id].ans[result]) report(true);
             else {
-                report(id)
+                report(false);
                 if (elm) elm.classList.add('w');
             }
             break;
@@ -158,20 +158,17 @@ function check(result, elm) {
                 ) wrongAns--;
             });
 
-            report(id, wrongAns <= 0);
+            report(wrongAns <= 0);
             break;
         case 3:
             // check if the answer exist in the allowed answer
-            report(
-                id,
-                QUIZ.questions[id].ans[
-                    document.getElementById('ansInp').value
-                ]
-            );
+            report(QUIZ.questions[id].ans[
+                document.getElementById('ansInp').value
+            ]);
             break;
         case 4:
             // written response, always correct
-            report(id, true);
+            report(true);
             break;
     }
 
@@ -180,10 +177,11 @@ function check(result, elm) {
 
 /**
  * Report to user the correctness of their answer
- * @param {Number} id Question ID
  * @param {Boolean} correct Validated result
  */
-function report(id, correct) {
+function report(correct) {
+    let id = QUESTID;
+
     if (correct) {
         DONE.push(id);
         AGAIN = AGAIN.filter(v => v != id); // remove from again

@@ -14,6 +14,7 @@
             font-optical-sizing: auto;
             font-weight: normal;
             font-style: normal;
+
         }
         body > table {
             width: 100%;
@@ -57,10 +58,21 @@
             padding: 0.5rem;
             margin: 0;
             font-weight: normal;
-            border: 1px solid black;
+            border-image:
+                linear-gradient(to right bottom,
+                    #000000ff 0%,
+                    #000000ff 10%,
+                    #00000000 10%,
+                    #00000000 90%,
+                    #000000ff 90%,
+                    #000000ff 100%
+                ) 1;
+            border-width: 0.25rem;
+            border-style: solid;
         }
         summary {
             font-weight: bolder;
+            margin-bottom: 0.5rem;
         }
         summary::marker { content: ""; }
 
@@ -104,8 +116,7 @@
         body .wAns,
         body.wAns .sAns { display: none; }
         body.wAns .wAns,
-        body .sAns
-        { display: block; }
+        body .sAns { display: block; }
         dd.wAns > table {
             margin-right: 0;
             margin-left: auto;

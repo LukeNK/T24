@@ -131,8 +131,10 @@ new QRCode(
     document.getElementById("qrcode"),
     'http://lukenk.github.io/T24' + window.location.hash);
 
-let quoteID = Math.floor(Math.random() * Quotes.length);
+let quote = Math.floor(Math.random() * Quotes.length);
+quote = Quotes[quote];
+if (typeof(quote[0]) == 'number') quote[0] = '';
 document.querySelector('footer').innerHTML =
     `<hr>
-    « ${Quotes[quoteID][1].replaceAll('\n', '<br>')} »<br>
-    — ${Quotes[quoteID][0]}`;
+    « ${quote[1].replaceAll('\n', '<br>')} »<br>
+    — ${quote[0]}`;

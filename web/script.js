@@ -236,66 +236,62 @@ if (oldDate + 12 * 60 * 60 * 1000 < curDate) {
     window.location.href = 'load.html';
 }
 
-(() => {
-    // iterate through data folder to download files
-    for (const subject of Object.keys(SUBJECTS)) {
-        const trans = SUBJECTS[subject];
-        SUBJECTS[subject] = {}; // clear for array in array
+// iterate through data folder to download files
+for (const subject of Object.keys(SUBJECTS)) {
+    const trans = SUBJECTS[subject];
+    SUBJECTS[subject] = {}; // clear for array in array
 
-        let list = document.createElement('details');
-        list.innerHTML = `<summary class="loading">${trans}</summary>`;
-        menu.querySelector('div').append(list);
+    let list = document.createElement('details');
+    list.innerHTML = `<summary class="loading">${trans}</summary>`;
+    menu.querySelector('div').append(list);
 
-        for (let grade = 10; grade <= 12; grade++) {
-            SUBJECTS[subject][grade] = [];
+    for (let grade = 10; grade <= 12; grade++) {
+        SUBJECTS[subject][grade] = [];
 
-            for (let id = 0; id < 100; id++) {
-                let test = document.createElement('button');
-                test.setAttribute(
+        for (let id = 0; id < 100; id++) {
+            let test = document.createElement('button');
+            test.setAttribute(
+                'onclick',
+                `startGame("${subject}", ${grade}, ${id})`
+            );
+            test.addEventListener('contextmenu', (ev) => {
+                document.getElementById('setting').setAttribute('open', 'true');
+                document.getElementById('setting').scrollIntoView();
+                document.querySelector('#setting summary span').innerHTML =
+                    `${subject}${grade}-${id}`;
+                document.getElementById('setStart').onclick = () => test.click();
+                document.getElementById('setPrint').setAttribute(
                     'onclick',
-                    `startGame("${subject}", ${grade}, ${id})`
+                    `window.location.href = '${window.location.href}print.html#${subject}${grade}-${id}'`
                 );
-                test.addEventListener('contextmenu', (ev) => {
-                    document.getElementById('setting').setAttribute('open', 'true');
-                    document.getElementById('setting').scrollIntoView();
-                    document.querySelector('#setting summary span').innerHTML =
-                        `${subject}${grade}-${id}`;
-                    document.getElementById('setStart').onclick = () => test.click();
-                    document.getElementById('setPrint').setAttribute(
-                        'onclick',
-                        `window.location.href = '${window.location.href}print.html#${subject}${grade}-${id}'`
-                    );
-                    ev.preventDefault();
-                })
+                ev.preventDefault();
+            })
 
-                // else, load the quiz
-                let response = localStorage.getItem(`${subject}${grade}-${id}`);
-                if (!response) break;
-                response = parse(response);
-                test.innerHTML = grade + '. ' + response.meta.name;
+            // else, load the quiz
+            let response = localStorage.getItem(`${subject}${grade}-${id}`);
+            if (!response) break;
+            response = parse(response);
+            test.innerHTML = grade + '. ' + response.meta.name;
 
-                // set config
-                document.getElementById('quizLimit').max =
-                    Math.max(
-                        document.getElementById('quizLimit').max,
-                        response.questions.length
-                    );
-                document.getElementById('quizLimit').value =
-                    document.getElementById('quizLimit').max;
+            // set config
+            document.getElementById('quizLimit').max =
+                Math.max(
+                    document.getElementById('quizLimit').max,
+                    response.questions.length
+                );
+            document.getElementById('quizLimit').value =
+                document.getElementById('quizLimit').max;
 
-                SUBJECTS[subject][grade].push(response);
-                list.prepend(test); // reverse sort
+            SUBJECTS[subject][grade].push(response);
+            list.prepend(test); // reverse sort
 
-                // start game the moment it is available
-                if (
-                    hash[0] == subject
-                    && hash[1] == grade
-                    && hash[2] == id
-                )
-                    startGame(hash[0], hash[1], hash[2]);
-            }
+            // start game the moment it is available
+            if (
+                hash[0] == subject
+                && hash[1] == grade
+                && hash[2] == id
+            )
+                startGame(hash[0], hash[1], hash[2]);
         }
-
-        list.querySelector('summary').classList.remove('loading');
     }
-})();
+}

@@ -1,21 +1,49 @@
-<!-- Load parser to get subject list -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chargeur du T24</title>
+    <link rel="shortcut icon" href="web/logo.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="web/style.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <h1>Téléchargement des quiz</h1>
+        <p><a href="./">
+            Retour à la page d'accueil<br>
+            Return to home page<br>
+            Trở về trang chủ
+        </a></p>
+    </div>
+</body>
+
+<!-- Load parser to get the subject list -->
 <script src="web/parser.js"></script>
 
 <script>
     localStorage.clear()
 
     // check if all quizes has been loaded
-    function loader(s, g) {
+    function loader(s, g, id) {
         SUBJECTS[s][g] = true;
         for (const subject of Object.keys(SUBJECTS))
             for (const grade of Object.keys(SUBJECTS[subject]))
-                if (!SUBJECTS[subject][grade]) return false;
+                if (!SUBJECTS[subject][grade]) {
+                    document.body.innerHTML +=
+                        'Téléchargé ' + Math.max(0, id - 1) +
+                        ' quiz de ' + s + g + '<br>';
+                    return false
+                };
 
+        document.body.innerHTML += `Démarrage de l'application...`;
         localStorage.setItem(
             'version',
             new Date().valueOf()
         )
-        window.location.href = './';
+        // window.location.href = './';
     }
 
     // iterate through data folder to download files
@@ -28,7 +56,7 @@
                     let response =
                         await fetch(`data/${subject}${grade}/${id}.html`);
                     if (!response.ok) {
-                        loader(subject, grade);
+                        loader(subject, grade, id);
                         break;
                     }
                     localStorage.setItem(
@@ -40,3 +68,4 @@
         }
     }
 </script>
+</html>

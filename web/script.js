@@ -225,15 +225,16 @@ try {
     alert(`Redirect to legacy app\nRedirection vers l'application héritée\nĐiều hướng đến phiên bản cũ`);
     window.location.href = 'legacy.html';
 }
-
-let curDate = new Date().valueOf(),
-    oldDate = new Date(
-        parseInt(localStorage.getItem('version'))
-    ).valueOf();
-// if version is outdated for 12 hours
-if (oldDate + 12 * 60 * 60 * 1000 < curDate) {
-    localStorage.setItem('version', curDate);
+let curDate = new Date(),
+    oldDate = new Date(parseInt(localStorage.getItem('version')));
+// if version is outdated for 12 hour
+if (oldDate.valueOf() + 12 * 60 * 60 * 1000 < curDate.valueOf()) {
+    localStorage.setItem('version', curDate.valueOf());
     window.location.href = 'load.html';
+} else {
+    document.querySelector('time').innerHTML =
+        oldDate.toLocaleString()
+        + ` (il y a ${((curDate - oldDate) / 1000 / 60 / 60).toPrecision(2)}h)`;
 }
 
 // iterate through data folder to download files

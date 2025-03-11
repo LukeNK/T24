@@ -1,0 +1,42 @@
+<!-- Load parser to get subject list -->
+<script src="web/parser.js"></script>
+
+<script>
+    localStorage.clear()
+
+    // check if all quizes has been loaded
+    function loader(s, g) {
+        SUBJECTS[s][g] = true;
+        for (const subject of Object.keys(SUBJECTS))
+            for (const grade of Object.keys(SUBJECTS[subject]))
+                if (!SUBJECTS[subject][grade]) return false;
+
+        localStorage.setItem(
+            'version',
+            new Date().valueOf()
+        )
+        window.location.href = './';
+    }
+
+    // iterate through data folder to download files
+    for (const subject of Object.keys(SUBJECTS)) {
+        SUBJECTS[subject] = {};
+        for (let grade = 10; grade <= 12; grade++) {
+            SUBJECTS[subject][grade] = false;
+            (async () => {
+                for (let id = 0; id < 100; id++) {
+                    let response =
+                        await fetch(`data/${subject}${grade}/${id}.html`);
+                    if (!response.ok) {
+                        loader(subject, grade);
+                        break;
+                    }
+                    localStorage.setItem(
+                        `${subject}${grade}-${id}`,
+                        await response.text()
+                    );
+                }
+            })();
+        }
+    }
+</script>

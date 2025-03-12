@@ -54,6 +54,7 @@ let repo = [];
     // get Github list of quizzes
     repo = await fetch('https://api.github.com/repos/LukeNK/T24/git/trees/main?recursive=1');
     repo = await repo.json();
+    localStorage.setItem('version', repo.sha);
     repo = repo.tree.filter(v => v.path.search(/data\/.*\.html/) == 0);
     for (let i in repo)
         repo[i] = repo[i].path; // save paths

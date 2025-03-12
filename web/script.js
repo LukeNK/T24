@@ -215,6 +215,7 @@ hash = [
     ...hash.substring(2).split('-')
 ];
 
+// test local storage
 try {
     storage = window['localStorage'];
     const x = "__storage_test__";
@@ -225,19 +226,44 @@ try {
     alert(`Redirect to legacy app\nRedirection vers l'application héritée\nĐiều hướng đến phiên bản cũ`);
     window.location.href = 'legacy.html';
 }
+
+// test if the quizzes are up to date
 let curDate = new Date(),
     oldDate = new Date(parseInt(localStorage.getItem('timestamp')));
-// if version is outdated for 12 hour
-if (
-    isNaN(oldDate)
-    || oldDate.valueOf() + 12 * 60 * 60 * 1000 < curDate.valueOf()
-) {
+if (isNaN(oldDate))
     window.location.href = 'load.html' + window.location.hash;
-} else {
+else
     document.querySelector('time').innerHTML =
         oldDate.toLocaleString()
         + ` (il y a ${((curDate - oldDate) / 1000 / 60 / 60).toPrecision(2)}h)`;
-}
+
+// test quiz version using git
+(async () => {
+    // prevent multiple fetch to Github if the app is hosted on Github
+    if (
+        window.location.href.includes('lukenk.github.io')
+        && curDate - oldDate < 1000 * 60 * 60
+    ) return;
+
+    // if the app is local, only fetch if it has been more than a minute
+    // this is to prevent the app from constantly refreshing and turn on
+    if (
+        !window.location.href.includes('lukenk.github.io')
+        && (curDate - oldDate < 1000 * 60)
+    ) {
+        localStorage.setItem('timestamp', 0);
+        return;
+    }
+
+    // fetch from Github, load quizzes if the version is different
+    let response = await fetch(
+        'https://api.github.com/repos/LukeNK/T24/commits/main',
+        { accept: 'application/vnd.github.VERSION.sha' }
+    );
+    response = await response.json();
+    if (localStorage.getItem('version') != response.sha)
+        window.location.href = 'load.html' + window.location.hash;
+})();
 
 // iterate through data folder to download files
 for (const subject of Object.keys(SUBJECTS)) {

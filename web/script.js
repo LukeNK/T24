@@ -241,14 +241,14 @@ else
 (async () => {
     // prevent multiple fetch to Github if the app is hosted on Github
     if (
-        window.location.href.includes('lukenk.github.io')
+        window.location.href.includes('github.io')
         && curDate - oldDate < 1000 * 60 * 60
     ) return;
 
     // if the app is local, only fetch if it has been more than a minute
     // this is to prevent the app from constantly refreshing and turn on
     if (
-        !window.location.href.includes('lukenk.github.io')
+        !window.location.href.includes('github.io')
         && (curDate - oldDate < 1000 * 60)
     ) {
         localStorage.setItem('timestamp', 0);

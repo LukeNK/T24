@@ -49,7 +49,7 @@ function loader(s, g, id) {
 let repo = [];
 (async () => {
     // if not on Github, use brute-force loading
-    if (!window.location.href.includes('lukenk.github.io')) return;
+    if (!window.location.href.includes('github.io')) return;
 
     // get Github list of quizzes
     repo = await fetch('https://api.github.com/repos/LukeNK/T24/git/trees/main?recursive=1');

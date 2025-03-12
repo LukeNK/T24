@@ -233,7 +233,7 @@ if (
     || oldDate.valueOf() + 12 * 60 * 60 * 1000 < curDate.valueOf()
 ) {
     localStorage.setItem('version', curDate.valueOf());
-    window.location.href = 'load.html' + window.location.href;
+    window.location.href = 'load.html' + window.location.hash;
 } else {
     document.querySelector('time').innerHTML =
         oldDate.toLocaleString()

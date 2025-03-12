@@ -33,7 +33,7 @@ function loader(s, g, id) {
         for (const grade of Object.keys(SUBJECTS[subject]))
             if (!SUBJECTS[subject][grade]) {
                 document.body.innerHTML +=
-                    'Téléchargé ' + Math.max(0, id - 1) +
+                    'Téléchargé ' + (id + 1) +
                     ' quiz de ' + s + g + '<br>';
                 return false;
             };

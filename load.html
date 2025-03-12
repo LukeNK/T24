@@ -24,32 +24,32 @@
 <script src="web/parser.js"></script>
 
 <script>
-localStorage.clear()
+localStorage.clear();
 
 // check if all quizes has been loaded
 function loader(s, g, id) {
     SUBJECTS[s][g] = true;
+    document.body.innerHTML +=
+        'Téléchargé ' + id
+        + ' quiz de ' + s + g + '<br>';
+
     for (const subject of Object.keys(SUBJECTS))
         for (const grade of Object.keys(SUBJECTS[subject]))
-            if (!SUBJECTS[subject][grade]) {
-                document.body.innerHTML +=
-                    'Téléchargé ' + (id + 1) +
-                    ' quiz de ' + s + g + '<br>';
+            if (!SUBJECTS[subject][grade])
                 return false;
-            };
 
     document.body.innerHTML += `Démarrage de l'application...`;
     localStorage.setItem(
         'version',
         new Date().valueOf()
     )
-    window.location.href = './';
+    window.location.href = './' + window.location.hash;
 }
 
 let repo = [];
 (async () => {
     // if not on Github, use brute-force loading
-    if (!window.location.href.includes('lukenk.github.io')) return;
+    if (window.location.href.includes('lukenk.github.io')) return;
 
     // get Github list of quizzes
     repo = await fetch('https://api.github.com/repos/LukeNK/T24/git/trees/main?recursive=1');

@@ -228,9 +228,12 @@ try {
 let curDate = new Date(),
     oldDate = new Date(parseInt(localStorage.getItem('version')));
 // if version is outdated for 12 hour
-if (oldDate.valueOf() + 12 * 60 * 60 * 1000 < curDate.valueOf()) {
+if (
+    isNaN(oldDate)
+    || oldDate.valueOf() + 12 * 60 * 60 * 1000 < curDate.valueOf()
+) {
     localStorage.setItem('version', curDate.valueOf());
-    window.location.href = 'load.html';
+    window.location.href = 'load.html' + window.location.href;
 } else {
     document.querySelector('time').innerHTML =
         oldDate.toLocaleString()

@@ -24,28 +24,40 @@
 <script src="web/parser.js"></script>
 
 <script>
-    localStorage.clear()
+localStorage.clear()
 
-    // check if all quizes has been loaded
-    function loader(s, g, id) {
-        SUBJECTS[s][g] = true;
-        for (const subject of Object.keys(SUBJECTS))
-            for (const grade of Object.keys(SUBJECTS[subject]))
-                if (!SUBJECTS[subject][grade]) {
-                    document.body.innerHTML +=
-                        'Téléchargé ' + Math.max(0, id - 1) +
-                        ' quiz de ' + s + g + '<br>';
-                    return false
-                };
+// check if all quizes has been loaded
+function loader(s, g, id) {
+    SUBJECTS[s][g] = true;
+    for (const subject of Object.keys(SUBJECTS))
+        for (const grade of Object.keys(SUBJECTS[subject]))
+            if (!SUBJECTS[subject][grade]) {
+                document.body.innerHTML +=
+                    'Téléchargé ' + Math.max(0, id - 1) +
+                    ' quiz de ' + s + g + '<br>';
+                return false;
+            };
 
-        document.body.innerHTML += `Démarrage de l'application...`;
-        localStorage.setItem(
-            'version',
-            new Date().valueOf()
-        )
-        window.location.href = './';
-    }
+    document.body.innerHTML += `Démarrage de l'application...`;
+    localStorage.setItem(
+        'version',
+        new Date().valueOf()
+    )
+    window.location.href = './';
+}
 
+let repo = [];
+(async () => {
+    // if not on Github, use brute-force loading
+    if (window.location.href.includes('lukenk.github.io')) return;
+
+    // get Github list of quizzes
+    repo = await fetch('https://api.github.com/repos/LukeNK/T24/git/trees/main?recursive=1');
+    repo = await repo.json();
+    repo = repo.tree.filter(v => v.path.search(/data\/.*\.html/) == 0);
+    for (let i in repo)
+        repo[i] = repo[i].path; // save paths
+})().finally(() => {
     // iterate through data folder to download files
     for (const subject of Object.keys(SUBJECTS)) {
         SUBJECTS[subject] = {};
@@ -53,8 +65,14 @@
             SUBJECTS[subject][grade] = false;
             (async () => {
                 for (let id = 0; id < 100; id++) {
-                    let response =
-                        await fetch(`data/${subject}${grade}/${id}.html`);
+                    let quizPath = `data/${subject}${grade}/${id}.html`;
+                    // if the repo list is loaded AND no more quiz is found
+                    if ( repo.length != 0 && !repo.includes(quizPath) ) {
+                        loader(subject, grade, id);
+                        break;
+                    };
+
+                    let response = await fetch(quizPath);
                     if (!response.ok) {
                         loader(subject, grade, id);
                         break;
@@ -67,5 +85,6 @@
             })();
         }
     }
+});
 </script>
 </html>

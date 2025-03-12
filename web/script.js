@@ -226,7 +226,7 @@ try {
     window.location.href = 'legacy.html';
 }
 let curDate = new Date(),
-    oldDate = new Date(parseInt(localStorage.getItem('version')));
+    oldDate = new Date(parseInt(localStorage.getItem('timestamp')));
 // if version is outdated for 12 hour
 if (
     isNaN(oldDate)

@@ -7,17 +7,32 @@
 
     <link rel="stylesheet" href="web/style.css">
     <style>
+        progress {
+            width: 100%;
+            height: 2rem;
+            border-radius: 0;
+        }
+        progress::-webkit-progress-bar {
+            background-color: var(--color-fg);
+        }
+        progress::-webkit-progress-value {
+            background-color: var(--color-green);
+        }
+        progress::-moz-progress-bar {
+            background-color: var(--color-green);
+        }
     </style>
 </head>
 <body>
-    <div id="menu">
-        <h1>Téléchargement des quiz</h1>
-        <p><a href="./">
-            Retour à la page d'accueil<br>
-            Return to home page<br>
-            Trở về trang chủ
-        </a></p>
-    </div>
+    <h1>Téléchargement des quiz...</h1>
+    <progress value="0" max="0"></progress>
+    <p><a href="./">
+        Retour à la page d'accueil<br>
+        Return to home page<br>
+        Trở về trang chủ
+    </a></p>
+    <blockquote></blockquote>
+
 </body>
 
 <!-- Load parser to get the subject list -->
@@ -29,16 +44,26 @@ localStorage.clear();
 // check if all quizes has been loaded
 function loader(s, g, id) {
     SUBJECTS[s][g] = true;
-    document.body.innerHTML +=
-        'Téléchargé ' + id
-        + ' quiz de ' + s + g + '<br>';
+    if (id > 0)
+        document.querySelector('blockquote').innerHTML +=
+            'Téléchargé ' + id + ' quiz de ' + s + g + '<br>';
+
+    let loaded = 0, total = 0;
 
     for (const subject of Object.keys(SUBJECTS))
-        for (const grade of Object.keys(SUBJECTS[subject]))
-            if (!SUBJECTS[subject][grade])
-                return false;
+        for (const grade of Object.keys(SUBJECTS[subject])) {
+            total++
+            if (SUBJECTS[subject][grade]) loaded++
+        }
 
-    document.body.innerHTML += `Démarrage de l'application...`;
+    if (loaded < total) {
+        document.querySelector('progress').value = loaded;
+        document.querySelector('progress').max = total;
+        return;
+    }
+
+    document.querySelector('progress').value = total;
+    document.querySelector('h1').innerHTML = `Démarrage de l'application...`;
     localStorage.setItem(
         'timestamp',
         new Date().valueOf()
@@ -72,6 +97,9 @@ let repo = [];
                         loader(subject, grade, id);
                         break;
                     };
+
+                    document.querySelector('h1').innerHTML =
+                        `Téléchargement de ${subject}${grade}-${id}...`;
 
                     let response = await fetch(quizPath);
                     if (!response.ok) {

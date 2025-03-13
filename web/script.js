@@ -264,7 +264,7 @@ else {
     // fetch from Github, load quizzes if the version is different
     let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
     response = await response.json();
-    if (!localStorage.getItem('version') == response.sha)
+    if (localStorage.getItem('version') != response.sha)
         window.location.href = 'load.html' + window.location.hash;
 })();
 

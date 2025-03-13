@@ -234,8 +234,8 @@ if (isNaN(oldDate))
     window.location.href = 'load.html' + window.location.hash;
 else {
     document.getElementById('quizTime').innerHTML =
-        ((curDate - oldDate) / 1000 / 60 / 60).toFixed(0) + 'h '
-        + ((curDate - oldDate) / 1000 / 60 % 60).toFixed(0) + 'm';
+        Math.floor((curDate - oldDate) / 1000 / 60 / 60) + 'h '
+        + Math.floor((curDate - oldDate) / 1000 / 60 % 60) + 'm';
     document.querySelector('time').innerHTML = oldDate.toLocaleString();
 }
 

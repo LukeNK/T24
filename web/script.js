@@ -241,7 +241,9 @@ else {
 
 // test quiz version using git
 (async () => {
-    document.getElementById('quizVer').innerHTML = window.location.host;
+    document.getElementById('quizVer').innerHTML =
+        window.location.host + ' '
+        + (localStorage.getItem('version') || '').substring(0, 7);
 
     // prevent multiple fetch to Github if the app is hosted on Github
     if (
@@ -262,10 +264,7 @@ else {
     // fetch from Github, load quizzes if the version is different
     let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
     response = await response.json();
-    if (localStorage.getItem('version') == response.sha)
-        document.getElementById('quizVer').innerHTML =
-            `${localStorage.getItem('version').substring(0, 7)}`;
-    else
+    if (!localStorage.getItem('version') == response.sha)
         window.location.href = 'load.html' + window.location.hash;
 })();
 

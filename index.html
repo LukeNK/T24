@@ -11,8 +11,8 @@
 <body>
     <div id="menu">
         <p>
-            Dernière mise à jour : <time></time><br>
-            <a href="load.html">Recharger</a> | <a href="legacy.html">Version héritée</a>
+            Quiz mis à jour : il y a <span id="quizTime"></span><br>
+            <a href="load.html">Recharger</a>
         </p>
         <div></div>
         <details id="setting">
@@ -29,6 +29,13 @@
                 <span id="quizLimitE"></span>
             </label>
             <blockquote>Le quiz se terminera si vous répondez à ce nombre de questions ET corrigez toutes vos réponses incorrectes.</blockquote>
+
+            <h1>Version quiz</h1>
+            <p>
+                Dernière mise à jour : <time></time><br>
+                Version : <span id="quizVer"></span>
+            </p>
+
             <h1>Raccourcis dans le jeu</h1>
             <ul>
                 <li>1, 2, 3, 4... : sélectionnez l'option 1, 2, 3, 4,...</li>
@@ -48,7 +55,7 @@
         <ol id="answers"></ol>
         <div id="controls">
             <button onclick="startGame()">✕</button>
-            <p><span id="done">0</span>/<span id="total"></span></p>
+            <p><span id="done">0</span> / <span id="total"></span></p>
             <div id="progress"></div>
             <!-- Empty check to skip -->
             <button onclick="check()">▶</button>

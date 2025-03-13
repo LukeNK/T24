@@ -98,6 +98,7 @@ details button {
     text-align: center;
     width: max-content;
 }
+#setting * { margin: 0; }
 
 label {
     width: 100%;

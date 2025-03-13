@@ -232,13 +232,17 @@ let curDate = new Date(),
     oldDate = new Date(parseInt(localStorage.getItem('timestamp')));
 if (isNaN(oldDate))
     window.location.href = 'load.html' + window.location.hash;
-else
-    document.querySelector('time').innerHTML =
-        oldDate.toLocaleString()
-        + ` (il y a ${((curDate - oldDate) / 1000 / 60 / 60).toPrecision(2)}h)`;
+else {
+    document.getElementById('quizTime').innerHTML =
+        ((curDate - oldDate) / 1000 / 60 / 60).toFixed(0) + 'h '
+        + ((curDate - oldDate) / 1000 / 60 % 60).toFixed(0) + 'm';
+    document.querySelector('time').innerHTML = oldDate.toLocaleString();
+}
 
 // test quiz version using git
 (async () => {
+    document.getElementById('quizVer').innerHTML = window.location.host;
+
     // prevent multiple fetch to Github if the app is hosted on Github
     if (
         window.location.href.includes('github.io')
@@ -249,7 +253,7 @@ else
     // this is to prevent the app from constantly refreshing and turn on
     if (
         !window.location.href.includes('github.io')
-        && (curDate - oldDate < 1000 * 60)
+        && curDate - oldDate < 1000 * 60
     ) {
         localStorage.setItem('timestamp', 0);
         return;
@@ -258,7 +262,10 @@ else
     // fetch from Github, load quizzes if the version is different
     let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
     response = await response.json();
-    if (localStorage.getItem('version') != response.sha)
+    if (localStorage.getItem('version') == response.sha)
+        document.getElementById('quizVer').innerHTML =
+            `${localStorage.getItem('version').substring(0, 7)}`;
+    else
         window.location.href = 'load.html' + window.location.hash;
 })();
 

@@ -63,8 +63,6 @@ td, th {
     padding: 0.5rem;
 }
 
-span { margin: 0 0.5rem; }
-
 body {
     margin: 0;
     background-color: var(--color-bg);

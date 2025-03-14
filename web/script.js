@@ -227,7 +227,7 @@ try {
     window.location.href = 'legacy.html';
 }
 
-// test if the quizzes are up to date
+// test if there exists a quiz in the cache already
 let curDate = new Date(),
     oldDate = new Date(parseInt(localStorage.getItem('timestamp')));
 if (isNaN(oldDate))
@@ -262,9 +262,15 @@ else {
     }
 
     // fetch from Github, load quizzes if the version is different
-    let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
-    response = await response.json();
-    if (localStorage.getItem('version') != response.sha)
+    // otherwise, default to load the quiz
+    let response = '';
+    if (window.location.href.includes('github.io')) {
+        let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
+        response = await response.json();
+        response = response.sha
+    }
+
+    if (localStorage.getItem('version') !== response)
         window.location.href = 'load.html' + window.location.hash;
 })();
 

@@ -52,7 +52,7 @@ function loader(s, g, id) {
 
     for (const subject of Object.keys(SUBJECTS))
         for (const grade of Object.keys(SUBJECTS[subject])) {
-            total++
+            total++;
             if (SUBJECTS[subject][grade]) loaded++
         }
 
@@ -64,10 +64,7 @@ function loader(s, g, id) {
 
     document.querySelector('progress').value = total;
     document.querySelector('h1').innerHTML = `Démarrage de l'application...`;
-    localStorage.setItem(
-        'timestamp',
-        new Date().valueOf()
-    )
+    localStorage.setItem('timestamp', new Date().valueOf());
     window.location.href = './' + window.location.hash;
 }
 

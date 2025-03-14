@@ -69,6 +69,32 @@ With the correct quiz ID, you can print the quiz at [print.html](https://lukenk.
 - Option to show/hide wrong options or hints
 - Inspirational quotes provided by [LukeNK](https://lukenk.github.io/)
 
+## Load strategy
+*This is a newly-introduced feature and still under active development.*
+
+The app separates into two files: the main app (`/index.html`) and quiz loader (`/load.html`). The cached quizzes are stored in `localStorage` API. Along with the quizzes (with the key as the quiz's ID), there are two additional keys:
+- `timestamp`: timestamp of the last update of the quizzes
+- `version`: the commit sha of the quizzes, or empty if the app is hosted locally.
+
+To determine whether the app was hosted locally or release, the script will look for `github.com` in `window.location.href`. Therefore, you can simulate a production environment by adding a fake query `?test=github.com`.
+
+The general process to load the quizzess is like this:
+1. If there is no `timestamp` in `localStorage`, redirect to loader
+2. Check up-to-date condition
+3. Load the quiz
+
+__In step 2__, the check condition depends on whether the app is hosted in locally or not. Regardless, it will check if the quiz timestamp are within the range of the allowed range. For release version, it will also check with Github's API for sha to compared with the localStorage's sha; therefore, even if the quiz is not up-to-date, the loader won't be fired.
+
+__In step 4__, there are two different ways to load the quizzes, depends on the version:
+- __Release__: get the list of all quizzes from Github's API before fetching all the listed files
+- __Local__: brute-force each subject by increasing quiz ID until an error response is met. There will be no `version` key when the quizzes are loaded with this.
+
+| | Release | Local |
+|-|-|-|
+| Up-to-date limit | 1h | 1m |
+| Load strategy | GitHub's API | brute-force |
+| Quiz version | git commit's sha | empty string
+
 ## Tools
 - [Table to HTML](https://tableconvert.com/excel-to-html)
 

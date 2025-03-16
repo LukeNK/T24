@@ -265,7 +265,7 @@ else {
     // otherwise, default to load the quiz
     let response = '';
     if (window.location.href.includes('github.io')) {
-        let response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
+        response = await fetch('https://api.github.com/repos/LukeNK/T24/commits/main');
         response = await response.json();
         response = response.sha
     }

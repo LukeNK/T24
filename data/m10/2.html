@@ -1,0 +1,78 @@
+# [En cours] Finale II
+
+Công thức &Delta; trong phương trình bậc 2
+    > &Delta; = b<sup>2</sup> - 4ac
+
+Công thức tính nghiệm
+    > x = (-b ± &Sqrt;&Delta;) / 2a
+
+Dấu của tam thức bậc 2
+    > <ul>
+        <li>&Delta; &gt; 0 ⇒ 2 nghiệm phân biệt</li>
+        <li>&Delta; = 0 ⇒ 1 nghiệm (2 nghiệm kép)</li>
+        <li>&Delta; &lt; 0 ⇒ vô nghiệm</li>
+    </ul>
+    <p>Số lượng nghiệm + dấu của a ⇒ dấu của phương trình</p>
+    <blockquote>Dấu của a để cho biết parabol úp lên / xuống, số lượng nghiệm cho biết phương trình cắt Ox bao nhiêu lần. Ngoài lề: &Delta; &lt; 0 ⇒ &Sqrt;&Delta; = &empty; ⇒ phương trình vô nghiệm</blockquote>
+
+Cách xét dấu phương trình bậc 2
+    > <ol>
+        <li>Sử dụng mode &rarr; 9 &rarr; 2 để tính số nghiệm</li>
+        <li>Dùng a để xét dấu; 2 nghiệm &rArr; cánh ngoài cùng dấu, bên trong ngược dấu</li>
+    </ol>
+
+Các bước quy về phương trình bậc 2
+    > <ol>
+        <li>Để căn về một vế</li>
+        <li><b>Nếu là trắc nghiệm 1 đáp án</b>: x + shift + calc[solve]</li>
+        <li><i>Tùy thích</i>: nếu điều kiện đơn giản, giải điều kiện (&Sqrt;A = B &rArr; A &GreaterEqual; 0 và B &GreaterEqual; 0)</li>
+        <li>Căn hai vế</li>
+        <li>Tìm X</li>
+        <li>Thay vào phương trình gốc (thử điều kiện)</li>
+    </ol>
+
+Hoán vị (permutation)
+    > P<sub>n</sub> = n!
+    <blockquote>Hoán vị cho ra hết tất cả cách sắp xếp. 0! = 1 (không có gì vẫn có một cách sắp xếp). "Hoán vị": các cách hoán đổi cho nhau</blockquote>
+
+Chỉnh hợp (partial permutation)
+    > nAk = n! / (n - k)!
+    <blockquote>Chỉnh hợp bỏ đi các cách sấp xếp mà chúng ta không sử dụng đến (do đã có đủ phần tử), từ đó P<sub>n</sub> = nAn. "Partial": chỉ một phần của hoán vị</blockquote>
+
+Tổ hợp (combination)
+    > nCk = n! / k!(n - k)!
+    <blockquote>Tổ hợp chỉ lấy các cách chọn các phần tử, không quan trọng cách sắp xếp (nên mới chia k! để tính tất cả các cách chọn giống nhau trở thành 1). "Combine": kết hợp</blockquote>
+
+Trường hợp sử dụng các phép toán
+    > <table>
+        <tr>
+            <td></td>
+            <th>Không theo thứ tự</th>
+            <th>Theo thứ tự</th>
+        </tr>
+        <tr>
+            <th>Chọn tất cả</th>
+            <td>Đếm số phần tử</td>
+            <td>Hoán vị</td>
+        </tr>
+        <tr>
+            <th>Chọn một phần</th>
+            <td>Tổ hợp</td>
+            <td>Chỉnh hợp</td>
+        </tr>
+    </table>
+
+Nhị thức Newton
+    > (a + b)<sup>n</sup> = <sub><i>k tổng 0&rarr;n</i></sub> nCk * a<sup>n - k</sup> * b<sup>k</sup>
+    <blockquote>số mũ của a giảm dần, số mũ của b tăng theo k</blockquote>
+
+Công thức tích vô hướng
+    > a⇀.b⇀ = a<sub>x</sub>b<sub>x</sub> + a<sub>y</sub>b<sub>y</sub>
+
+Phép toán vector
+    > <ul>
+        <li>a⇀ &perp; b⇀ &hArr; a⇀.b⇀ = 0</li>
+        <li>a⇀ cùng phương b⇀ &hArr; a<sub>x</sub>b<sub>y</sub> - a<sub>y</sub>b<sub>x</sub> = 0 (nền tảng tìm vector pháp tuyến từ vector chỉ phương)</sub></li>
+        <li>|a⇀| = &Sqrt;(a<sub>x</sub>² + a<sub>y</sub>²) &hArr; |a⇀|² = a⇀.a⇀ (tích vô hướng của chính a với a)</li>
+        <li>cos(a⇀, b⇀) = (a⇀.b⇀) / (|a⇀|.|b⇀|)</li>
+    </ul>

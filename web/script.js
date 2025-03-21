@@ -123,6 +123,8 @@ function ask() {
     }
 
     e_quest.scrollIntoView();
+    MathJax.typesetClear([e_quest, e_ans]);
+    MathJax.typesetPromise([e_quest, e_ans]);
 
     // set progress bar and hide hints
     if (AGAIN.includes(id))

@@ -1,46 +1,15 @@
 # [En cours] Finale II
 
-Công thức &Delta; trong phương trình bậc 2
-    > &Delta; = b<sup>2</sup> - 4ac
-
-Công thức tính nghiệm
-    > x = (-b ± &Sqrt;&Delta;) / 2a
-
-Dấu của tam thức bậc 2
-    > <ul>
-        <li>&Delta; &gt; 0 ⇒ 2 nghiệm phân biệt</li>
-        <li>&Delta; = 0 ⇒ 1 nghiệm (2 nghiệm kép)</li>
-        <li>&Delta; &lt; 0 ⇒ vô nghiệm</li>
-    </ul>
-    <p>Số lượng nghiệm + dấu của a ⇒ dấu của phương trình</p>
-    <blockquote>Dấu của a để cho biết parabol úp lên / xuống, số lượng nghiệm cho biết phương trình cắt Ox bao nhiêu lần. Ngoài lề: &Delta; &lt; 0 ⇒ &Sqrt;&Delta; = &empty; ⇒ phương trình vô nghiệm</blockquote>
-
-Cách xét dấu phương trình bậc 2
-    > <ol>
-        <li>Sử dụng mode &rarr; 9 &rarr; 2 để tính số nghiệm</li>
-        <li>Dùng a để xét dấu; 2 nghiệm &rArr; cánh ngoài cùng dấu, bên trong ngược dấu</li>
-    </ol>
-
-Các bước quy về phương trình bậc 2
-    > <ol>
-        <li>Để căn về một vế</li>
-        <li><b>Nếu là trắc nghiệm 1 đáp án</b>: x + shift + calc[solve]</li>
-        <li><i>Tùy thích</i>: nếu điều kiện đơn giản, giải điều kiện (&Sqrt;A = B &rArr; A &GreaterEqual; 0 và B &GreaterEqual; 0)</li>
-        <li>Căn hai vế</li>
-        <li>Tìm X</li>
-        <li>Thay vào phương trình gốc (thử điều kiện)</li>
-    </ol>
-
 Hoán vị (permutation)
-    > P<sub>n</sub> = n!
+    > $$ P_n = n! $$
     <blockquote>Hoán vị cho ra hết tất cả cách sắp xếp. 0! = 1 (không có gì vẫn có một cách sắp xếp). "Hoán vị": các cách hoán đổi cho nhau</blockquote>
 
 Chỉnh hợp (partial permutation)
-    > nAk = n! / (n - k)!
+    > $$ A^k_n = [nPk] = \frac{n!}{(n - k)!} $$
     <blockquote>Chỉnh hợp bỏ đi các cách sấp xếp mà chúng ta không sử dụng đến (do đã có đủ phần tử), từ đó P<sub>n</sub> = nAn. "Partial": chỉ một phần của hoán vị</blockquote>
 
 Tổ hợp (combination)
-    > nCk = n! / k!(n - k)!
+    > $$ C^k_n = [nCk] = \frac{n!}{k!(n - k)!} $$
     <blockquote>Tổ hợp chỉ lấy các cách chọn các phần tử, không quan trọng cách sắp xếp (nên mới chia k! để tính tất cả các cách chọn giống nhau trở thành 1). "Combine": kết hợp</blockquote>
 
 Trường hợp sử dụng các phép toán
@@ -63,16 +32,61 @@ Trường hợp sử dụng các phép toán
     </table>
 
 Nhị thức Newton
-    > (a + b)<sup>n</sup> = <sub><i>k tổng 0&rarr;n</i></sub> nCk * a<sup>n - k</sup> * b<sup>k</sup>
+    > $$ (a + b)^n = \sum^n_{k=0} C^k_n \times a^{n - k} \times b^k $$
     <blockquote>số mũ của a giảm dần, số mũ của b tăng theo k</blockquote>
 
 Công thức tích vô hướng
-    > a⇀.b⇀ = a<sub>x</sub>b<sub>x</sub> + a<sub>y</sub>b<sub>y</sub>
+    > $$ \vec{a}\cdot\vec{b} = a_x \cdot b_x + a_y \cdot b_y  $$
 
 Phép toán vector
     > <ul>
-        <li>a⇀ &perp; b⇀ &hArr; a⇀.b⇀ = 0</li>
-        <li>a⇀ cùng phương b⇀ &hArr; a<sub>x</sub>b<sub>y</sub> - a<sub>y</sub>b<sub>x</sub> = 0 (nền tảng tìm vector pháp tuyến từ vector chỉ phương)</sub></li>
-        <li>|a⇀| = &Sqrt;(a<sub>x</sub>² + a<sub>y</sub>²) &hArr; |a⇀|² = a⇀.a⇀ (tích vô hướng của chính a với a)</li>
-        <li>cos(a⇀, b⇀) = (a⇀.b⇀) / (|a⇀|.|b⇀|)</li>
+        <li>\( \vec{a} \perp \vec{b} &hArr; \vec{a}\cdot\vec{b} = 0 &hArr; a_x \cdot b_x + a_y \cdot b_y = 0 \)</li>
+        <li>\( \vec{a}&parsl;\vec{b} &hArr; a_x \cdot b_y - a_y \cdot b_a = 0 \) (nền tảng tìm vector pháp tuyến từ vector chỉ phương)</sub></li>
+        <li>\( |\vec{a}| = \sqrt{x^2 + y^2} &hArr; |\vec{a}|^2 = \vec{a}\cdot\vec{a} \) (tích vô hướng của chính a với a)</li>
+    </ul>
+
+Góc giữa hai vector
+    > $$ \cos{(\vec{a}, \vec{b})} \\= \frac{ |\vec{a}\cdot\vec{b}| }{ |\vec{a}||\vec{b}| } = \frac{ a_xb_x + a_yb_y }{ \sqrt{a_x^2 + a_y^2} \sqrt{b_x^2 + b_y^2} } $$
+
+Phương trình tổng quát (general form)
+    > $$ ax + by + c = 0 $$ &rArr; vector pháp tuyến \( \vec{n} = (a; b) \)
+
+Phương trình chính tắc
+    > $$ \frac{ x-x_0 }{ x_1-x_0 } = \frac{ y-y_0 }{ y_1-y_0} $$ &rArr;
+    <ul>
+        <li>Tử: đi qua điểm \( A(x_0; y_0) \)</li>
+        <li>Mẫu: vector pháp tuyến \( \vec{u} = (x_1-x_0; y_1-y_0) = (a; b) \)</li>
+    </ul>
+
+Phương trình tham số
+    > $$ \begin{cases} x =& x_0 &+ at \\ y =& y_0 &+ bt \end{cases} $$ &rArr;
+    <ul>
+        <li>Đi qua điểm \( A(x_0; y_0) \)</li>
+        <li>Vector chỉ phương: \( \vec{u} = (a; b) \)</li>
+    </ul>
+
+Vị trí tương đối giữa hai đường thẳng
+    > Về cơ bản, ta xét hệ số gốc của vector chỉ phương / pháp tuyển / của chính đường thẳng. Để hai vector song song hoặc trùng nhau: $$ \frac{y_A}{x_A} = \frac{y_B}{x_B} &hArr; a_x \cdot b_y - a_y \cdot b_a = 0 $$
+    <p>Các trường hợp:</p>
+    <ul>
+        <li>\( = 0 \): Trùng nhau hoặc song song (chọn một điểm trên một đường thẳng để thử)</li>
+        <li>\( \neq 0 \): Cắt nhau tại một điểm nào đó (giải hệ phương trình)</li>
+    </ul>
+    <p>mode+9+1:</p> $$\begin{align} \begin{cases} a_1x &+ b_1y &= -c_1 \\ a_2x &+ b_2y &= -c_2 \end{cases} \end{align}$$
+
+Góc giữa hai đường thẳng
+    > Khi chọn vector để xét, chọn cả hai đều là vector chỉ phương hoặc cả hai đều là vector pháp tuyến $$\begin{align} \cos{(d_1, d_2)} &= \frac{ |\vec{a}\cdot\vec{b}| }{ |\vec{a}||\vec{b}| } \end{align}$$
+    <blockquote>Và ta nhận ra rằng: đây cơ bản là công thức của góc giữa hai vector!</blockquote>
+
+Khoẳng cách từ điểm đến đường thẳng
+    > $$ d(\Delta; A) = \frac{ |ax_A + by_A + c| }{ \sqrt{a^2 + b^2} } $$
+    <blockquote><ul>
+        <li>Tử: nếu có một đường &Delta;' song song với &Delta; thì \(c\) của nó sẽ khác bao nhiêu?</li>
+        <li>Mẫu: chia với độ dài vector pháp tuyến để điều chỉnh tỉ lệ của c theo (một cách nào đó) độ dốc của &Delta;</li>
+    </ul></blockquote>
+
+Phương trình đường tròn
+    > Để vẽ một đường tròn, ta cần tâm I và bán kính R. Các công thức này đều chỉ là biến hóa của việc đó.
+    <ul>
+        <li>Dạng 1</li>
     </ul>

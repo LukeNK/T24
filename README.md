@@ -98,6 +98,14 @@ __In step 4__, there are two different ways to load the quizzes, depends on the 
 ## Tools
 - [Table to HTML](https://tableconvert.com/excel-to-html)
 
+### Regex to clean a file
+After using Google image to scan your file, use these Regex before start solving it. Pay close attention to the space at the end of each regex (wrapped inside a pair of `/`).
+
+| Find | Replace with | Explaination |
+| - | - | - |
+| `/Câu [0-9]*[\.:] /` | `/\n$1\n    ? /` | Add question number and space between questions |
+| `/\n[A-D]\. /`| `/\n    /` | Replace answer ABCD and add indent |
+
 # Removed introduction
 I was trying to find an alternative against all of the popular quizzing apps, when I decided to program this app because why not.
 | App | Main drawback |

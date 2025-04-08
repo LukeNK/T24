@@ -7,6 +7,11 @@ window.MathJax = {
     },
     tex: {
         packages: { '[+]': ['ams'] }
+    },
+    startup: {
+        pageReady: () => {
+            loadQuiz();
+        }
     }
 };
 

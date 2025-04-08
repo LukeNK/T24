@@ -122,12 +122,13 @@ let loadQuiz = async () => {
         list.innerHTML += answerSpace + '</span>';
     });
 
+    MathJax.typeset();
+
     document.title = '[' + quizID.join('-').toUpperCase() + '] ' + data.meta.name;
     document.querySelectorAll('details').forEach(e => e.setAttribute('open', 'true'))
     document.getElementById('time').innerHTML += ' / ' + checksum.toString(16).toUpperCase()
     document.getElementById('questCount').innerHTML += `<br>Code de réponse: ${seed}`;
 };
-loadQuiz();
 
 new QRCode(
     document.getElementById("qrcode"),

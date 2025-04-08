@@ -1,4 +1,4 @@
-const list = document.querySelector('dl');
+const list = document.querySelector('main');
 let quizID = window.location.hash.substring(1) || prompt('Please input test ID');
     seed = '',
     random = '', // placeholder for global function
@@ -56,10 +56,10 @@ let loadQuiz = async () => {
     data.questions.forEach((quest, questNum) => {
         // display question, no number for flashcards
         if (quest.type == 2)
-            list.innerHTML += `<dt>${quest.text}</dt>`;
+            list.innerHTML += `${quest.text}`;
         else {
             questNum = quest.num || questNum; // question number
-            list.innerHTML += `<dt>${questNum}⟩ ${quest.text}</dt>`;
+            list.innerHTML += `<b>${questNum}⟩ ${quest.text}</b>`;
         }
 
         // get the longest answer, minimum is 4
@@ -69,6 +69,7 @@ let loadQuiz = async () => {
                 ansLen = e.length;
         });
 
+        let ansElm = document.createElement('div');
         if (quest.type != 3) {
             // skip showing answer for short answer questions
             let letters = 'ABCD', order = 0;
@@ -77,28 +78,29 @@ let loadQuiz = async () => {
                     let insert = (quest.type == 1)?
                         order + 1 : letters[order]
 
-                    let dd = document.createElement('dd');
-                    dd.innerHTML = `${insert}. ${ans}`;
-                    if (ansLen > 30) dd.classList.add('long');
-                    else if (ansLen > 15) dd.classList.add('mid');
+                    let span = document.createElement('span');
+                    span.innerHTML = `${insert}. ${ans}`;
+                    if (ansLen > 30) span.classList.add('long');
+                    else if (ansLen > 15) span.classList.add('mid');
 
-                    list.appendChild(dd);
+                    ansElm.appendChild(span);
 
                     if (quest.ans[ans])
                         for (const char of ans) checksum ^= char.charCodeAt(0);
                     else
-                        list.lastElementChild.classList.add('wAns');
+                        ansElm.lastElementChild.classList.add('wAns');
 
                     order++
                 }
             })
+            list.appendChild(ansElm);
         } else {
             let answers = '';
             Object.keys(quest.ans).forEach(ans => answers += ans + ' ' );
-            list.innerHTML += `<dd class="sAns"> = ${answers}</dd>`;
+            list.innerHTML += `<span class="sAns"> = ${answers}</dd>`;
         }
 
-        let answerSpace = '<dd class="wAns" style="text-align: right; flex-basis: 100%;">';
+        let answerSpace = '<span class="wAns" style="text-align: right; flex-basis: 100%;">';
         switch (quest.type) {
             case 0:
                 answerSpace += '◯ ◯ ◯ ◯';
@@ -117,7 +119,7 @@ let loadQuiz = async () => {
             for (; quest.writeLine > 0; quest.writeLine--)
                 answerSpace += '<hr class="wAns">';
 
-        list.innerHTML += answerSpace + '</dd>';
+        list.innerHTML += answerSpace + '</span>';
     });
 
     document.title = '[' + quizID.join('-').toUpperCase() + '] ' + data.meta.name;

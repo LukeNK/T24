@@ -14,71 +14,78 @@
             font-optical-sizing: auto;
             font-weight: normal;
             font-style: normal;
-
         }
         body > table {
             width: 100%;
         }
         body > table th {
-            font-size: xx-large;
+            font-size: x-large;
             font-weight: bolder;
         }
         body > table td {
             border: none;
         }
+        #qrcode > img {
+            max-height: 8em;
+        }
         #subID { text-transform: uppercase; }
 
-        dl {
-            display: flex;
-            flex-wrap: wrap;
-            column-gap: 1rem;
+        main {
+            font-size: 9pt;
         }
-        dt {
-            margin-top: 0.5rem;
+        main > b {
+            margin-top: 0.5em;
+            margin-bottom: 0;
             flex: 0 0 100%;
             font-weight: bolder;
         }
-        dd {
-            flex: 1 1 0;
-            margin-inline-start: 0;
+        main > div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-left: 1em;
         }
-        dd.long { flex-basis: 100%; }
-        dd.mid {flex-basis: 40%}
+        main .long { flex-basis: 100%; }
+        main .mid { flex-basis: 40%; }
 
         img {
             display: block;
             height: auto;
             width: auto;
             max-width: 100%;
-            max-height: 10rem;
+            max-height: 10em;
             margin: auto;
         }
 
         details {
-            padding: 0.5rem;
+            padding: 0.5em;
             margin: 0;
             font-weight: normal;
             border-image:
                 linear-gradient(to bottom,
-                    #000000ff 1rem,
-                    #000000ff 2rem,
+                    #000000ff 1em,
+                    #000000ff 2em,
                     #00000000 10%
                 ) 1;
-            border-width: 0 0 0 0.25rem;
+            border-width: 0 0 0 0.25em;
             border-style: solid;
         }
         summary {
             font-weight: bolder;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.5em;
         }
         summary::marker { content: ""; }
 
         table {
             border-collapse: collapse;
+            font-size: 1em;
         }
         th, td {
             border: 1px solid black;
-            padding: 0.25rem;
+            padding: 0.25em;
+        }
+        td {
+            vertical-align: top;
         }
 
         ul, ol {
@@ -92,18 +99,34 @@
         }
         blockquote::before {
             content: "→";
-            margin: 0 0.5rem;
+            margin: 0 0.5em;
         }
 
         hr {
-            margin-top: 1.5rem;
+            margin-top: 1.5em;
         }
 
-        footer { text-align: center; }
+        footer {
+            margin-top: 1em;
+            text-align: center;
+        }
         footer > hr { margin: 0 40%; }
 
         @media print {
-            button { display: none; }
+            @page {
+                size: landscape;
+            }
+
+            button, input { display: none; }
+
+            body > table {
+                column-count: 1;
+            }
+
+            main {
+                column-count: 2;
+                column-gap: 18pt;
+            }
         }
 
         body td.wAns { display: block; visibility: hidden; }
@@ -115,13 +138,13 @@
         body.wAns .sAns { display: none; }
         body.wAns .wAns,
         body .sAns { display: block; }
-        dd.wAns > table {
+        span.wAns > table {
             margin-right: 0;
             margin-left: auto;
         }
-        dd.wAns > table td {
-            width: 1rem;
-            height: 1.5rem;
+        span.wAns > table td {
+            width: 1em;
+            height: 1.5em;
         }
 
         body td.hints {
@@ -150,27 +173,26 @@
 <body class="wAns">
     <button onclick="window.location.href = '/T24'">Page d'accueil</button>
     <button onclick="loadQuiz()">Recharger le quiz</button>
+    <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('wAns');" checked>
+    <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('hints');">
     <table>
         <tr>
+            <th id="subID"></th>
             <th id="quiz" colspan="2"></th>
             <td id="qrcode" rowspan="3"></td>
-            <th id="subID"></th>
         </tr>
         <tr>
+            <th id="quizID" rowspan="2"></th>
             <td id="time"></td>
             <td class="wAns">Toutes les options</td>
-            <th id="quizID"></th>
         </tr>
         <tr>
             <td id="questCount"></td>
             <td class="hints">Indices</td>
-            <td style="text-align: right;">
-                <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('wAns');" checked>
-                <input type="checkbox" onclick="document.body.classList[this.checked? 'add' : 'remove']('hints');">
-            </td>
         </tr>
     </table>
     <dl></dl>
+    <main></main>
     <footer></footer>
 </body>
 <script src="web/parser.js"></script>

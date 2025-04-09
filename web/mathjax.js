@@ -10,7 +10,8 @@ window.MathJax = {
     },
     startup: {
         pageReady: () => {
-            loadQuiz();
+            // note that this will prevent default behaviour
+            if (typeof(loadQuiz) == 'function') loadQuiz();
         }
     }
 };

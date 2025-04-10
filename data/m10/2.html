@@ -35,63 +35,71 @@ Nhị thức Newton
     > $$ (a + b)^n = \sum^n_{k=0} C^k_n \times a^{n - k} \times b^k $$
     <blockquote>số mũ của a giảm dần, số mũ của b tăng theo k</blockquote>
 
-Công thức tích vô hướng
-    > $$ \vec{a}\cdot\vec{b} = a_x \cdot b_x + a_y \cdot b_y  $$
+Tọa độ vector - hai điểm
+    >
+    <ul>
+        <li>Vector giữa hai điểm $$ \vec{AB} = (&Delta;x; &Delta;y) = (x_A - x_B; y_A - y_B) $$</li>
+        <li>Khoảng cách giữa hai điểm $$ AB = |\vec{AB}| = \sqrt{&Delta;_x^2 + &Delta;_y^2} $$</li>
+        <li>Trung điểm của hai điểm $$ M = \left( \frac{x_A + x_B}{2}; \frac{y_A + y_B}{2} \right) $$</li>
+        <li>Trọng tâm của &Delta;ABC $$ G = \left( \frac{x_A + x_B + x_C}{3}; \frac{y_A + y_B + y_C}{3} \right) $$</li>
+    </ul>
+    <blockquote>Trung điểm và trọng tâm về cơ bản là trung bình cộng</blockquote>
 
-Phép toán vector
+Tọa độ vector - hai vector
+    >
+    <ul>
+        <li><b>Độ dài của vector</b> $$ |\vec{a}| = \sqrt{a_x^2 + a_y^2} $$</li>
+        <li><b>Tích vô hướng</b> $$ \vec{a}\cdot\vec{b} = a_xb_x + a_yb_y $$</li>
+        <li><b>Góc giữa hai vector</b> $$ \cos{(\vec{a}, \vec{b})} = \frac{ \vec{a}\cdot\vec{b} }{ |\vec{a}|\cdot|\vec{b}| } $$</li>
+    </ul>
+
+Vector cùng phương
     > <ul>
-        <li>\( \vec{a} \perp \vec{b} &hArr; \vec{a}\cdot\vec{b} = 0 &hArr; a_x \cdot b_x + a_y \cdot b_y = 0 \)</li>
-        <li>\( \vec{a}&parsl;\vec{b} &hArr; a_x \cdot b_y - a_y \cdot b_a = 0 \) (nền tảng tìm vector pháp tuyến từ vector chỉ phương)</sub></li>
-        <li>\( |\vec{a}| = \sqrt{x^2 + y^2} &hArr; |\vec{a}|^2 = \vec{a}\cdot\vec{a} \) (tích vô hướng của chính a với a)</li>
+        <li><b>Tích của vector với một số</b> $$ \vec{a} = k\cdot\vec{b} \qquad (k&Element;&reals;)$$ </li>
+        <li><b>Cùng tỉ lệ hệ số góc</b> $$ \frac{a_x}{b_x} = \frac{a_y}{b_y} &hArr; a_xb_y - a_yb_x = 0 $$</li>
     </ul>
 
-Góc giữa hai vector
-    > $$ \cos{(\vec{a}, \vec{b})} \\= \frac{ |\vec{a}\cdot\vec{b}| }{ |\vec{a}||\vec{b}| } = \frac{ a_xb_x + a_yb_y }{ \sqrt{a_x^2 + a_y^2} \sqrt{b_x^2 + b_y^2} } $$
-
-Phương trình tổng quát (general form)
-    > $$ ax + by + c = 0 $$ &rArr; vector pháp tuyến \( \vec{n} = (a; b) \)
-
-Phương trình chính tắc
-    > $$ \frac{ x-x_0 }{ x_1-x_0 } = \frac{ y-y_0 }{ y_1-y_0} $$ &rArr;
-    <ul>
-        <li>Tử: đi qua điểm \( A(x_0; y_0) \)</li>
-        <li>Mẫu: vector pháp tuyến \( \vec{u} = (x_1-x_0; y_1-y_0) = (a; b) \)</li>
-    </ul>
-
-Phương trình tham số
-    > $$ \begin{cases} x =& x_0 &+ at \\ y =& y_0 &+ bt \end{cases} $$ &rArr;
-    <ul>
-        <li>Đi qua điểm \( A(x_0; y_0) \)</li>
-        <li>Vector chỉ phương: \( \vec{u} = (a; b) \)</li>
+Phương trình đường thẳng
+    > <ul>
+        <li><b>Tổng quát</b> $$ Ax + By + C = 0 $$ &rArr; VTPT \( \vec{n} = (A; B) \)</li>
+        <li><b>Chính tắc</b> $$ \frac{x - x_0}{a} = \frac{y - y_0}{b} $$ &rArr; VTCP \( \vec{u} = (a; b) \) <br>&rArr; Cắt điểm \((x_0; y_0)\)</li>
+        <li><b>Tham số</b> $$\begin{cases} x = x_0 + at \\ y = y_0 + bt\end{cases} $$ &rArr; VTCP \( \vec{u} = (a; b) \) <br>&rArr; Cắt điểm \((x_0; y_0)\)</li>
     </ul>
 
 Vị trí tương đối giữa hai đường thẳng
-    > Về cơ bản, ta xét hệ số gốc của vector chỉ phương / pháp tuyển / của chính đường thẳng. Để hai vector song song hoặc trùng nhau: $$ \frac{y_A}{x_A} = \frac{y_B}{x_B} &hArr; a_x \cdot b_y - a_y \cdot b_a = 0 $$
-    <p>Các trường hợp:</p>
+    > Dựa trên tỉ lệ của vector chỉ phương hoặc pháp tuyến $$ \frac{a_x}{b_x} &Square; \frac{a_y}{b_y} $$
     <ul>
-        <li>\( = 0 \): Trùng nhau hoặc song song (chọn một điểm trên một đường thẳng để thử)</li>
-        <li>\( \neq 0 \): Cắt nhau tại một điểm nào đó (giải hệ phương trình)</li>
+        <li>&NotEqual; : hai đường cắt nhau</li>
+        <li>= và điểm thuộc cả hai đường: trùng nhau</li>
+        <li>= và điểm chỉ trên một đường: song song</li>
     </ul>
-    <p>mode+9+1:</p> $$\begin{align} \begin{cases} a_1x &+ b_1y &= -c_1 \\ a_2x &+ b_2y &= -c_2 \end{cases} \end{align}$$
+    <p>mode+9+1: $$\begin{align} \begin{cases} a_1x &+ b_1y &= -c_1 \\ a_2x &+ b_2y &= -c_2 \end{cases} \end{align}$$</p>
 
-Góc giữa hai đường thẳng
-    > Khi chọn vector để xét, chọn cả hai đều là vector chỉ phương hoặc cả hai đều là vector pháp tuyến $$\begin{align} \cos{(d_1, d_2)} &= \frac{ |\vec{a}\cdot\vec{b}| }{ |\vec{a}||\vec{b}| } \end{align}$$
-    <blockquote>Và ta nhận ra rằng: đây cơ bản là công thức của góc giữa hai vector!</blockquote>
+Khoảng cách từ điểm đến đường thẳng
+    > $$ d(&Delta;, A) = \frac{ |ax_0+by_0+c| }{ |\vec{n}| } $$
+    <ul>
+        <li>Điểm \( A(x_0; y_0) \)</li>
+        <li>Vector pháp tuyến của &Delta; \( \vec{n} = (a, b) \)</li>
+    </ul>
 
-Khoẳng cách từ điểm đến đường thẳng
-    > $$ d(\Delta; A) = \frac{ |ax_A + by_A + c| }{ \sqrt{a^2 + b^2} } $$
-    <blockquote><ul>
-        <li>Tử: nếu có một đường &Delta;' song song với &Delta; thì \(c\) của nó sẽ khác bao nhiêu?</li>
-        <li>Mẫu: chia với độ dài vector pháp tuyến để điều chỉnh tỉ lệ của c theo (một cách nào đó) độ dốc của &Delta;</li>
-    </ul></blockquote>
+Phương trình đường tròn dạng 1 (standard form)
+    > $$ (x - x_0)^2 + (y - y_0)^2 = R^2 $$
+    <ul>
+        <li>Tâm \( I(x_0; y_0) \)</li>
+        <li>Bán kính \( R \)</li>
+    </ul>
+    <blockquote>Những điểm cách đều một tâm nên về cơ bản là \( |\vec{IA}| = R \)</blockquote>
 
-Phương trình đường tròn
-    > Để vẽ một đường tròn, ta cần tâm \(I(x_0; y_0)\) và bán kính \(R\). Dạng phương trình cơ bản nhất: $$ (x-x_0)^2 + (y-y_0)^2 = R^2 $$
-    <blockquote>Nguồn gốc của phương trình này là từ cách tính khoảng cách từ điểm I đến một điểm bất kỳ \( \sqrt{(x-x_0)^2 + (y-y_0)^2} \) và đường tròn là các điểm cách bán kính một khoảng cách R</blockquote>
+Dạng toán của PT đường tròn dạng 1
+    > <ol>
+        <li><b>Đường kính AB:</b> I là trung điểm AB, \( R = |\vec{AB}| / 2 \)</li>
+        <li><b>Bán kính IA:</b> I là... I, \( R = |\vec{IA}| \)</li>
+    </ol>
 
-Dạng 2 của phương trình đường tròn
-    > Có đường kính AB ( {A, B} &Element; (O) ) &rArr; $$\begin{cases} I(\frac{x_A + x_B}{2}, \frac{y_A + y_B}{2}) \\ R = |\vec{AB}|&div;2 \end{cases}$$
-    <blockquote>Do AB là đường kính nên trung điểm của nó sẽ là tâm I, phân nữa của AB sẽ là bán kính</blockquote>
-
-Dạng 3 của phương trình đường tròn
-    > Cũng tương tự như dạng 2, nhưng ta chỉ có A nằm trên (O) và I. Do vậy, ta chỉ cần tính R: $$\begin{cases} I(x_0; y_0) \\ R = |\vec{IA}| \end{cases}$$
+Phương trình đường tròn dạng 2 (general form)
+    > $$ x^2 + y^2 - 2ax - 2by + c = 0 $$
+    <ul>
+        <li>Tâm <i>sử dụng tham số trước x và y</i>: \( I(\frac{x_t}{-2}; \frac{y_t}{-2}) \)</li>
+        <li>Bán kính \( R = \sqrt{a^2 + b^2 - c} \) </li>
+    </ul>
+    <blockquote>Khai triển dạng 1</blockquote>

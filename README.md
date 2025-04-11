@@ -103,7 +103,7 @@ After using Google image to scan your file, use these Regex before start solving
 
 | Find | Replace with | Explaination |
 | - | - | - |
-| `/[\t ]+([BCD]\. )/` | `\n$1` | Clean up tabulars in a MSWord document |
+| `/[\t ]+([BCD]\. )/` | `/\n$1/` | Clean up tabulars in a MSWord document |
 | `/Câu ([0-9]*)[\.:] /` | `/\n$1\n    ? /` | Add question number and space between questions |
 | `/\n[A-D]\. /`| `/\n    /` | Replace answer ABCD and add indent |
 

@@ -72,7 +72,7 @@ let loadQuiz = async () => {
         let ansElm = document.createElement('div');
         if (quest.type != 3) {
             // skip showing answer for short answer questions
-            let letters = 'ABCD', order = 0;
+            let letters = 'ABCDEFGHIJKLMNOP', order = 0;
             shuffle(Object.keys(quest.ans)).forEach(ans => {
                 if (ans != CHECKMARK && ans != XMARK) {
                     let insert = (quest.type == 1)?
@@ -100,21 +100,16 @@ let loadQuiz = async () => {
             list.innerHTML += `<span class="sAns"> = ${answers}</dd>`;
         }
 
+        // handle answer space
+        const answerFill = ['◯ ', '◯◯—', '', '<td></td> '];
         let answerSpace = '<span class="wAns" style="text-align: right; flex-basis: 100%;">';
-        switch (quest.type) {
-            case 0:
-                answerSpace += '◯ ◯ ◯ ◯';
-                break;
-            case 1:
-                answerSpace += '◯◯—◯◯—◯◯—◯◯';
-                break;
-            case 3:
-                answerSpace += '<table><tr>';
-                for (; ansLen > 0; ansLen--)
-                    answerSpace += '<td></td>'
-                answerSpace += '</tr></table>';
-                break;
-        }
+        if (quest.type == 3) answerSpace += '<table><tr>';
+        else ansLen = Object.keys(quest.ans).length;
+
+        for (; ansLen > 0; ansLen--) answerSpace += answerFill[quest.type]
+
+        answerSpace = answerSpace.slice(0, -1); // slice trailing character
+        if (quest.type == 3) answerSpace += '</tr></table>';
         if (quest.writeLine)
             for (; quest.writeLine > 0; quest.writeLine--)
                 answerSpace += '<hr class="wAns">';

@@ -25,7 +25,8 @@
 </head>
 <body>
     <h1>Téléchargement des quiz...</h1>
-    <progress value="0" max="0"></progress>
+    <!-- 0.1 to prevent default 1 -->
+    <progress value="0" max="0.1"></progress>
     <p><a href="./">
         Retour à la page d'accueil<br>
         Return to home page<br>
@@ -39,6 +40,8 @@
 <script src="web/parser.js"></script>
 
 <script>
+let repo = [],
+    progressBar = document.querySelector('progress');
 localStorage.clear();
 
 // check if all quizes has been loaded
@@ -46,7 +49,8 @@ function loader(s, g, id) {
     SUBJECTS[s][g] = true;
     if (id > 0)
         document.querySelector('blockquote').innerHTML +=
-            'Téléchargé ' + id + ' quiz de ' + s + g + '<br>';
+            'Téléchargé ' + id + ' quiz de ' + s + g
+            + ` (${progressBar.value}/${progressBar.max})<br>`;
 
     let loaded = 0, total = 0;
 
@@ -56,19 +60,13 @@ function loader(s, g, id) {
             if (SUBJECTS[subject][grade]) loaded++
         }
 
-    if (loaded < total) {
-        document.querySelector('progress').value = loaded;
-        document.querySelector('progress').max = total;
-        return;
-    }
+    if (loaded < total) return;
 
-    document.querySelector('progress').value = total;
     document.querySelector('h1').innerHTML = `Démarrage de l'application...`;
     localStorage.setItem('timestamp', new Date().valueOf());
     window.location.href = './' + window.location.hash;
 }
 
-let repo = [];
 (async () => {
     // if not on Github, use brute-force loading
     if (!window.location.href.includes('github.io')) return;
@@ -97,8 +95,17 @@ let repo = [];
 
                     document.querySelector('h1').innerHTML =
                         `Téléchargement de ${subject}${grade}-${id}...`;
+                    // 0.1 to prevent default 1 of <progress>
+                    console.log(progressBar.max);
+                    progressBar.max =
+                        repo.length
+                        || ( progressBar.max == 0.1? 1 : progressBar.max + 1 );
 
                     let response = await fetch(quizPath);
+                    console.log(progressBar.value, progressBar.max);
+                    progressBar.value = progressBar.value + 1;
+                    console.log(progressBar.value, progressBar.max);
+
                     if (!response.ok) {
                         loader(subject, grade, id);
                         break;

@@ -42,11 +42,11 @@ let loadQuiz = async () => {
         + date.getMinutes().toString().padStart(2, '0')
         + '<br>Checksum: ' + checksum;
     document.getElementById('questCount').innerHTML =
-        data.questions.filter(v => v.type == 0).length + ' + '
-        + data.questions.filter(v => v.type == 1).length + ' + '
-        + data.questions.filter(v => v.type == 2).length + ' + '
-        + data.questions.filter(v => v.type == 3).length + ' + '
-        + data.questions.filter(v => v.type == 4).length;
+        data.questions.filter(v => v.type == 0).length
+        + ' + ' + data.questions.filter(v => v.type == 1).length
+        + ' + ' + data.questions.filter(v => v.type == 2).length
+        + ' + ' + data.questions.filter(v => v.type == 3).length
+        + ' + ' + data.questions.filter(v => v.type == 4).length;
 
     // first time use checksum, if user reloads then ask for seed
     seed = seed? prompt('Please input seed') : checksum;

@@ -102,7 +102,7 @@ let loadQuiz = async () => {
 
         // handle answer space
         const answerFill = ['◯ ', '◯◯—', '', '<td></td> '];
-        let answerSpace = '<span class="wAns" style="text-align: right; flex-basis: 100%;">';
+        let answerSpace = '<span class="wAns" style="text-align: right; flex-basis: 100%;"> ';
         if (quest.type == 3) answerSpace += '<table><tr>';
         else ansLen = Object.keys(quest.ans).length;
 

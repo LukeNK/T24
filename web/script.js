@@ -217,18 +217,6 @@ hash = [
     ...hash.substring(2).split('-')
 ];
 
-// test local storage
-try {
-    storage = window['localStorage'];
-    const x = "__storage_test__";
-    storage.setItem(x, x);
-    storage.removeItem(x);
-} catch (e) {
-    console.log(e)
-    alert(`Redirect to legacy app\nRedirection vers l'application héritée\nĐiều hướng đến phiên bản cũ`);
-    window.location.href = 'legacy.html';
-}
-
 // test if there exists a quiz in the cache already
 let curDate = new Date(),
     oldDate = new Date(parseInt(localStorage.getItem('timestamp')));

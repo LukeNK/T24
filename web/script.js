@@ -56,10 +56,10 @@ function startGame(s, g, i) {
  */
 function ask() {
     if (DONE.length >= QUIZLIM && AGAIN.length <= 0) {
-        let temp = (Date.now() - QUIZTIME) / 1000;
-        menu.innerHTML =
-            `<p>🎉Vous avez répondu à ${DONE.length} questions en ${floor(temp / 60)}m ${floor(temp % 60)}s</p>`
-            + menu.innerHTML;
+        let temp = (Date.now() - QUIZTIME) / 1000,
+            p = document.createElement('p');
+        p.innerText = `🎉Vous avez répondu à ${DONE.length} questions en ${floor(temp / 60)}m ${floor(temp % 60)}s`
+        menu.prepend(p);
         startGame();
         return false;
     };

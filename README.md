@@ -85,7 +85,7 @@ The general process to load the quizzess is like this:
 
 __In step 2__, the check condition depends on whether the app is hosted in locally or not. Regardless, it will check if the quiz timestamp are within the range of the allowed range. For release version, it will also check with Github's API for sha to compared with the localStorage's sha; therefore, even if the quiz is not up-to-date, the loader won't be fired.
 
-__In step 4__, there are two different ways to load the quizzes, depends on the version:
+__In step 3__, there are two different ways to load the quizzes, depends on the version:
 - __Release__: get the list of all quizzes from Github's API before fetching all the listed files
 - __Local__: brute-force each subject by increasing quiz ID until an error response is met. There will be no `version` key when the quizzes are loaded with this.
 
@@ -93,7 +93,7 @@ __In step 4__, there are two different ways to load the quizzes, depends on the 
 |-|-|-|
 | Up-to-date limit | 1h | 1m |
 | Load strategy | GitHub's API | brute-force |
-| Quiz version | git commit's sha | empty string
+| Quiz version | git commit's sha |  |
 
 ## Tools
 - [Table to HTML](https://tableconvert.com/excel-to-html)

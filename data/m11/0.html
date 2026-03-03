@@ -1,62 +1,42 @@
 # MATH 1120 - Midterm II
 
-Product and quotient rule
-    > $$ (fg)' = f'g + fg' $$ $$ \left( \frac{f}{g} \right)' = \frac{f'g - fg'}{g^2} $$
-    <ul>
-        <li>The first term has the derivative of the top.</li>
-        <li>This is similar to the product rule</li>
-        <li>The denominator is the square of the original denominator.</li>
-    </ul>
+Produc rule
+    > $$ (fg)' = f'g + fg' $$
+
+Quotient rule
+    > $$ \left( \frac{f}{g} \right)' = \frac{f'g - fg'}{g^2} $$
+    <blockquote>The first term has the derivative of the top, the denominator is the square of the original denominator.</blockquote>
 
 Chain rule
     > $$ (f(g(x)))' = f'(g(x))g'(x) $$
     <blockquote>Don't forget the final g'(x)</blockquote>
+
+Trig identities
+    > $$ \sin^2 x + \cos^2 x = 1 $$
+    <!----> $$ \sin 2\theta = 2\sin x \cos x $$
+    <!----> $$ \cos 2\theta = \cos^2 x - \sin^2 x $$
 
 Limit of sine
     > $$ \lim_{x \to 0} \frac{\sin x}{x} = 1 $$
     <p>The reciprocal also equals 1</p>
 
 Derivative of trig functions
-    > <table>
-        <tr>
-            <td>$$ \sin x \rightarrow \cos x $$</td>
-            <td>$$ \cos x \rightarrow -\sin x $$</td>
-        </tr>
-        <tr>
-            <td>$$ \tan x \rightarrow \sec^2 x $$</td>
-            <td>$$ \cot x \rightarrow -\csc^2 x $$</td>
-        </tr>
-        <tr>
-            <td>$$ \sec x \rightarrow \sec x \tan x $$</td>
-            <td>$$ \csc x \rightarrow -\csc x \cot x$$</td>
-        </tr>
-    </table>
+    > $$\begin{aligned} \sin x &\rightarrow \cos x &  \cos x &\rightarrow -\sin x \\
+    <!----> \tan x &\rightarrow \sec^2 x &  \cot x &\rightarrow -\csc^2 x \\
+    <!----> \sec x &\rightarrow \sec x \tan x &  \csc x &\rightarrow -\csc x \cot x \end{aligned}$$
     <ul>
         <li>Despite sin has the reciprocal csc, here it is on the same colume as sec</li>
         <li>The derivative of the "opposite" functions are simply just a negative.</li>
     </ul>
 
 Derivative of inverse trig functions
-    > <table>
-        <tr>
-            <td>$$ \sin^{-1} x \rightarrow \frac{1}{\sqrt(1-x^2)} $$</td>
-            <td>$$ \cos^{-1} x \rightarrow -(\sin^{-1})' $$</td>
-        </tr>
-        <tr>
-            <td>$$ \tan^{-1} x \rightarrow \frac{1}{1+x^2} $$</td>
-            <td>$$ \cot^{-1} x \rightarrow -(\tan^{-1})' $$</td>
-        </tr>
-        <tr>
-            <td>$$ \sec^{-1} x \rightarrow \frac{1}{x\sqrt{x^2-1}} $$</td>
-            <td>$$ \csc^{-1} x \rightarrow -(\csc^{-1})' $$</td>
-        </tr>
-    </table>
+    > $$\begin{aligned} \sin^{-1} x &\rightarrow \frac{1}{\sqrt{1-x^2}} & \cos^{-1} x &\rightarrow -(\sin^{-1})' \\
+    <!----> \tan^{-1} x &\rightarrow \frac{1}{1+x^2} & \cot^{-1} x &\rightarrow -(\tan^{-1})' \\
+    <!----> \sec^{-1} x &\rightarrow \frac{1}{x\sqrt{x^2-1}} & \csc^{-1} x &\rightarrow -(\csc^{-1})' \end{aligned}$$
     <p>The derivative of the "opposite" function is just the negative of the opposite function.</p>
     <blockquote>It is good idea to break down functions into sine and cosine, but answer in a combined function (for solving)</blockquote>
 
 Exponential function
-    > $$ (a^x)' = a^x \times \log x $$
-
-Logarithmic
-    > $$ (\log_b x)' = \frac{1}{x}\frac{1}{\ln b}  $$
-    <blockquote>It is generally helpful to breakdown complex equation into many terms of long, as long as they don't contain product or power (can be removed using log rules).</blockquote>
+    > $$ (a^x)' = a^x \times \ln x $$
+    <!----> $$ (\log_b x)' = \frac{1}{x}\frac{1}{\ln b} $$
+    <blockquote>It is generally helpful to breakdown complex equation into many terms, as long as they don't contain product, quotient, or power (can be removed using log rules).</blockquote>
